@@ -18,6 +18,7 @@
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
   <style>
     :root {
@@ -119,6 +120,7 @@
       margin-bottom: 0.25rem;
     }
     .koan-btn {
+      width: 100%;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -154,6 +156,62 @@
       background: var(--surface2);
       color: var(--muted);
       flex-shrink: 0;
+    }
+
+    .chapter-switcher {
+      background: linear-gradient(180deg, rgba(108,142,245,0.12), rgba(108,142,245,0.03));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 0.25rem;
+    }
+    .chapter-switcher-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .chapter-count {
+      font-size: 0.68rem;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 2px 8px;
+      color: var(--text);
+      background: var(--surface);
+    }
+    .chapter-filter {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.62rem 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(1em + 1px), calc(100% - 13px) calc(1em + 1px);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+    }
+    .chapter-filter:focus { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+    .koan-list-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.5rem;
+      min-height: 180px;
     }
 
     /* ── Content ── */
@@ -396,8 +454,8 @@
     @media (max-width: 768px) {
       main { grid-template-columns: 1fr; padding: 1rem; }
       .compare-row { grid-template-columns: 1fr; }
-      .sidebar { flex-direction: row; flex-wrap: wrap; }
-      .koan-btn { flex: 1 1 calc(50% - 0.25rem); }
+      .sidebar { flex-direction: column; }
+      .koan-btn { width: 100%; }
     }
   </style>
 </head>
@@ -439,32 +497,13 @@
       </div>
     </div>
 
-    <!-- Target formula -->
+    <!-- Compare preview -->
     <div class="card">
       <div class="card-header">
-        <h2>目标公式</h2>
+        <h2>图形对比</h2>
         <span class="badge" id="difficulty-badge">—</span>
       </div>
-      <div class="formula-display" id="target-display">
-        <span style="color:var(--muted)">← 从左侧选择一个公案</span>
-      </div>
-      <p class="description" id="koan-description" style="margin-top:1rem"></p>
-    </div>
-
-    <!-- Editor -->
-    <div class="card">
-      <div class="editor-label">
-        你的 LaTeX 输入
-        <button class="hint-btn" id="hint-toggle" onclick="toggleHint()">💡 提示 (⌘H)</button>
-      </div>
-      <div class="hint-box" id="hint-box"></div>
-      <div class="editor-wrap" style="margin-top:0.5rem">
-        <textarea id="latex-input" placeholder="在此输入 LaTeX 代码，例如：\frac{1}{2}" rows="3"
-          oninput="onInputChange()"></textarea>
-      </div>
-
-      <!-- Compare row -->
-      <div class="compare-row" style="margin-top:1rem">
+      <div class="compare-row">
         <div class="preview-box">
           <div class="box-label">目标</div>
           <div class="preview-formula" id="compare-target">—</div>
@@ -474,6 +513,20 @@
           <div class="preview-formula" id="compare-yours">—</div>
         </div>
       </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="card">
+      <div class="editor-label">
+        你的 LaTeX 输入
+        <button class="hint-btn" id="hint-toggle" onclick="toggleHint()">💡 提示 (⌘/)</button>
+      </div>
+      <div class="hint-box" id="hint-box"></div>
+      <div class="editor-wrap" style="margin-top:0.5rem">
+        <textarea id="latex-input" placeholder="在此输入 LaTeX 代码，例如：\frac{1}{2}" rows="3"
+          oninput="onInputChange()"></textarea>
+      </div>
+
 
       <div class="result-banner" id="result-banner">
         <div class="result-icon" id="result-icon"></div>
@@ -483,7 +536,7 @@
       <div class="actions" style="margin-top:1rem">
         <button class="btn btn-primary" onclick="checkAnswer()">✓ 提交对比 (⌘↩)</button>
         <button class="btn btn-ghost" onclick="clearInput()">清空 (⌘K)</button>
-        <button class="btn btn-ghost" onclick="nextKoan()">下一题 (⌘N) →</button>
+        <button class="btn btn-ghost" onclick="nextKoan()">下一题 (⌘J) →</button>
       </div>
     </div>
 
@@ -494,7 +547,7 @@
 /* ────────────────────────────────────────────
    KOAN DATABASE
 ──────────────────────────────────────────── */
-const KOANS = [
+let KOANS = [
   {
     id: 1,
     title: "分数",
@@ -632,6 +685,38 @@ const KOANS = [
   }
 ];
 
+async function loadKoansFromYaml() {
+  const response = await fetch('./koans.yaml', { cache: 'no-store' });
+  if (!response.ok) {
+    throw new Error(`题库配置加载失败（HTTP ${response.status}）`);
+  }
+
+  const yamlText = await response.text();
+  const parsed = window.jsyaml?.load(yamlText);
+  if (!parsed || !Array.isArray(parsed.koans)) {
+    throw new Error('题库配置格式错误：缺少 koans 数组');
+  }
+
+  KOANS = parsed.koans.map((item, idx) => ({
+    id: item.id ?? idx + 1,
+    title: item.title ?? `题目 ${idx + 1}`,
+    chapter: item.chapter ?? '未分类',
+    tag: item.tag ?? '未标记',
+    difficulty: item.difficulty ?? 'easy',
+    latex: item.latex ?? '',
+    description: item.description ?? '',
+    hint: item.hint ?? ''
+  }));
+
+  if (!KOANS.length) {
+    throw new Error('题库为空，请在 koans.yaml 中至少配置一道题');
+  }
+}
+
+function getKoanKey(koan) {
+  return String(koan?.id ?? '');
+}
+
 /* ────────────────────────────────────────────
    STATE
 ──────────────────────────────────────────── */
@@ -640,37 +725,158 @@ let solvedSet = new Set();
 let totalAttempts = 0;
 let streak = 0;
 let previewTimer = null;
+let selectedChapter = '';
+
+const STORAGE_KEY = 'latex_koans_progress_v1';
+
+function saveProgress() {
+  try {
+    const snapshot = {
+      solvedIds: [...solvedSet],
+      totalAttempts,
+      streak,
+      selectedChapter,
+      currentKoanId: currentKoan ? getKoanKey(currentKoan) : null
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+  } catch (error) {
+    console.warn('进度保存失败：', error);
+  }
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+
+    const snapshot = JSON.parse(raw);
+    if (!snapshot || typeof snapshot !== 'object') return null;
+
+    const validIds = new Set(KOANS.map(k => getKoanKey(k)));
+    const restoredSolved = Array.isArray(snapshot.solvedIds)
+      ? snapshot.solvedIds.map(String).filter(id => validIds.has(id))
+      : [];
+
+    solvedSet = new Set(restoredSolved);
+    totalAttempts = Number.isFinite(snapshot.totalAttempts) ? Math.max(0, snapshot.totalAttempts) : 0;
+    streak = Number.isFinite(snapshot.streak) ? Math.max(0, snapshot.streak) : 0;
+
+    if (typeof snapshot.selectedChapter === 'string' && snapshot.selectedChapter.trim()) {
+      selectedChapter = snapshot.selectedChapter;
+    }
+
+    return snapshot.currentKoanId != null ? String(snapshot.currentKoanId) : null;
+  } catch (error) {
+    console.warn('进度恢复失败，已忽略：', error);
+    return null;
+  }
+}
 
 /* ────────────────────────────────────────────
    INIT
 ──────────────────────────────────────────── */
-window.addEventListener('load', () => {
-  buildSidebar();
-  updateStats();
-  bindShortcuts();
-  loadKoan(KOANS[0]);
+window.addEventListener('load', async () => {
+  try {
+    await loadKoansFromYaml();
+    const restoredKoanId = loadProgress();
+    buildSidebar();
+    updateStats();
+    bindShortcuts();
+
+    const initialKoan = KOANS.find(k => getKoanKey(k) === restoredKoanId) || KOANS[0];
+    loadKoan(initialKoan);
+  } catch (error) {
+    console.error(error);
+    const compareTarget = document.getElementById('compare-target');
+    if (compareTarget) {
+      compareTarget.innerHTML = '<span style="color:var(--red)">初始化失败，请查看错误详情</span>';
+    }
+  }
 });
 
 function buildSidebar() {
   const list = document.getElementById('koan-list');
-  // keep h3
   const h3 = list.querySelector('h3');
   list.innerHTML = '';
   list.appendChild(h3);
 
-  KOANS.forEach(k => {
+  const chapters = [...new Set(KOANS.map(k => k.chapter || '未分类'))];
+  if (!chapters.length) return;
+
+  if (!selectedChapter || !chapters.includes(selectedChapter)) {
+    selectedChapter = chapters[0];
+  }
+
+  const switcher = document.createElement('div');
+  switcher.className = 'chapter-switcher';
+  switcher.innerHTML = `
+    <div class="chapter-switcher-top">
+      <span>章节筛选</span>
+      <span class="chapter-count" id="chapter-count"></span>
+    </div>
+  `;
+
+  const select = document.createElement('select');
+  select.className = 'chapter-filter';
+  select.id = 'chapter-filter';
+  select.innerHTML = chapters
+    .map(ch => `<option value="${ch}">${ch}</option>`)
+    .join('');
+  select.value = selectedChapter;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'koan-list-wrap';
+  wrap.id = 'koan-list-wrap';
+
+  const updateChapterMeta = () => {
+    const count = KOANS.filter(k => (k.chapter || '未分类') === selectedChapter).length;
+    const countEl = document.getElementById('chapter-count');
+    if (countEl) countEl.textContent = `${count} 题`;
+  };
+
+  select.onchange = () => {
+    selectedChapter = select.value;
+    renderKoanListByChapter();
+    updateChapterMeta();
+    saveProgress();
+  };
+
+  switcher.appendChild(select);
+  list.appendChild(switcher);
+  list.appendChild(wrap);
+
+  renderKoanListByChapter();
+  updateChapterMeta();
+  updateProgress();
+}
+
+function renderKoanListByChapter() {
+  const wrap = document.getElementById('koan-list-wrap');
+  if (!wrap) return;
+
+  const chapterItems = KOANS.filter(k => (k.chapter || '未分类') === selectedChapter);
+  wrap.innerHTML = '';
+
+  chapterItems.forEach(k => {
     const btn = document.createElement('button');
     btn.className = 'koan-btn';
-    btn.id = `koan-btn-${k.id}`;
+    btn.id = `koan-btn-${getKoanKey(k)}`;
     btn.onclick = () => loadKoan(k);
+
+    if (currentKoan && getKoanKey(currentKoan) === getKoanKey(k)) {
+      btn.classList.add('active');
+    }
+    if (solvedSet.has(getKoanKey(k))) {
+      btn.classList.add('solved');
+    }
+
     btn.innerHTML = `
       <span class="status-dot"></span>
       <span class="koan-title-text">${k.id}. ${k.title}</span>
       <span class="koan-tag">${k.tag}</span>
     `;
-    list.appendChild(btn);
+    wrap.appendChild(btn);
   });
-  updateProgress();
 }
 
 /* ────────────────────────────────────────────
@@ -681,7 +887,7 @@ async function loadKoan(koan) {
 
   // sidebar active
   document.querySelectorAll('.koan-btn').forEach(b => b.classList.remove('active'));
-  const activeBtn = document.getElementById(`koan-btn-${koan.id}`);
+  const activeBtn = document.getElementById(`koan-btn-${getKoanKey(koan)}`);
   if (activeBtn) activeBtn.classList.add('active');
 
   // difficulty badge
@@ -689,8 +895,6 @@ async function loadKoan(koan) {
   badge.className = 'badge badge-' + koan.difficulty;
   badge.textContent = { easy: '简单', medium: '中等', hard: '困难' }[koan.difficulty];
 
-  // description
-  document.getElementById('koan-description').innerHTML = koan.description;
 
   // hide result, hint
   hideResult();
@@ -699,12 +903,11 @@ async function loadKoan(koan) {
   document.getElementById('compare-yours').innerHTML = '—';
 
   // render target
-  const targetDisplay = document.getElementById('target-display');
   const compareTarget = document.getElementById('compare-target');
-  const wrapped = `\\[${koan.latex}\\]`;
-  targetDisplay.innerHTML = wrapped;
-  compareTarget.innerHTML = `\\(${koan.latex}\\)`;
-  await typesetElements([targetDisplay, compareTarget]);
+  compareTarget.innerHTML = `\\[${koan.latex}\\]`;
+  await typesetElements([compareTarget]);
+
+  saveProgress();
 }
 
 /* ────────────────────────────────────────────
@@ -768,9 +971,9 @@ async function checkAnswer() {
 
   if (match) {
     streak++;
-    if (!solvedSet.has(currentKoan.id)) {
-      solvedSet.add(currentKoan.id);
-      const btn = document.getElementById(`koan-btn-${currentKoan.id}`);
+    if (!solvedSet.has(getKoanKey(currentKoan))) {
+      solvedSet.add(getKoanKey(currentKoan));
+      const btn = document.getElementById(`koan-btn-${getKoanKey(currentKoan)}`);
       if (btn) {
         btn.classList.add('solved');
         btn.classList.remove('failed');
@@ -784,8 +987,8 @@ async function checkAnswer() {
     );
   } else {
     streak = 0;
-    const btn = document.getElementById(`koan-btn-${currentKoan.id}`);
-    if (btn && !solvedSet.has(currentKoan.id)) {
+    const btn = document.getElementById(`koan-btn-${getKoanKey(currentKoan)}`);
+    if (btn && !solvedSet.has(getKoanKey(currentKoan))) {
       btn.classList.add('failed');
     }
     updateStats();
@@ -794,6 +997,8 @@ async function checkAnswer() {
       '仔细对比上方的目标与你的预览，注意大小写与花括号。'
     );
   }
+
+  saveProgress();
 }
 
 /* ────────────────────────────────────────────
@@ -911,9 +1116,15 @@ function clearInput() {
 }
 
 function nextKoan() {
-  if (!currentKoan) { loadKoan(KOANS[0]); return; }
-  const idx = KOANS.findIndex(k => k.id === currentKoan.id);
-  const next = KOANS[(idx + 1) % KOANS.length];
+  const scoped = selectedChapter
+    ? KOANS.filter(k => (k.chapter || '未分类') === selectedChapter)
+    : KOANS;
+
+  if (!scoped.length) return;
+  if (!currentKoan) { loadKoan(scoped[0]); return; }
+
+  const idx = scoped.findIndex(k => getKoanKey(k) === getKoanKey(currentKoan));
+  const next = scoped[(idx + 1 + scoped.length) % scoped.length];
   loadKoan(next);
 }
 
@@ -935,13 +1146,13 @@ function bindShortcuts() {
       return;
     }
 
-    if (key === 'n') {
+    if (key === 'j') {
       e.preventDefault();
       nextKoan();
       return;
     }
 
-    if (key === 'h') {
+    if (key === '/' || key === '?') {
       e.preventDefault();
       toggleHint();
     }
