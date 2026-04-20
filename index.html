@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaTeX 公案 · 练习站</title>
+
+  <!-- MathJax 3 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        packages: { '[+]': ['ams'] }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+      startup: { typeset: false }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #6c8ef5;
+      --accent2: #a78bfa;
+      --green: #34d399;
+      --red: #f87171;
+      --yellow: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #8892b0;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    .logo span { font-weight: 300; }
+    .progress-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .progress-track {
+      width: 140px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Layout ── */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .sidebar h3 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 0 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .koan-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+    }
+    .koan-btn:hover { background: var(--surface2); border-color: var(--accent); }
+    .koan-btn.active {
+      background: var(--surface2);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent) inset;
+    }
+    .koan-btn .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--border);
+    }
+    .koan-btn.solved .status-dot { background: var(--green); }
+    .koan-btn.failed .status-dot { background: var(--red); }
+    .koan-title-text { font-size: 0.88rem; line-height: 1.3; }
+    .koan-tag {
+      margin-left: auto;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: var(--surface2);
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* ── Content ── */
+    .content { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .card-header h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .badge {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+    .badge-easy { background: #064e3b; color: var(--green); }
+    .badge-medium { background: #451a03; color: var(--yellow); }
+    .badge-hard { background: #450a0a; color: var(--red); }
+
+    /* Target formula display */
+    .formula-display {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      font-size: 1.1rem;
+    }
+
+    /* Description */
+    .description {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .description strong { color: var(--text); }
+
+    /* Editor */
+    .editor-wrap {
+      position: relative;
+    }
+    .editor-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .editor-label .hint-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      padding: 1px 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-left: auto;
+    }
+    .editor-label .hint-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    textarea#latex-input {
+      width: 100%;
+      background: #0a0c13;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #a5f3fc;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      padding: 1rem 1.25rem;
+      resize: vertical;
+      min-height: 80px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    textarea#latex-input:focus { border-color: var(--accent); }
+    textarea#latex-input::placeholder { color: #334155; }
+
+    /* Preview + Compare row */
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .preview-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .preview-box .box-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+    .preview-formula {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+    /* Result banner */
+    .result-banner {
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: none;
+    }
+    .result-banner.show { display: flex; }
+    .result-banner.success {
+      background: #052e1c;
+      border: 1px solid #065f46;
+      color: var(--green);
+    }
+    .result-banner.error {
+      background: #2d0a0a;
+      border: 1px solid #7f1d1d;
+      color: var(--red);
+    }
+    .result-banner.warning {
+      background: #2d1a00;
+      border: 1px solid #78350f;
+      color: var(--yellow);
+    }
+    .result-icon { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+    .result-text strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+
+    /* Hint box */
+    .hint-box {
+      background: #1e1a05;
+      border: 1px solid #78350f;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.85rem;
+      color: var(--yellow);
+      display: none;
+      line-height: 1.6;
+    }
+    .hint-box.show { display: block; }
+    .hint-box code {
+      background: #2d2200;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+      font-size: 0.88rem;
+    }
+
+    /* Score / streak */
+    .stats-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .stat-card {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .stat-card .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+    .stat-card.highlight .stat-value { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      main { grid-template-columns: 1fr; padding: 1rem; }
+      .compare-row { grid-template-columns: 1fr; }
+      .sidebar { flex-direction: row; flex-wrap: wrap; }
+      .koan-btn { flex: 1 1 calc(50% - 0.25rem); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">LaTeX <span>公案</span></div>
+  <div class="progress-bar-wrap">
+    <span id="progress-text">0 / 0</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Sidebar: koan list -->
+  <aside class="sidebar" id="koan-list">
+    <h3>公式题库</h3>
+    <!-- populated by JS -->
+  </aside>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Stats row -->
+    <div class="stats-row">
+      <div class="stat-card highlight">
+        <div class="stat-value" id="stat-solved">0</div>
+        <div class="stat-label">已通过</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-streak">0</div>
+        <div class="stat-label">连续正确</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-attempts">0</div>
+        <div class="stat-label">总尝试</div>
+      </div>
+    </div>
+
+    <!-- Target formula -->
+    <div class="card">
+      <div class="card-header">
+        <h2>目标公式</h2>
+        <span class="badge" id="difficulty-badge">—</span>
+      </div>
+      <div class="formula-display" id="target-display">
+        <span style="color:var(--muted)">← 从左侧选择一个公案</span>
+      </div>
+      <p class="description" id="koan-description" style="margin-top:1rem"></p>
+    </div>
+
+    <!-- Editor -->
+    <div class="card">
+      <div class="editor-label">
+        你的 LaTeX 输入
+        <button class="hint-btn" id="hint-toggle" onclick="toggleHint()">💡 提示 (⌘H)</button>
+      </div>
+      <div class="hint-box" id="hint-box"></div>
+      <div class="editor-wrap" style="margin-top:0.5rem">
+        <textarea id="latex-input" placeholder="在此输入 LaTeX 代码，例如：\frac{1}{2}" rows="3"
+          oninput="onInputChange()"></textarea>
+      </div>
+
+      <!-- Compare row -->
+      <div class="compare-row" style="margin-top:1rem">
+        <div class="preview-box">
+          <div class="box-label">目标</div>
+          <div class="preview-formula" id="compare-target">—</div>
+        </div>
+        <div class="preview-box">
+          <div class="box-label">你的输入（实时预览）</div>
+          <div class="preview-formula" id="compare-yours">—</div>
+        </div>
+      </div>
+
+      <div class="result-banner" id="result-banner">
+        <div class="result-icon" id="result-icon"></div>
+        <div class="result-text" id="result-text"></div>
+      </div>
+
+      <div class="actions" style="margin-top:1rem">
+        <button class="btn btn-primary" onclick="checkAnswer()">✓ 提交对比 (⌘↩)</button>
+        <button class="btn btn-ghost" onclick="clearInput()">清空 (⌘K)</button>
+        <button class="btn btn-ghost" onclick="nextKoan()">下一题 (⌘N) →</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+/* ────────────────────────────────────────────
+   KOAN DATABASE
+──────────────────────────────────────────── */
+const KOANS = [
+  {
+    id: 1,
+    title: "分数",
+    tag: "基础",
+    difficulty: "easy",
+    latex: "\\frac{a}{b}",
+    description: "用 <strong>\\frac{分子}{分母}</strong> 表示分数。",
+    hint: "语法：<code>\\frac{a}{b}</code>"
+  },
+  {
+    id: 2,
+    title: "平方根",
+    tag: "基础",
+    difficulty: "easy",
+    latex: "\\sqrt{x}",
+    description: "用 <strong>\\sqrt{}</strong> 表示平方根。",
+    hint: "<code>\\sqrt{x}</code>"
+  },
+  {
+    id: 3,
+    title: "n 次方根",
+    tag: "基础",
+    difficulty: "easy",
+    latex: "\\sqrt[n]{x}",
+    description: "用 <strong>\\sqrt[n]{}</strong> 表示 n 次方根。",
+    hint: "<code>\\sqrt[n]{x}</code>"
+  },
+  {
+    id: 4,
+    title: "上下标",
+    tag: "基础",
+    difficulty: "easy",
+    latex: "x^{2} + y_{i}",
+    description: "<strong>^{}</strong> 为上标，<strong>_{}</strong> 为下标。",
+    hint: "<code>x^{2} + y_{i}</code>"
+  },
+  {
+    id: 5,
+    title: "求和符号",
+    tag: "符号",
+    difficulty: "medium",
+    latex: "\\sum_{i=1}^{n} i",
+    description: "用 <strong>\\sum_{下限}^{上限}</strong> 表示求和。",
+    hint: "<code>\\sum_{i=1}^{n} i</code>"
+  },
+  {
+    id: 6,
+    title: "定积分",
+    tag: "符号",
+    difficulty: "medium",
+    latex: "\\int_{a}^{b} f(x)\\,dx",
+    description: "<strong>\\int_{下限}^{上限}</strong> 表示积分，<code>\\,</code> 是小间距。",
+    hint: "<code>\\int_{a}^{b} f(x)\\,dx</code>"
+  },
+  {
+    id: 7,
+    title: "极限",
+    tag: "符号",
+    difficulty: "medium",
+    latex: "\\lim_{x \\to \\infty} f(x)",
+    description: "<strong>\\lim_{x \\to \\infty}</strong> 表示极限趋向无穷。",
+    hint: "<code>\\lim_{x \\to \\infty} f(x)</code>"
+  },
+  {
+    id: 8,
+    title: "二项式定理",
+    tag: "组合",
+    difficulty: "medium",
+    latex: "\\binom{n}{k} = \\frac{n!}{k!(n-k)!}",
+    description: "<strong>\\binom{n}{k}</strong> 表示组合数。",
+    hint: "<code>\\binom{n}{k} = \\frac{n!}{k!(n-k)!}</code>"
+  },
+  {
+    id: 9,
+    title: "矩阵",
+    tag: "线代",
+    difficulty: "hard",
+    latex: "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}",
+    description: "用 <strong>pmatrix</strong> 环境创建带括号的矩阵，<code>&</code> 分列，<code>\\\\</code> 换行。",
+    hint: "<code>\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}</code>"
+  },
+  {
+    id: 10,
+    title: "偏微分",
+    tag: "微积分",
+    difficulty: "medium",
+    latex: "\\frac{\\partial f}{\\partial x}",
+    description: "<strong>\\partial</strong> 表示偏导符号。",
+    hint: "<code>\\frac{\\partial f}{\\partial x}</code>"
+  },
+  {
+    id: 11,
+    title: "欧拉公式",
+    tag: "经典",
+    difficulty: "medium",
+    latex: "e^{i\\pi} + 1 = 0",
+    description: "世界上最美丽的公式——欧拉恒等式。",
+    hint: "<code>e^{i\\pi} + 1 = 0</code>"
+  },
+  {
+    id: 12,
+    title: "高斯积分",
+    tag: "经典",
+    difficulty: "hard",
+    latex: "\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}",
+    description: "经典的高斯积分公式。",
+    hint: "<code>\\int_{-\\infty}^{\\infty} e^{-x^2}\\,dx = \\sqrt{\\pi}</code>"
+  },
+  {
+    id: 13,
+    title: "连乘积",
+    tag: "符号",
+    difficulty: "medium",
+    latex: "\\prod_{k=1}^{n} k = n!",
+    description: "<strong>\\prod</strong> 表示连乘积。",
+    hint: "<code>\\prod_{k=1}^{n} k = n!</code>"
+  },
+  {
+    id: 14,
+    title: "向量点积",
+    tag: "向量",
+    difficulty: "easy",
+    latex: "\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta",
+    description: "<strong>\\vec{}</strong> 表示向量，<strong>\\cdot</strong> 是点积符号。",
+    hint: "<code>\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}|\\cos\\theta</code>"
+  },
+  {
+    id: 15,
+    title: "方程组",
+    tag: "环境",
+    difficulty: "hard",
+    latex: "\\begin{cases} x + y = 1 \\\\ x - y = 0 \\end{cases}",
+    description: "用 <strong>cases</strong> 环境表示方程组。",
+    hint: "<code>\\begin{cases} x + y = 1 \\\\ x - y = 0 \\end{cases}</code>"
+  }
+];
+
+/* ────────────────────────────────────────────
+   STATE
+──────────────────────────────────────────── */
+let currentKoan = null;
+let solvedSet = new Set();
+let totalAttempts = 0;
+let streak = 0;
+let previewTimer = null;
+
+/* ────────────────────────────────────────────
+   INIT
+──────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  buildSidebar();
+  updateStats();
+  bindShortcuts();
+  loadKoan(KOANS[0]);
+});
+
+function buildSidebar() {
+  const list = document.getElementById('koan-list');
+  // keep h3
+  const h3 = list.querySelector('h3');
+  list.innerHTML = '';
+  list.appendChild(h3);
+
+  KOANS.forEach(k => {
+    const btn = document.createElement('button');
+    btn.className = 'koan-btn';
+    btn.id = `koan-btn-${k.id}`;
+    btn.onclick = () => loadKoan(k);
+    btn.innerHTML = `
+      <span class="status-dot"></span>
+      <span class="koan-title-text">${k.id}. ${k.title}</span>
+      <span class="koan-tag">${k.tag}</span>
+    `;
+    list.appendChild(btn);
+  });
+  updateProgress();
+}
+
+/* ────────────────────────────────────────────
+   LOAD KOAN
+──────────────────────────────────────────── */
+async function loadKoan(koan) {
+  currentKoan = koan;
+
+  // sidebar active
+  document.querySelectorAll('.koan-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.getElementById(`koan-btn-${koan.id}`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // difficulty badge
+  const badge = document.getElementById('difficulty-badge');
+  badge.className = 'badge badge-' + koan.difficulty;
+  badge.textContent = { easy: '简单', medium: '中等', hard: '困难' }[koan.difficulty];
+
+  // description
+  document.getElementById('koan-description').innerHTML = koan.description;
+
+  // hide result, hint
+  hideResult();
+  hideHint();
+  document.getElementById('latex-input').value = '';
+  document.getElementById('compare-yours').innerHTML = '—';
+
+  // render target
+  const targetDisplay = document.getElementById('target-display');
+  const compareTarget = document.getElementById('compare-target');
+  const wrapped = `\\[${koan.latex}\\]`;
+  targetDisplay.innerHTML = wrapped;
+  compareTarget.innerHTML = `\\(${koan.latex}\\)`;
+  await typesetElements([targetDisplay, compareTarget]);
+}
+
+/* ────────────────────────────────────────────
+   TYPESET HELPERS
+──────────────────────────────────────────── */
+async function typesetElement(el) {
+  if (window.MathJax && MathJax.typesetPromise) {
+    await MathJax.typesetPromise([el]);
+  }
+}
+async function typesetElements(els) {
+  if (window.MathJax && MathJax.typesetPromise) {
+    await MathJax.typesetPromise(els);
+  }
+}
+
+/* ────────────────────────────────────────────
+   REAL-TIME PREVIEW
+──────────────────────────────────────────── */
+function onInputChange() {
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(renderPreview, 400);
+}
+
+async function renderPreview() {
+  const raw = document.getElementById('latex-input').value.trim();
+  const yoursEl = document.getElementById('compare-yours');
+  if (!raw) {
+    yoursEl.innerHTML = '—';
+    return;
+  }
+  yoursEl.innerHTML = `\\(${raw}\\)`;
+  if (MathJax.typesetClear) MathJax.typesetClear([yoursEl]);
+  await typesetElement(yoursEl);
+}
+
+/* ────────────────────────────────────────────
+   CHECK ANSWER  (image-comparison via canvas)
+──────────────────────────────────────────── */
+async function checkAnswer() {
+  if (!currentKoan) return;
+  const raw = document.getElementById('latex-input').value.trim();
+  if (!raw) {
+    showResult('warning', '⚠️', '请先输入 LaTeX 代码', '');
+    return;
+  }
+
+  totalAttempts++;
+  updateStats();
+
+  // ensure both rendered
+  const yoursEl = document.getElementById('compare-yours');
+  yoursEl.innerHTML = `\\(${raw}\\)`;
+  if (MathJax.typesetClear) MathJax.typesetClear([yoursEl]);
+  await typesetElement(yoursEl);
+
+  const targetEl = document.getElementById('compare-target');
+
+  // pixel comparison
+  const match = await pixelCompare(targetEl, yoursEl);
+
+  if (match) {
+    streak++;
+    if (!solvedSet.has(currentKoan.id)) {
+      solvedSet.add(currentKoan.id);
+      const btn = document.getElementById(`koan-btn-${currentKoan.id}`);
+      if (btn) {
+        btn.classList.add('solved');
+        btn.classList.remove('failed');
+      }
+    }
+    updateStats();
+    updateProgress();
+    showResult('success', '✓',
+      '完全匹配！恭喜通过本题',
+      `你输入的公式与目标图形一致。连续正确：${streak} 题`
+    );
+  } else {
+    streak = 0;
+    const btn = document.getElementById(`koan-btn-${currentKoan.id}`);
+    if (btn && !solvedSet.has(currentKoan.id)) {
+      btn.classList.add('failed');
+    }
+    updateStats();
+    showResult('error', '✗',
+      '图形不匹配，请检查你的输入',
+      '仔细对比上方的目标与你的预览，注意大小写与花括号。'
+    );
+  }
+}
+
+/* ────────────────────────────────────────────
+   PIXEL COMPARISON
+──────────────────────────────────────────── */
+async function pixelCompare(elA, elB) {
+  // Render both to canvas via SVG serialization
+  const svgA = getMathJaxSVG(elA);
+  const svgB = getMathJaxSVG(elB);
+
+  if (!svgA || !svgB) {
+    // Fallback: text-level normalized comparison
+    return normalizedTextMatch(elA.textContent, elB.textContent);
+  }
+
+  try {
+    const [imgA, imgB] = await Promise.all([svgToImage(svgA), svgToImage(svgB)]);
+    return imagesMatch(imgA, imgB);
+  } catch(e) {
+    return normalizedTextMatch(elA.textContent, elB.textContent);
+  }
+}
+
+function getMathJaxSVG(container) {
+  const svg = container.querySelector('svg');
+  return svg ? svg : null;
+}
+
+function svgToImage(svgEl) {
+  return new Promise((resolve, reject) => {
+    const clone = svgEl.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    // force a standard size
+    const W = 200, H = 80;
+    clone.setAttribute('width', W);
+    clone.setAttribute('height', H);
+    const blob = new Blob([clone.outerHTML], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image(W, H);
+    img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+function imagesMatch(imgA, imgB) {
+  const W = 200, H = 80;
+  const canvasA = document.createElement('canvas');
+  const canvasB = document.createElement('canvas');
+  canvasA.width = canvasB.width = W;
+  canvasA.height = canvasB.height = H;
+  const ctxA = canvasA.getContext('2d');
+  const ctxB = canvasB.getContext('2d');
+  ctxA.fillStyle = '#ffffff';
+  ctxA.fillRect(0, 0, W, H);
+  ctxB.fillStyle = '#ffffff';
+  ctxB.fillRect(0, 0, W, H);
+  ctxA.drawImage(imgA, 0, 0, W, H);
+  ctxB.drawImage(imgB, 0, 0, W, H);
+
+  const dataA = ctxA.getImageData(0, 0, W, H).data;
+  const dataB = ctxB.getImageData(0, 0, W, H).data;
+
+  let diff = 0;
+  for (let i = 0; i < dataA.length; i += 4) {
+    diff += Math.abs(dataA[i] - dataB[i]);
+    diff += Math.abs(dataA[i+1] - dataB[i+1]);
+    diff += Math.abs(dataA[i+2] - dataB[i+2]);
+  }
+  const totalPixels = W * H;
+  const avgDiff = diff / (totalPixels * 3);
+  return avgDiff < 8; // threshold: allow slight anti-aliasing variance
+}
+
+function normalizedTextMatch(textA, textB) {
+  const norm = s => s.replace(/\s+/g, '').toLowerCase();
+  return norm(textA) === norm(textB);
+}
+
+/* ────────────────────────────────────────────
+   UI HELPERS
+──────────────────────────────────────────── */
+function showResult(type, icon, title, body) {
+  const banner = document.getElementById('result-banner');
+  const iconEl = document.getElementById('result-icon');
+  const textEl = document.getElementById('result-text');
+  banner.className = `result-banner show ${type}`;
+  iconEl.textContent = icon;
+  textEl.innerHTML = `<strong>${title}</strong>${body ? body : ''}`;
+}
+function hideResult() {
+  document.getElementById('result-banner').className = 'result-banner';
+}
+
+function toggleHint() {
+  if (!currentKoan) return;
+  const box = document.getElementById('hint-box');
+  if (box.classList.contains('show')) {
+    hideHint();
+  } else {
+    box.innerHTML = `💡 提示：${currentKoan.hint}`;
+    box.classList.add('show');
+  }
+}
+function hideHint() {
+  const box = document.getElementById('hint-box');
+  box.classList.remove('show');
+  box.innerHTML = '';
+}
+
+function clearInput() {
+  document.getElementById('latex-input').value = '';
+  document.getElementById('compare-yours').innerHTML = '—';
+  hideResult();
+}
+
+function nextKoan() {
+  if (!currentKoan) { loadKoan(KOANS[0]); return; }
+  const idx = KOANS.findIndex(k => k.id === currentKoan.id);
+  const next = KOANS[(idx + 1) % KOANS.length];
+  loadKoan(next);
+}
+
+function bindShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    if (!e.metaKey) return;
+
+    const key = e.key.toLowerCase();
+
+    if (key === 'enter') {
+      e.preventDefault();
+      checkAnswer();
+      return;
+    }
+
+    if (key === 'k') {
+      e.preventDefault();
+      clearInput();
+      return;
+    }
+
+    if (key === 'n') {
+      e.preventDefault();
+      nextKoan();
+      return;
+    }
+
+    if (key === 'h') {
+      e.preventDefault();
+      toggleHint();
+    }
+  });
+}
+
+/* ────────────────────────────────────────────
+   STATS & PROGRESS
+──────────────────────────────────────────── */
+function updateStats() {
+  document.getElementById('stat-solved').textContent = solvedSet.size;
+  document.getElementById('stat-streak').textContent = streak;
+  document.getElementById('stat-attempts').textContent = totalAttempts;
+}
+
+function updateProgress() {
+  const total = KOANS.length;
+  const solved = solvedSet.size;
+  document.getElementById('progress-text').textContent = `${solved} / ${total}`;
+  document.getElementById('progress-fill').style.width = `${(solved / total) * 100}%`;
+}
+</script>
+</body>
+</html>
