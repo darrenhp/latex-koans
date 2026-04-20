@@ -17,7 +17,7 @@
       startup: { typeset: false }
     };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
   <style>
@@ -77,6 +77,23 @@
       gap: 0.75rem;
       font-size: 0.85rem;
       color: var(--muted);
+    }
+    .reset-progress-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.6rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .reset-progress-btn:hover {
+      color: var(--red);
+      border-color: var(--red);
+      background: rgba(248, 113, 113, 0.08);
     }
     .progress-track {
       width: 140px;
@@ -468,6 +485,7 @@
     <div class="progress-track">
       <div class="progress-fill" id="progress-fill" style="width:0%"></div>
     </div>
+    <button class="reset-progress-btn" onclick="resetProgress()">清除进度</button>
   </div>
 </header>
 
@@ -939,7 +957,7 @@ async function renderPreview() {
     yoursEl.innerHTML = '—';
     return;
   }
-  yoursEl.innerHTML = `\\(${raw}\\)`;
+  yoursEl.innerHTML = `\\[${raw}\\]`;
   if (MathJax.typesetClear) MathJax.typesetClear([yoursEl]);
   await typesetElement(yoursEl);
 }
@@ -960,7 +978,7 @@ async function checkAnswer() {
 
   // ensure both rendered
   const yoursEl = document.getElementById('compare-yours');
-  yoursEl.innerHTML = `\\(${raw}\\)`;
+  yoursEl.innerHTML = `\\[${raw}\\]`;
   if (MathJax.typesetClear) MathJax.typesetClear([yoursEl]);
   await typesetElement(yoursEl);
 
@@ -1115,17 +1133,79 @@ function clearInput() {
   hideResult();
 }
 
-function nextKoan() {
-  const scoped = selectedChapter
-    ? KOANS.filter(k => (k.chapter || '未分类') === selectedChapter)
-    : KOANS;
+function resetProgress() {
+  const ok = window.confirm('确定要清除当前做题进度吗？此操作不可撤销。');
+  if (!ok) return;
 
+  solvedSet = new Set();
+  totalAttempts = 0;
+  streak = 0;
+
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    console.warn('清除本地进度失败：', error);
+  }
+
+  document.querySelectorAll('.koan-btn').forEach(btn => {
+    btn.classList.remove('solved');
+    btn.classList.remove('failed');
+  });
+
+  updateStats();
+  updateProgress();
+  hideResult();
+}
+
+function nextKoan() {
+  const chapters = [...new Set(KOANS.map(k => k.chapter || '未分类'))];
+  if (!chapters.length) return;
+
+  if (!selectedChapter || !chapters.includes(selectedChapter)) {
+    selectedChapter = chapters[0];
+  }
+
+  const scoped = KOANS.filter(k => (k.chapter || '未分类') === selectedChapter);
   if (!scoped.length) return;
-  if (!currentKoan) { loadKoan(scoped[0]); return; }
+
+  if (!currentKoan) {
+    loadKoan(scoped[0]);
+    return;
+  }
 
   const idx = scoped.findIndex(k => getKoanKey(k) === getKoanKey(currentKoan));
-  const next = scoped[(idx + 1 + scoped.length) % scoped.length];
-  loadKoan(next);
+  const hasNextInChapter = idx >= 0 && idx < scoped.length - 1;
+
+  if (hasNextInChapter) {
+    loadKoan(scoped[idx + 1]);
+    return;
+  }
+
+  // 当前章节已到最后一题：切换到下一章节第一题
+  let chapterIdx = chapters.indexOf(selectedChapter);
+  for (let i = 0; i < chapters.length; i++) {
+    chapterIdx = (chapterIdx + 1) % chapters.length;
+    const nextChapter = chapters[chapterIdx];
+    const nextScoped = KOANS.filter(k => (k.chapter || '未分类') === nextChapter);
+    if (!nextScoped.length) continue;
+
+    selectedChapter = nextChapter;
+
+    const select = document.getElementById('chapter-filter');
+    if (select) {
+      select.value = selectedChapter;
+      if (typeof select.onchange === 'function') {
+        select.onchange();
+      } else {
+        renderKoanListByChapter();
+      }
+    } else {
+      renderKoanListByChapter();
+    }
+
+    loadKoan(nextScoped[0]);
+    return;
+  }
 }
 
 function bindShortcuts() {
