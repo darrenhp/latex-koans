@@ -25,8 +25,8 @@ koans:
 - title: KMP 匹配
   tag: KMP
   difficulty: hard
-  latex: '\text{KMP: use }\pi_p\text{ to avoid backtracking}'
-  description: KMP 匹配：模式 $p$ 在文本 $t$ 中，用 $\pi_p$ 避免回溯。时间复杂度：$O(n + m)$。
+  latex: '\text{KMP}(t, p) = \{ i \in [0, n-m] : t[i:i+m] = p \}'
+  description: 'KMP 匹配：给定文本 $t$ ($|t|=n$) 和模式 $p$ ($|p|=m$)，返回所有匹配位置集合。使用前缀函数 $\pi_p$ 避免文本指针回溯。时间复杂度：$O(n + m)$。'
 - title: Z 函数定义
   tag: Z算法
   difficulty: hard
@@ -36,9 +36,8 @@ koans:
 - title: Z 盒与递推
   tag: Z算法
   difficulty: hard
-  latex: z[i] = \begin{cases} \min(r-i+1, z[i-l]), & i \leq r \\ 0, & \end{cases}
-  description: Z 盒：$[l, r]$ 满足 $z[l] = r - l + 1$ 且 $r$ 最大化。递推公式：$$z[i] = \begin{cases}
-    \min(r-i+1, z[i-l]), & i \leq r \\ 0, & \text{否则} \end{cases}$$然后暴力扩展。
+  latex: 'z[i] = \begin{cases} \min(r-i+1, z[i-l]), & i \leq r \\ 0, & i > r \end{cases}'
+  description: 'Z 盒：$[l, r]$ 满足 $z[l] = r - l + 1$ 且 $r$ 最大化。递推公式：$$z[i] = \begin{cases} \min(r-i+1, z[i-l]), & i \leq r \\ 0, & i > r \end{cases}$$然后暴力扩展。$z[0] = 0$。时间复杂度：$O(n)$。'
 - title: AC 自动机定义
   tag: AC自动机
   difficulty: hard
@@ -47,11 +46,8 @@ koans:
 - title: 后缀数组定义
   tag: 后缀数组
   difficulty: hard
-  latex: \text{SA}[0:n-1] \text{ is permutation, } \text{suffix}_{\text{SA}[0]}(s)
-    < \cdots < \text{suffix}_{\text{SA}[n-1]}(s)
-  description: 后缀数组：$\text{SA}[0:n-1]$ 是 $\{0,1,\ldots,n-1\}$ 的排列，满足 $$\text{suffix}_{\text{SA}[0]}(s)
-    < \text{suffix}_{\text{SA}[1]}(s) < \cdots < \text{suffix}_{\text{SA}[n-1]}(s)$$排名数组：$\text{Rank}[i]
-    = j \iff \text{SA}[j] = i$。
+  latex: '\begin{aligned} \text{SA}[0:n-1] &\text{ is permutation of } \{0,\ldots,n-1\} \\ \text{suffix}_{\text{SA}[0]}(s) &< \text{suffix}_{\text{SA}[1]}(s) < \cdots < \text{suffix}_{\text{SA}[n-1]}(s) \\ \text{Rank}[i] &= j \iff \text{SA}[j] = i \end{aligned}'
+  description: '后缀数组：$\text{SA}[0:n-1]$ 是 $\{0,1,\ldots,n-1\}$ 的排列，满足后缀字典序递增。排名数组：$\text{Rank}[i] = j \iff \text{SA}[j] = i$。构建：倍增法 $O(n \log n)$，SA-IS $O(n)$。'
 - title: LCP 数组
   tag: 后缀数组
   difficulty: hard
@@ -63,8 +59,8 @@ koans:
 - title: 后缀自动机定义
   tag: SAM
   difficulty: hard
-  latex: '\begin{aligned} \text{SAM} &= (Q, \Sigma, \delta, \text{len}, \text{link}, s_0) \\ \text{where } &\forall v \in Q, \delta(v, \cdot) \text{ accepts all suffixes of } s \end{aligned}'
-  description: '后缀自动机 (SAM)：接受 $s$ 所有后缀的最小 DFA，形式化为六元组 $(Q, \Sigma, \delta, \text{len}, \text{link}, s_0)$，其中 $Q$ 为状态集，$\delta$ 为转移函数，$\text{len}(v)$ 为状态 $v$ 表示的最长子串长度，$\text{link}(v)$ 为后缀链接，$s_0$ 为初始状态。状态数：$|Q| \leq 2n - 1$。转移数：$\leq 3n - 4$。'
+  latex: '\begin{aligned} \text{SAM} &= (Q, \Sigma, \delta, \text{len}, \text{link}, s_0) \\ L(\text{SAM}) &= \{ \text{suffixes of } s \} \\ |Q| &\leq 2n-1, |\delta| \leq 3n-4 \end{aligned}'
+  description: '后缀自动机 (SAM)：接受 $s$ 所有后缀的最小 DFA，形式化为六元组 $(Q, \Sigma, \delta, \text{len}, \text{link}, s_0)$。$L(\text{SAM})$ 为 SAM 接受的语言（所有后缀）。状态数：$|Q| \leq 2n - 1$。转移数：$|\delta| \leq 3n - 4$。'
 - title: 后缀链接与 endpos
   tag: SAM
   difficulty: hard
@@ -83,13 +79,10 @@ koans:
 - title: Lyndon 分解
   tag: Lyndon分解
   difficulty: hard
-  latex: s = w_1 w_2 \cdots w_k, w_i \text{ is Lyndon word, } w_1 \geq w_2 \geq \cdots
-    \geq w_k
-  description: Lyndon 分解：任何字符串 $s$ 可唯一分解为 $$s = w_1 w_2 \cdots w_k$$ 其中 $w_i$ 是 Lyndon
-    词且 $w_1 \geq w_2 \geq \cdots \geq w_k$（字典序）。Lyndon 词：字符串 $w$ 满足 $w$ 是其所有真后缀中严格最小的。
+  latex: '\begin{aligned} \text{Lyndon}(w) &\iff \forall i \in [1, |w|), w < w[i:] \\ s &= w_1 w_2 \cdots w_k, \forall i, \text{Lyndon}(w_i), w_1 \geq w_2 \geq \cdots \geq w_k \end{aligned}'
+  description: 'Lyndon 分解：任何字符串 $s$ 可唯一分解为 $s = w_1 w_2 \cdots w_k$，其中 $w_i$ 是 Lyndon 词（$\text{Lyndon}(w) \iff \forall i \in [1, |w|), w < w[i:]$）且 $w_1 \geq w_2 \geq \cdots \geq w_k$（字典序）。Chen-Fox-Lyndon 定理：分解唯一。'
 - title: Runs 理论
   tag: Runs
   difficulty: hard
-  latex: \text{Run} = (l, r, p) \text{ where } s[l:l+p] = s[l+p:l+2p] = \cdots
-  description: Runs 理论：Run 是三元组 $(l, r, p)$ 表示区间 $[l, r]$ 内所有长度为 $p$ 的子串都相同（周期为 $p$）。Runs
-    数量上界：$O(n)$，具体 $\leq 3n$。
+  latex: '\begin{aligned} \text{Run} &= (l, r, p) \\ \text{s.t. } \forall i &\in [l, r-p], s[i:i+p] = s[i+p:i+2p] \\ &\text{maximal: } [l-1, r] \text{ or } [l, r+1] \text{ breaks periodicity} \end{aligned}'
+  description: 'Runs 理论：Run 是三元组 $(l, r, p)$ 表示区间 $[l, r]$ 内所有长度为 $p$ 的子串都相同（周期为 $p$），且区间极大。形式化：$\forall i \in [l, r-p], s[i:i+p] = s[i+p:i+2p]$，且区间无法向两侧扩展。Runs 数量上界：$|\text{Runs}| \leq 3n$。'
