@@ -89,7 +89,9 @@ koans:
   tag: 级数
   difficulty: hard
   latex: f(x) \sim \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n\cos nx + b_n\sin
-    nx\right)
+    nx\right),
+    a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nxdx,
+    b_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nxdx
   description: 傅里叶级数：$$f(x) \sim \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n\cos
     nx + b_n\sin nx\right)$$$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nxdx,\
     b_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nxdx$$

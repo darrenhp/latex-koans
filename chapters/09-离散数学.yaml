@@ -14,7 +14,11 @@ koans:
 - title: 集合运算
   tag: 集合论
   difficulty: medium
-  latex: A \cup B, A \cap B, A \setminus B, \overline{A}, A \triangle B
+  latex: A \cup B = \{x \mid x \in A \lor x \in B\},
+    A \cap B = \{x \mid x \in A \land x \in B\},
+    A \setminus B = \{x \mid x \in A \land x \notin B\},
+    \overline{A} = U \setminus A,
+    A \triangle B = (A \setminus B) \cup (B \setminus A)
   description: 基本运算：并集：$A \cup B = \{x \mid x \in A \lor x \in B\}$。交集：$A \cap B =
     \{x \mid x \in A \land x \in B\}$。差集：$A \setminus B = \{x \mid x \in A \land x
     \notin B\}$。补集：$\overline{A} = U \setminus A$。对称差：$A \triangle B = (A \setminus
@@ -34,7 +38,10 @@ koans:
 - title: 关系性质
   tag: 关系
   difficulty: medium
-  latex: (a,a) \in R, (a,b) \in R \Rightarrow (b,a) \in R
+  latex: \forall a \in A, (a, a) \in R \text{ (reflexive)},
+    (a,b) \in R \Rightarrow (b,a) \in R \text{ (symmetry)},
+    (a,b) \in R \land (b,c) \in R \Rightarrow (a,c) \in R \text{ (transitivity)},
+    (a,b) \in R \land (b,a) \in R \Rightarrow a = b \text{ (anti-symmetry)}
   description: 关系性质：自反性：$\forall a \in A, (a, a) \in R$。对称性：$(a, b) \in R \Rightarrow
     (b, a) \in R$。传递性：$(a, b) \in R \land (b, c) \in R \Rightarrow (a, c) \in R$。反对称性：$(a,
     b) \in R \land (b, a) \in R \Rightarrow a = b$。
@@ -53,7 +60,9 @@ koans:
 - title: 康托尔定理
   tag: 基数
   difficulty: hard
-  latex: '|\mathcal{P}(A)| = 2^{|A|} > |A|'
+  latex: '|\mathcal{P}(A)| = 2^{|A|} > |A|,
+    |A| = |\mathbb{N}| = \aleph_0 \text{ (countable)},
+    |\mathbb{R}| = 2^{\aleph_0} = \mathfrak{c} \text{ (uncountable)}'
   description: 康托尔定理：$$|\mathcal{P}(A)| = 2^{|A|} > |A|$$可数集：$|A| = |\mathbb{N}| =
     \aleph_0$。不可数集：$| \mathbb{R} | = 2^{\aleph_0} = \mathfrak{c}$。
 - title: 命题联结词

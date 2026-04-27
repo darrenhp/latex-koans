@@ -19,7 +19,7 @@ koans:
 - title: 贝叶斯定理
   tag: 定理
   difficulty: medium
-  latex: P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}
+  latex: P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} = \frac{P(B|A) \cdot P(A)}{\sum_{i} P(B|A_i) \cdot P(A_i)}
   description: 贝叶斯定理：$$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} = \frac{P(B|A) \cdot
     P(A)}{\sum_{i} P(B|A_i) \cdot P(A_i)}$$
 - title: 离散随机变量
@@ -39,21 +39,24 @@ koans:
   tag: 期望与方差
   difficulty: medium
   latex: E[X] = \sum_{x} x \cdot p(x) \text{ (discrete)}, E[X] = \int_{-\infty}^{\infty}
-    x \cdot f(x) dx \text{ (continuous)}
+    x \cdot f(x) dx \text{ (continuous)}, E[aX + b] = aE[X] + b,
+    E[X + Y] = E[X] + E[Y], E[XY] = E[X] \cdot E[Y] \text{ (independent)}
   description: 期望：离散：$$E[X] = \sum_{x} x \cdot p(x)$$连续：$$E[X] = \int_{-\infty}^{\infty}
     x \cdot f(x) dx$$性质：$E[aX + b] = aE[X] + b$，$E[X + Y] = E[X] + E[Y]$，独立时：$E[XY]
     = E[X] \cdot E[Y]$。
 - title: 方差定义
   tag: 期望与方差
   difficulty: medium
-  latex: \text{Var}(X) = E[(X - \mu)^2] = E[X^2] - (E[X])^2
+  latex: \text{Var}(X) = E[(X - \mu)^2] = E[X^2] - (E[X])^2,
+    \text{Var}(aX + b) = a^2 \text{Var}(X),
+    \text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) \text{ (independent)}
   description: 方差：$$\text{Var}(X) = E[(X - \mu)^2] = E[X^2] - (E[X])^2$$性质：$\text{Var}(aX
     + b) = a^2 \text{Var}(X)$，独立时：$\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$。
 - title: 协方差与相关系数
   tag: 期望与方差
   difficulty: hard
-  latex: \text{Cov}(X, Y) = E[(X - \mu_X)(Y - \mu_Y)], \rho_{X,Y} = \frac{\text{Cov}(X,
-    Y)}{\sigma_X \sigma_Y}
+  latex: \text{Cov}(X, Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X]E[Y],
+    \rho_{X,Y} = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}
   description: 协方差：$$\text{Cov}(X, Y) = E[(X - \mu_X)(Y - \mu_Y)] = E[XY] - E[X]E[Y]$$相关系数：$$\rho_{X,Y}
     = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}$$
 - title: 伯努利分布
@@ -80,7 +83,9 @@ koans:
 - title: 正态分布
   tag: 分布
   difficulty: hard
-  latex: 'X \sim N(\mu, \sigma^2): f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)'
+  latex: 'X \sim N(\mu, \sigma^2): f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right),
+    E[X] = \mu, \text{Var}(X) = \sigma^2,
+    \phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2} \text{ (standard normal)}'
   description: 正态分布 $X \sim N(\mu, \sigma^2)$：$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}
     \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)$$$E[X] = \mu$, $\text{Var}(X) =
     \sigma^2$。标准正态分布 $Z \sim N(0, 1)$：$$\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$$
@@ -109,7 +114,9 @@ koans:
 - title: 矩母函数
   tag: 母函数
   difficulty: hard
-  latex: M_X(t) = E[e^{tX}], E[X^n] = M_X^{(n)}(0)
+  latex: M_X(t) = E[e^{tX}], E[X^n] = M_X^{(n)}(0),
+    M_{X+Y}(t) = M_X(t) \cdot M_Y(t) \text{ (independent)},
+    \phi_X(t) = E[e^{itX}] \text{ (characteristic function)}
   description: 矩母函数：$$M_X(t) = E[e^{tX}]$$性质：$E[X^n] = M_X^{(n)}(0)$，独立时：$M_{X+Y}(t)
     = M_X(t) \cdot M_Y(t)$。特征函数：$$\phi_X(t) = E[e^{itX}]$$唯一性定理：分布函数与特征函数一一对应。
 - title: 重期望法则
@@ -121,7 +128,9 @@ koans:
   tag: 随机过程
   difficulty: hard
   latex: P(X_{n+1} = x_{n+1} | X_n = x_n, \ldots, X_0 = x_0) = P(X_{n+1} = x_{n+1}
-    | X_n = x_n)
+    | X_n = x_n),
+    P_{ij} = P(X_{n+1} = j | X_n = i),
+    \pi_j = \sum_{i} \pi_i P_{ij} \text{ (stationary distribution)}
   description: 马尔可夫性质：$$P(X_{n+1} = x_{n+1} | X_n = x_n, \ldots, X_0 = x_0) = P(X_{n+1}
     = x_{n+1} | X_n = x_n)$$转移概率：$$P_{ij} = P(X_{n+1} = j | X_n = i)$$平稳分布 $\pi$：$\pi_j
-    = \sum_{i} \pi_i P_{ij}$。
+    = \sum_{i} \pi_i P_{ij}$$。

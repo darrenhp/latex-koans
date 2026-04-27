@@ -39,7 +39,7 @@ koans:
   - title: 功的定义
     tag: 力学
     difficulty: easy
-    latex: 'W = F s \cos\theta'
+    latex: 'W = F s \cos\theta, W = \int \vec{F} \cdot d\vec{r} \text{ (integral form)}'
     description: '功：$W = F s \cos\theta$，或 $W = \int \vec{F} \cdot d\vec{r}$。'
 
   - title: 功率公式
