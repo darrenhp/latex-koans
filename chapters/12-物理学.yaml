@@ -416,8 +416,8 @@ koans:
   - title: 泡利不相容原理
     tag: 量子力学
     difficulty: medium
-    latex: '\text{同一量子态不能容纳两个全同费米子}'
-    description: '泡利不相容原理：同一量子态不能容纳两个全同费米子。'
+    latex: '\text{No two identical fermions can occupy the same quantum state}'
+    description: 'Pauli exclusion principle: No two identical fermions can occupy the same quantum state.'
 
   # ========== 相对论 (Relativity) ==========
   - title: 洛伦兹变换（x方向）
@@ -490,14 +490,14 @@ koans:
   - title: 宇称不守恒
     tag: 粒子物理
     difficulty: hard
-    latex: '\text{弱相互作用中宇称 } P \text{ 不守恒}'
-    description: '宇称不守恒（杨振宁、李政道，1956；吴健雄实验验证，1957）：弱相互作用中宇称不守恒。'
+    latex: 'P \text{ symmetry is violated in weak interactions}'
+    description: 'Parity violation (Yang and Lee, 1956; Wu experiment, 1957): $P$ symmetry is violated in weak interactions.'
 
   - title: CP破坏
     tag: 粒子物理
     difficulty: hard
-    latex: '\text{弱相互作用中电荷共轭（C）和宇称（P）的联合变换不守恒}'
-    description: 'CP 破坏：弱相互作用中电荷共轭（C）和宇称（P）的联合变换不守恒。'
+    latex: 'CP \text{ symmetry is violated in weak interactions}'
+    description: 'CP violation: The combined Charge conjugation (C) and Parity (P) transformation is not conserved in weak interactions.'
 
   # ========== 宇宙学 (Cosmology) ==========
   - title: 弗里德曼方程（第一式）

@@ -69,23 +69,23 @@ koans:
 - title: 连通分量与强连通
   tag: 连通性
   difficulty: medium
-  latex: '\text{Connected component: maximal connected subgraph of } G'
+  latex: '\text{Connected component} = \text{maximal connected subgraph of } G'
   description: 连通分量：$G$ 的极大连通子图。有向图的强连通：$\forall u,v \in V$，存在 $u \to v$ 和 $v \to
     u$ 的路径。
 - title: 割点与割边
   tag: 连通性
   difficulty: hard
-  latex: '\text{Cut vertex: vertex whose removal increases \# connected components}'
+  latex: '\text{Cut vertex: } \exists \text{ components}(G) < \text{ components}(G - v)'
   description: 割点：删除后增加连通分量数的顶点。割边（桥）：删除后增加连通分量数的边。
 - title: 树的定义
   tag: 树
   difficulty: medium
-  latex: G \text{ is tree} \iff |E| = |V| - 1
+  latex: 'G \text{ is a tree} \iff G \text{ is connected and } |E| = |V| - 1'
   description: 树：$G$ 连通且 $|E| = |V| - 1$。性质：任意两顶点间有唯一简单路径；无圈且连通；最小边数的连通图；最大边数的无圈图。
 - title: 森林与生成树
   tag: 树
   difficulty: medium
-  latex: '\text{Forest: }k\text{ components, }|E| = |V| - k'
+  latex: '\text{Forest: } k \text{ components}, |E| = |V| - k'
   description: 森林：$k$ 个连通分量，$|E| = |V| - k$。生成树：$G$ 的连通生成子图且是树。
 - title: Cayley 公式
   tag: 树
@@ -95,7 +95,7 @@ koans:
 - title: 欧拉回路与欧拉路径
   tag: 欧拉图
   difficulty: medium
-  latex: '\text{Euler circuit: uses each edge exactly once}'
+  latex: '\text{Euler circuit: traverses each edge exactly once}'
   description: 欧拉回路：经过每条边恰好一次的回路。欧拉路径：经过每条边恰好一次的路径。
 - title: 无向图欧拉回路条件
   tag: 欧拉图

@@ -97,8 +97,7 @@ koans:
 - title: 群的定义
   tag: 群论
   difficulty: medium
-  latex: '\forall a, b \in G, a * b \in G, (a * b) * c = a * (b * c), \exists e: e
-    * a = a * e = a'
+  latex: '\forall a, b \in G: a * b \in G,\ (a * b) * c = a * (b * c),\ \exists e \in G: e * a = a * e = a'
   description: 群 $(G, *)$ 满足：1. 封闭性；2. 结合律；3. 单位元；4. 逆元。阿贝尔群（交换群）：满足交换律的群。
 - title: 拉格朗日定理
   tag: 群论
