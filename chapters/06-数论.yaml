@@ -90,8 +90,8 @@ koans:
 - title: 中国剩余定理
   tag: 定理
   difficulty: hard
-  latex: '\begin{cases} x \equiv a_1 \pmod{n_1} \\ x \equiv a_2 \pmod{n_2} \\ \cdots \\ x \equiv a_k \pmod{n_k} \end{cases}'
-  description: '中国剩余定理：若 $\gcd(n_i, n_j) = 1$（$i \neq j$），则方程组有唯一解模 $N = n_1 n_2 \cdots n_k$。'
+  latex: '\gcd(n_i, n_j) = 1 \ (i \neq j) \implies \exists! x \pmod{N}: \left\{\begin{array}{l} x \equiv a_1 \pmod{n_1} \\ \vdots \\ x \equiv a_k \pmod{n_k} \end{array}\right.'
+  description: '中国剩余定理：若 $\gcd(n_i, n_j) = 1$ ($i \neq j$)，则 $\left\{\begin{array}{l} x \equiv a_1 \pmod{n_1} \\ \vdots \\ x \equiv a_k \pmod{n_k} \end{array}\right.$ 有唯一解模 $N = n_1 n_2 \cdots n_k$。'
 - title: 阶的定义
   tag: 基础
   difficulty: medium
@@ -100,13 +100,13 @@ koans:
 - title: 原根定义
   tag: 基础
   difficulty: hard
-  latex: '\text{ord}_n(g) = \varphi(n) \iff g \text{ is primitive root mod } n'
+  latex: '\text{ord}_n(g) = \varphi(n)'
   description: '原根：$g$ 是模 $n$ 的原根 $\iff \text{ord}_n(g) = \varphi(n)$。存在条件：模 $n$ 有原根 $\iff n = 2, 4, p^k, 2p^k$（$p$ 奇素数）。'
 - title: 勒让德符号
   tag: 符号
   difficulty: hard
-  latex: '\left(\frac{a}{p}\right) = \begin{cases} 0, & p \mid a \\ 1, & a \text{ is quadratic residue mod } p \\ -1, & a \text{ is quadratic non-residue mod } p \end{cases}'
-  description: 'Legendre symbol: $$\left(\frac{a}{p}\right) = \begin{cases} 0, & p \mid a \\ 1, & a \text{ is quadratic residue mod } p \\ -1, & a \text{ is quadratic non-residue mod } p \end{cases}$$'
+  latex: '\left(\frac{a}{p}\right) = \begin{cases} 0, & p \mid a \\ 1, & \exists x \in \mathbb{Z}: x^2 \equiv a \pmod{p} \\ -1, & \text{otherwise} \end{cases}'
+  description: '勒让德符号：$$\left(\frac{a}{p}\right) = \begin{cases} 0, & p \mid a \\ 1, & \exists x: x^2 \equiv a \pmod{p} \\ -1, & \text{otherwise} \end{cases}$$'
 - title: 二次互反律
   tag: 定理
   difficulty: hard
@@ -120,10 +120,8 @@ koans:
 - title: 默比乌斯函数
   tag: 函数
   difficulty: hard
-  latex: '\mu(n) = \begin{cases} 1, & n = 1 \\ 0, & \exists p: p^2 \mid n \\ (-1)^k,
-    & n = p_1 p_2 \cdots p_k \end{cases}'
-  description: '默比乌斯函数：$$\mu(n) = \begin{cases} 1, & n = 1 \\ 0, & \exists p: p^2
-    \mid n \\ (-1)^k, & n = p_1 p_2 \cdots p_k \text{（不同素数）} \end{cases}$$'
+  latex: '\mu(n) = \begin{cases} 1, & n = 1 \\ 0, & \exists p: p^2 \mid n \\ (-1)^k, & n = p_1 p_2 \cdots p_k \text{ (distinct primes)} \end{cases}'
+  description: '默比乌斯函数：$$\mu(n) = \begin{cases} 1, & n = 1 \\ 0, & \exists p: p^2 \mid n \\ (-1)^k, & n = p_1 p_2 \cdots p_k \text{（不同素数）} \end{cases}$$'
 - title: 默比乌斯反演
   tag: 定理
   difficulty: hard
@@ -132,5 +130,5 @@ koans:
 - title: 黎曼ζ函数
   tag: 函数
   difficulty: hard
-  latex: '\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p } \frac{1}{1 - p^{-s}}'
+  latex: '\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-s}}'
   description: '黎曼ζ函数：$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-s}} \quad (\text{Re}(s) > 1)$$黎曼假设：$\zeta(s) = 0$ 且 $0 < \text{Re}(s) < 1 \implies \text{Re}(s) = \frac{1}{2}$。'

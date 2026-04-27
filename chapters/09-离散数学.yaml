@@ -27,8 +27,9 @@ koans:
 - title: 德摩根律
   tag: 集合论
   difficulty: medium
-  latex: \overline{A \cup B} = \overline{A} \cap \overline{B}, \overline{A \cap B}
-    = \overline{A} \cup \overline{B}
+  latex: |
+    \overline{A \cup B} = \overline{A} \cap \overline{B}
+    \overline{A \cap B} = \overline{A} \cup \overline{B}
   description: 德摩根律：$\overline{A \cup B} = \overline{A} \cap \overline{B}$，$\overline{A
     \cap B} = \overline{A} \cup \overline{B}$。
 - title: 笛卡尔积
@@ -83,20 +84,26 @@ koans:
 - title: 逆否定理
   tag: 命题逻辑
   difficulty: medium
-  latex: P \to Q \equiv \neg Q \to \neg P
+  latex: |
+    \neg(\neg P) \equiv P
+    P \to Q \equiv \neg Q \to \neg P
   description: 重要等价式：双重否定：$\neg(\neg P) \equiv P$。逆否定理：$P \to Q \equiv \neg Q \to
     \neg P$。
 - title: 量词否定
   tag: 谓词逻辑
   difficulty: medium
-  latex: \neg(\forall x P(x)) \equiv \exists x \neg P(x), \neg(\exists x P(x)) \equiv
-    \forall x \neg P(x)
+  latex: |
+    \neg(\forall x P(x)) \equiv \exists x \neg P(x)
+    \neg(\exists x P(x)) \equiv \forall x \neg P(x)
   description: 量词否定：$$\neg(\forall x P(x)) \equiv \exists x \neg P(x)$$$$\neg(\exists
     x P(x)) \equiv \forall x \neg P(x)$$
 - title: 推理规则
   tag: 推理
   difficulty: medium
-  latex: \frac{P \quad P \to Q}{Q} \text{ (Modus Ponens)}
+  latex: |
+    \frac{P \quad P \to Q}{Q} \text{ (Modus Ponens)}
+    \frac{\neg Q \quad P \to Q}{\neg P} \text{ (Modus Tollens)}
+    \frac{P \to Q \quad Q \to R}{P \to R} \text{ (Hypothetical Syllogism)}
   description: 推理规则：肯定前件 (Modus Ponens)：$\frac{P \quad P \to Q}{Q}$。否定后件 (Modus Tollens)：$\frac{\neg
     Q \quad P \to Q}{\neg P}$。假言三段论：$\frac{P \to Q \quad Q \to R}{P \to R}$。
 - title: 布尔代数公理
@@ -110,14 +117,19 @@ koans:
 - title: 德摩根定律（布尔代数）
   tag: 布尔代数
   difficulty: medium
-  latex: \neg(a \land b) = \neg a \lor \neg b, \neg(a \lor b) = \neg a \land \neg
-    b
+  latex: |
+    \neg(a \land b) = \neg a \lor \neg b
+    \neg(a \lor b) = \neg a \land \neg b
   description: 德摩根定律：$$\neg(a \land b) = \neg a \lor \neg b$$$$\neg(a \lor b) = \neg
     a \land \neg b$$
 - title: 群的定义
   tag: 群论
   difficulty: medium
-  latex: '\forall a, b \in G: a * b \in G,\ (a * b) * c = a * (b * c),\ \exists e \in G: e * a = a * e = a'
+  latex: |
+    \forall a, b \in G: a * b \in G
+    (a * b) * c = a * (b * c)
+    \exists e \in G: e * a = a * e = a
+    \forall a \in G, \exists a^{-1} \in G: a * a^{-1} = a^{-1} * a = e
   description: 群 $(G, *)$ 满足：1. 封闭性；2. 结合律；3. 单位元；4. 逆元。阿贝尔群（交换群）：满足交换律的群。
 - title: 拉格朗日定理
   tag: 群论
@@ -128,18 +140,25 @@ koans:
 - title: 环的定义
   tag: 环论
   difficulty: hard
-  latex: (R, +) \text{ is abelian group}, (R, \cdot) \text{ is semigroup, distributive}
+  latex: |
+    (R, +) \text{ is abelian group}
+    (R, \cdot) \text{ is semigroup}
+    \text{distributive: } a \cdot (b + c) = a \cdot b + a \cdot c
   description: 环 $(R, +, \cdot)$ 满足：$(R, +)$ 是阿贝尔群；$(R, \cdot)$ 是半群（结合律）；分配律：$a \cdot
     (b + c) = a \cdot b + a \cdot c$，$(a + b) \cdot c = a \cdot c + b \cdot c$。
 - title: 域的定义
   tag: 域论
   difficulty: hard
-  latex: (F, +) \text{ is abelian group}, (F \setminus \{0\}, \cdot) \text{ is abelian
-    group, distributive}
+  latex: |
+    (F, +) \text{ is abelian group (identity: } 0)
+    (F \setminus \{0\}, \cdot) \text{ is abelian group (identity: } 1)
+    \text{distributive}
   description: 域 $(F, +, \cdot)$ 满足：$(F, +)$ 是阿贝尔群（单位元：$0$）；$(F \setminus \{0\}, \cdot)$
-    是阿贝尔群（单位元：$1$）；分配律成立。例子：$\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{F}_p$。
+   是阿贝尔群（单位元：$1$）；分配律成立。例子：$\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{F}_p$。
 - title: 格的定义
   tag: 格论
   difficulty: hard
-  latex: a \lor b = \text{sup}\{a, b\}, a \land b = \text{inf}\{a, b\}
+  latex: |
+    a \lor b = \text{sup}\{a, b\}
+    a \land b = \text{inf}\{a, b\}
   description: 格：偏序集 $(L, \leq)$ 其中任意两个元素都有上确界（最小上界）和下确界（最大下界）。格的性质：幂等律、交换律、结合律、吸收律。
