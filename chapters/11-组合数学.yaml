@@ -1,0 +1,154 @@
+koans:
+- title: 乘法原理
+  tag: 基础
+  difficulty: easy
+  latex: '|A \times B| = |A| \cdot |B|'
+  description: 乘法原理：$$|A \times B| = |A| \cdot |B|$$
+- title: 加法原理
+  tag: 基础
+  difficulty: easy
+  latex: '|A \cup B| = |A| + |B| \quad (A \cap B = \emptyset)'
+  description: 加法原理：$$|A \cup B| = |A| + |B| \quad (A \cap B = \emptyset)$$
+- title: 无重复排列
+  tag: 排列组合
+  difficulty: medium
+  latex: P(n,r) = \frac{n!}{(n-r)!} = n \cdot (n-1) \cdot \ldots \cdot (n-r+1)
+  description: 无重复排列：$$P(n,r) = \frac{n!}{(n-r)!} = n \cdot (n-1) \cdot \ldots \cdot
+    (n-r+1)$$
+- title: 全排列
+  tag: 排列组合
+  difficulty: easy
+  latex: P(n,n) = n!
+  description: 全排列：$$P(n,n) = n!$$
+- title: 有重复排列
+  tag: 排列组合
+  difficulty: medium
+  latex: \frac{n!}{n_1! \cdot n_2! \cdot \ldots \cdot n_k!}
+  description: 有重复排列 (多重集)：$$\frac{n!}{n_1! \cdot n_2! \cdot \ldots \cdot n_k!}$$
+- title: 二项式系数
+  tag: 排列组合
+  difficulty: medium
+  latex: \binom{n}{r} = C(n,r) = \frac{n!}{r!(n-r)!}
+  description: 二项式系数：$$\binom{n}{r} = C(n,r) = \frac{n!}{r!(n-r)!}$$基本性质：$$\binom{n}{r}
+    = \binom{n}{n-r}$$$$\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}$$$$\sum_{k=0}^{n}
+    \binom{n}{k} = 2^n$$
+- title: 二项式定理
+  tag: 定理
+  difficulty: medium
+  latex: (x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k
+  description: 二项式定理：$$(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k$$
+- title: 容斥原理（两个集合）
+  tag: 容斥原理
+  difficulty: medium
+  latex: '|A \cup B| = |A| + |B| - |A \cap B|'
+  description: 容斥原理（两个集合）：$$|A \cup B| = |A| + |B| - |A \cap B|$$
+- title: 容斥原理（一般形式）
+  tag: 容斥原理
+  difficulty: hard
+  latex: \left|\bigcup_{i=1}^{n} A_i\right| = \sum_{k=1}^{n} (-1)^{k+1} \sum_{1 \leq
+    i_1 < \ldots < i_k \leq n} |A_{i_1} \cap \ldots \cap A_{i_k}|
+  description: 容斥原理（一般形式）：$$\left|\bigcup_{i=1}^{n} A_i\right| = \sum_{k=1}^{n} (-1)^{k+1}
+    \sum_{1 \leq i_1 < \ldots < i_k \leq n} |A_{i_1} \cap \ldots \cap A_{i_k}|$$
+- title: Min-Max 容斥
+  tag: 容斥原理
+  difficulty: hard
+  latex: \max(S) = \sum_{T \subseteq S, T \neq \emptyset} (-1)^{|T|+1} \min(T)
+  description: Min-Max 容斥：$$\max(S) = \sum_{T \subseteq S, T \neq \emptyset} (-1)^{|T|+1}
+    \min(T)$$$$\min(S) = \sum_{T \subseteq S, T \neq \emptyset} (-1)^{|T|+1} \max(T)$$
+- title: 鸽巣原理
+  tag: 原理
+  difficulty: easy
+  latex: \text{If } n+1 \text{ objects in } n \text{ boxes, then at least one box
+    has } \geq 2 \text{ objects}
+  description: 鸽巣原理：若 $n+1$ 个物体放入 $n$ 个盒子，则至少有一个盒子含 $\geq 2$ 个物体。一般形式：若 $n$ 个物体放入
+    $k$ 个盒子，则至少有一个盒子含 $\geq \lceil n/k \rceil$ 个物体。
+- title: 普通生成函数
+  tag: 生成函数
+  difficulty: medium
+  latex: G(x) = \sum_{n=0}^{\infty} a_n x^n
+  description: 普通生成函数 (OGF)：$$G(x) = \sum_{n=0}^{\infty} a_n x^n$$
+- title: 指数生成函数
+  tag: 生成函数
+  difficulty: medium
+  latex: E(x) = \sum_{n=0}^{\infty} a_n \frac{x^n}{n!}
+  description: 指数生成函数 (EGF)：$$E(x) = \sum_{n=0}^{\infty} a_n \frac{x^n}{n!}$$
+- title: 斐波那契数列
+  tag: 递推关系
+  difficulty: medium
+  latex: F_n = F_{n-1} + F_{n-2}, F_0 = 0, F_1 = 1
+  description: 斐波那契数列：$$F_n = F_{n-1} + F_{n-2}, \quad F_0 = 0, F_1 = 1$$通项公式：$$F_n
+    = \frac{1}{\sqrt{5}}\left(\phi^n - \psi^n\right), \quad \phi = \frac{1+\sqrt{5}}{2},
+    \psi = \frac{1-\sqrt{5}}{2}$$
+- title: 卡特兰数
+  tag: 递推关系
+  difficulty: hard
+  latex: C_n = \frac{1}{n+1}\binom{2n}{n} = \frac{(2n)!}{n!(n+1)!}
+  description: 卡特兰数 $C_n$：$$C_n = \frac{1}{n+1}\binom{2n}{n} = \frac{(2n)!}{n!(n+1)!}$$递推关系：$$C_n
+    = \sum_{i=0}^{n-1} C_i C_{n-1-i}$$
+- title: 错排数
+  tag: 递推关系
+  difficulty: hard
+  latex: D_n = n! \sum_{i=0}^{n} \frac{(-1)^i}{i!}
+  description: 错排数 $D_n$：$n$ 个元素的排列中，所有元素都不在原来位置上的方案数。通项公式（容斥原理）：$$D_n = n! \sum_{i=0}^{n}
+    \frac{(-1)^i}{i!}$$递推关系：$$D_n = (n-1)(D_{n-1} + D_{n-2})$$
+- title: 斯特林数（第二类）
+  tag: 递推关系
+  difficulty: hard
+  latex: \left\{ {n \atop k} \right\} = \frac{1}{k!} \sum_{i=0}^{k} (-1)^{k-i} \binom{k}{i}
+    i^n
+  description: 斯特林数（第二类）$S(n,k) = \left\{ {n \atop k} \right\}$：将 $n$ 个不同元素划分为 $k$
+    个无标号非空子集的方案数。通项公式（容斥原理）：$$\left\{ {n \atop k} \right\} = \frac{1}{k!} \sum_{i=0}^{k}
+    (-1)^{k-i} \binom{k}{i} i^n$$递推关系：$$\left\{ {n \atop k} \right\} = k \left\{ {n-1
+    \atop k} \right\} + \left\{ {n-1 \atop k-1} \right\}$$
+- title: 斯特林数（第一类）
+  tag: 递推关系
+  difficulty: hard
+  latex: \left[ {n \atop k} \right] = (n-1) \left[ {n-1 \atop k} \right] + \left[
+    {n-1 \atop k-1} \right]
+  description: 斯特林数（第一类）$s(n,k) = \left[ {n \atop k} \right]$：将 $n$ 个不同元素划分为 $k$ 个无标号非空轮换的方案数。递推关系：$$\left[
+    {n \atop k} \right] = (n-1) \left[ {n-1 \atop k} \right] + \left[ {n-1 \atop k-1}
+    \right]$$
+- title: 整数拆分函数
+  tag: 整数拆分
+  difficulty: hard
+  latex: p(n) = \sum_{k=1}^{n} p(n,k), p(n,k) = p(n-1, k-1) + p(n-k, k)
+  description: 整数拆分：$p(n)$ = 将 $n$ 拆分为正整数之和的方法数。$k$-部分拆数 $p(n,k)$：将 $n$ 拆分为恰好 $k$
+    个正整数之和的方法数。递推关系：$$p(n,k) = p(n-1, k-1) + p(n-k, k)$$生成函数：$$\sum_{n=0}^{\infty}
+    p(n) x^n = \prod_{k=1}^{\infty} \frac{1}{1-x^k}$$
+- title: 斯特林公式
+  tag: 渐近公式
+  difficulty: hard
+  latex: n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n
+  description: 斯特林公式：$$n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n$$
+- title: 二项式反演
+  tag: 反演
+  difficulty: hard
+  latex: g(n) = \sum_{k=0}^{n} \binom{n}{k} f(k) \implies f(n) = \sum_{k=0}^{n} (-1)^{n-k}
+    \binom{n}{k} g(k)
+  description: 二项式反演：若 $$g(n) = \sum_{k=0}^{n} \binom{n}{k} f(k)$$ 则 $$f(n) = \sum_{k=0}^{n}
+    (-1)^{n-k} \binom{n}{k} g(k)$$
+- title: 范德蒙恒等式
+  tag: 组合恒等式
+  difficulty: medium
+  latex: \binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k}
+  description: 范德蒙恒等式：$$\binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k}$$
+- title: Burnside 引理
+  tag: 计数
+  difficulty: hard
+  latex: '|X/G| = \frac{1}{|G|} \sum_{g \in G} |\text{Fix}(g)|'
+  description: Burnside 引理：有限群 $G$ 作用在有限集合 $X$ 上，则轨道数为：$$|X/G| = \frac{1}{|G|} \sum_{g
+    \in G} |\text{Fix}(g)|$$其中 $\text{Fix}(g) = \{x \in X \mid g \cdot x = x\}$ 是
+    $g$ 的不动点集。
+- title: Pólya 计数定理
+  tag: 计数
+  difficulty: hard
+  latex: N = Z(G) \big|_{x_i = m} = \frac{1}{|G|} \sum_{g \in G} m^{\text{cycles}(g)}
+  description: Pólya 计数定理：在群 $G$ 作用下，不同的染色方案数为：$$N = Z(G) \big|_{x_i = m} = \frac{1}{|G|}
+    \sum_{g \in G} m^{\text{cycles}(g)}$$其中 $Z(G)$ 是循环指标。
+- title: 拉姆齐数
+  tag: 拉姆齐理论
+  difficulty: hard
+  latex: R(m,n) = \min\{ N \mid \text{any } K_N \text{ has red } K_m \text{ or blue
+    } K_n \}
+  description: 拉姆齐数 $R(m,n)$：最小整数 $N$ 使得任意 $K_N$ 的红蓝边染色产生红色 $K_m$ 或蓝色 $K_n$。已知：$R(3,3)
+    = 6$, $R(4,4) = 18$。下界：$$R(m,n) \geq \binom{m+n-2}{m-1}$$

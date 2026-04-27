@@ -1,0 +1,126 @@
+koans:
+- title: 集合表示
+  tag: 集合论
+  difficulty: easy
+  latex: A = \{x \mid P(x)\}
+  description: 集合表示：$$A = \{x \mid P(x)\}$$
+- title: 集合关系
+  tag: 集合论
+  difficulty: easy
+  latex: A \subseteq B \iff \forall x (x \in A \Rightarrow x \in B)
+  description: 子集：$A \subseteq B \iff \forall x (x \in A \Rightarrow x \in B)$。真子集：$A
+    \subset B \iff A \subseteq B \land A \neq B$。集合相等：$A = B \iff A \subseteq B \land
+    B \subseteq A$。
+- title: 集合运算
+  tag: 集合论
+  difficulty: medium
+  latex: A \cup B, A \cap B, A \setminus B, \overline{A}, A \triangle B
+  description: 基本运算：并集：$A \cup B = \{x \mid x \in A \lor x \in B\}$。交集：$A \cap B =
+    \{x \mid x \in A \land x \in B\}$。差集：$A \setminus B = \{x \mid x \in A \land x
+    \notin B\}$。补集：$\overline{A} = U \setminus A$。对称差：$A \triangle B = (A \setminus
+    B) \cup (B \setminus A)$。
+- title: 德摩根律
+  tag: 集合论
+  difficulty: medium
+  latex: \overline{A \cup B} = \overline{A} \cap \overline{B}, \overline{A \cap B}
+    = \overline{A} \cup \overline{B}
+  description: 德摩根律：$\overline{A \cup B} = \overline{A} \cap \overline{B}$，$\overline{A
+    \cap B} = \overline{A} \cup \overline{B}$。
+- title: 笛卡尔积
+  tag: 关系
+  difficulty: easy
+  latex: A \times B = \{(a, b) \mid a \in A, b \in B\}
+  description: 笛卡尔积：$$A \times B = \{(a, b) \mid a \in A, b \in B\}$$
+- title: 关系性质
+  tag: 关系
+  difficulty: medium
+  latex: (a,a) \in R, (a,b) \in R \Rightarrow (b,a) \in R
+  description: 关系性质：自反性：$\forall a \in A, (a, a) \in R$。对称性：$(a, b) \in R \Rightarrow
+    (b, a) \in R$。传递性：$(a, b) \in R \land (b, c) \in R \Rightarrow (a, c) \in R$。反对称性：$(a,
+    b) \in R \land (b, a) \in R \Rightarrow a = b$。
+- title: 等价关系与等价类
+  tag: 关系
+  difficulty: medium
+  latex: '[a] = \{x \in A \mid (a, x) \in R\}'
+  description: 等价关系：自反 + 对称 + 传递。等价类：$$[a] = \{x \in A \mid (a, x) \in R\}$$
+- title: 函数类型
+  tag: 函数
+  difficulty: medium
+  latex: f(a_1) = f(a_2) \Rightarrow a_1 = a_2, \forall b \in B, \exists a \in A,
+    f(a) = b
+  description: 函数类型：单射（一对一）：$\forall a_1, a_2 \in A, f(a_1) = f(a_2) \Rightarrow a_1
+    = a_2$。满射（到上）：$\forall b \in B, \exists a \in A, f(a) = b$。双射：单射 + 满射。
+- title: 康托尔定理
+  tag: 基数
+  difficulty: hard
+  latex: '|\mathcal{P}(A)| = 2^{|A|} > |A|'
+  description: 康托尔定理：$$|\mathcal{P}(A)| = 2^{|A|} > |A|$$可数集：$|A| = |\mathbb{N}| =
+    \aleph_0$。不可数集：$| \mathbb{R} | = 2^{\aleph_0} = \mathfrak{c}$。
+- title: 命题联结词
+  tag: 命题逻辑
+  difficulty: easy
+  latex: \neg P, P \land Q, P \lor Q, P \to Q, P \leftrightarrow Q
+  description: 命题联结词：否定：$\neg P$。合取：$P \land Q$。析取：$P \lor Q$。蕴含：$P \Rightarrow Q$
+    或 $P \to Q$。双蕴含：$P \Leftrightarrow Q$ 或 $P \leftrightarrow Q$。
+- title: 逆否定理
+  tag: 命题逻辑
+  difficulty: medium
+  latex: P \to Q \equiv \neg Q \to \neg P
+  description: 重要等价式：双重否定：$\neg(\neg P) \equiv P$。逆否定理：$P \to Q \equiv \neg Q \to
+    \neg P$。
+- title: 量词否定
+  tag: 谓词逻辑
+  difficulty: medium
+  latex: \neg(\forall x P(x)) \equiv \exists x \neg P(x), \neg(\exists x P(x)) \equiv
+    \forall x \neg P(x)
+  description: 量词否定：$$\neg(\forall x P(x)) \equiv \exists x \neg P(x)$$$$\neg(\exists
+    x P(x)) \equiv \forall x \neg P(x)$$
+- title: 推理规则
+  tag: 推理
+  difficulty: medium
+  latex: \frac{P \quad P \to Q}{Q} \text{ (Modus Ponens)}
+  description: 推理规则：肯定前件 (Modus Ponens)：$\frac{P \quad P \to Q}{Q}$。否定后件 (Modus Tollens)：$\frac{\neg
+    Q \quad P \to Q}{\neg P}$。假言三段论：$\frac{P \to Q \quad Q \to R}{P \to R}$。
+- title: 布尔代数公理
+  tag: 布尔代数
+  difficulty: hard
+  latex: a \land b = b \land a, (a \land b) \land c = a \land (b \land c), a \land
+    (a \lor b) = a
+  description: 布尔代数 $(B, \land, \lor, \neg, 0, 1)$ 公理：交换律、结合律、分配律、吸收律、互补律、恒等律。
+- title: 德摩根定律（布尔代数）
+  tag: 布尔代数
+  difficulty: medium
+  latex: \neg(a \land b) = \neg a \lor \neg b, \neg(a \lor b) = \neg a \land \neg
+    b
+  description: 德摩根定律：$$\neg(a \land b) = \neg a \lor \neg b$$$$\neg(a \lor b) = \neg
+    a \land \neg b$$
+- title: 群的定义
+  tag: 群论
+  difficulty: medium
+  latex: '\forall a, b \in G, a * b \in G, (a * b) * c = a * (b * c), \exists e: e
+    * a = a * e = a'
+  description: 群 $(G, *)$ 满足：1. 封闭性；2. 结合律；3. 单位元；4. 逆元。阿贝尔群（交换群）：满足交换律的群。
+- title: 拉格朗日定理
+  tag: 群论
+  difficulty: hard
+  latex: '|G| = [G:H] \cdot |H|'
+  description: 拉格朗日定理：$$|G| = [G:H] \cdot |H|$$其中 $H$ 是 $G$ 的子群，$[G:H]$ 是 $H$ 在 $G$
+    中的指数。
+- title: 环的定义
+  tag: 环论
+  difficulty: hard
+  latex: (R, +) \text{ is abelian group}, (R, \cdot) \text{ is semigroup, distributive}
+  description: 环 $(R, +, \cdot)$ 满足：$(R, +)$ 是阿贝尔群；$(R, \cdot)$ 是半群（结合律）；分配律：$a \cdot
+    (b + c) = a \cdot b + a \cdot c$，$(a + b) \cdot c = a \cdot c + b \cdot c$。
+- title: 域的定义
+  tag: 域论
+  difficulty: hard
+  latex: (F, +) \text{ is abelian group}, (F \setminus \{0\}, \cdot) \text{ is abelian
+    group, distributive}
+  description: 域 $(F, +, \cdot)$ 满足：$(F, +)$ 是阿贝尔群（单位元：$0$）；$(F \setminus \{0\}, \cdot)$
+    是阿贝尔群（单位元：$1$）；分配律成立。例子：$\mathbb{Q}, \mathbb{R}, \mathbb{C}, \mathbb{F}_p$。
+- title: 格的定义
+  tag: 格论
+  difficulty: hard
+  latex: a \lor b = \text{sup}\{a, b\}, a \land b = \text{inf}\{a, b\}
+  description: 格：偏序集 $(L, \leq)$ 其中任意两个元素都有上确界（最小上界）和下确界（最大下界）。格的性质：幂等律、交换律、结合律、吸收律。

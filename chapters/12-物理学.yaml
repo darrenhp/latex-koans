@@ -1,0 +1,731 @@
+koans:
+  # ========== 力学 (Mechanics) ==========
+  - title: 牛顿第二定律
+    tag: 力学
+    difficulty: easy
+    latex: 'F = ma'
+    description: '牛顿第二定律：$F = ma$，力等于质量乘以加速度。'
+
+  - title: 动量定义
+    tag: 力学
+    difficulty: easy
+    latex: 'p = mv'
+    description: '动量定义：$p = mv$。'
+
+  - title: 动能公式
+    tag: 力学
+    difficulty: easy
+    latex: 'E_k = \frac{1}{2}mv^2'
+    description: '动能：$$E_k = \frac{1}{2}mv^2$$'
+
+  - title: 重力势能
+    tag: 力学
+    difficulty: easy
+    latex: 'E_p = mgh'
+    description: '重力势能：$$E_p = mgh$$'
+
+  - title: 万有引力定律
+    tag: 力学
+    difficulty: easy
+    latex: 'F = G\frac{m_1 m_2}{r^2}'
+    description: '万有引力定律：$$F = G\frac{m_1 m_2}{r^2}$$'
+
+  - title: 向心力公式
+    tag: 力学
+    difficulty: medium
+    latex: 'F_n = m\frac{v^2}{r}'
+    description: '向心力：$$F_n = m\frac{v^2}{r} = m\omega^2 r$$'
+
+  - title: 功的定义
+    tag: 力学
+    difficulty: easy
+    latex: 'W = F s \cos\theta'
+    description: '功：$W = F s \cos\theta$，或 $W = \int \vec{F} \cdot d\vec{r}$。'
+
+  - title: 功率公式
+    tag: 力学
+    difficulty: easy
+    latex: 'P = \frac{W}{t} = Fv\cos\theta'
+    description: '功率：$$P = \frac{W}{t} = Fv\cos\theta$$'
+
+  - title: 动量定理
+    tag: 力学
+    difficulty: medium
+    latex: 'F\Delta t = \Delta p'
+    description: '动量定理：$$F\Delta t = \Delta p$$'
+
+  - title: 简谐振动微分方程
+    tag: 力学
+    difficulty: medium
+    latex: '\frac{d^2x}{dt^2} + \omega^2 x = 0'
+    description: '简谐振动微分方程：$$\frac{d^2x}{dt^2} + \omega^2 x = 0$$'
+
+  - title: 简谐振动解
+    tag: 力学
+    difficulty: medium
+    latex: 'x(t) = A\cos(\omega t + \varphi)'
+    description: '简谐振动解：$$x(t) = A\cos(\omega t + \varphi)$$'
+
+  - title: 胡克定律
+    tag: 力学
+    difficulty: easy
+    latex: 'F = -kx'
+    description: '胡克定律：$$F = -kx$$'
+
+  - title: 波速波长频率关系
+    tag: 力学
+    difficulty: easy
+    latex: 'v = f\lambda'
+    description: '波速、频率、波长关系：$$v = f\lambda$$'
+
+  - title: 开普勒第三定律
+    tag: 力学
+    difficulty: medium
+    latex: '\frac{T^2}{a^3} = \text{常量}'
+    description: '开普勒第三定律：$$\frac{T^2}{a^3} = \text{常量}$$'
+
+  # ========== 热学 (Thermodynamics) ==========
+  - title: 热力学第一定律
+    tag: 热学
+    difficulty: easy
+    latex: '\Delta U = Q - W'
+    description: '热力学第一定律（能量守恒）：$$\Delta U = Q - W$$'
+
+  - title: 理想气体状态方程
+    tag: 热学
+    difficulty: easy
+    latex: 'PV = nRT = Nk_B T'
+    description: '理想气体状态方程：$$PV = nRT = Nk_B T$$'
+
+  - title: 理想气体内能
+    tag: 热学
+    difficulty: medium
+    latex: 'U = \frac{f}{2}nRT'
+    description: '理想气体内能：$$U = \frac{f}{2}nRT$$，其中 $f$ 为自由度。'
+
+  - title: 熵增原理
+    tag: 热学
+    difficulty: medium
+    latex: '\Delta S \geq 0 \quad (\text{孤立系统})'
+    description: '熵增原理：$$\Delta S \geq 0$$（孤立系统）。'
+
+  - title: 卡诺循环效率
+    tag: 热学
+    difficulty: medium
+    latex: '\eta_{\text{卡诺}} = 1 - \frac{T_2}{T_1}'
+    description: '卡诺循环效率：$$\eta_{\text{卡诺}} = 1 - \frac{T_2}{T_1}$$'
+
+  - title: 麦克斯韦-玻尔兹曼分布
+    tag: 热学
+    difficulty: hard
+    latex: 'f(v) = 4\pi \left(\frac{m}{2\pi k_B T}\right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T}}'
+    description: '麦克斯韦-玻尔兹曼分布速率公式。'
+
+  - title: 平均自由程
+    tag: 热学
+    difficulty: medium
+    latex: '\lambda = \frac{1}{\sqrt{2}\pi d^2 n}'
+    description: '平均自由程：$$\lambda = \frac{1}{\sqrt{2}\pi d^2 n}$$'
+
+  - title: 斯特藩-玻尔兹曼定律
+    tag: 热学
+    difficulty: medium
+    latex: 'M = \sigma T^4'
+    description: '斯特藩-玻尔兹曼定律：$$M = \sigma T^4$$'
+
+  # ========== 电磁学 (Electromagnetism) ==========
+  - title: 库仑定律
+    tag: 电磁学
+    difficulty: easy
+    latex: 'F = \frac{1}{4\pi\varepsilon_0}\frac{q_1 q_2}{r^2}'
+    description: '库仑定律：$$F = \frac{1}{4\pi\varepsilon_0}\frac{q_1 q_2}{r^2}$$'
+
+  - title: 点电荷电场
+    tag: 电磁学
+    difficulty: easy
+    latex: 'E = \frac{1}{4\pi\varepsilon_0}\frac{Q}{r^2}'
+    description: '点电荷电场强度：$$E = \frac{1}{4\pi\varepsilon_0}\frac{Q}{r^2}$$'
+
+  - title: 电场高斯定理
+    tag: 电磁学
+    difficulty: medium
+    latex: '\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{内}}}{\varepsilon_0}'
+    description: '电场高斯定理：$$\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{内}}}{\varepsilon_0}$$'
+
+  - title: 电势定义
+    tag: 电磁学
+    difficulty: easy
+    latex: 'V = \frac{1}{4\pi\varepsilon_0}\frac{Q}{r}'
+    description: '点电荷电势：$$V = \frac{1}{4\pi\varepsilon_0}\frac{Q}{r}$$'
+
+  - title: 电容定义
+    tag: 电磁学
+    difficulty: easy
+    latex: 'C = \frac{Q}{U}'
+    description: '电容定义：$$C = \frac{Q}{U}$$'
+
+  - title: 平行板电容器电容
+    tag: 电磁学
+    difficulty: medium
+    latex: 'C = \frac{\varepsilon_0 S}{d}'
+    description: '平行板电容器电容：$$C = \frac{\varepsilon_0 S}{d}$$'
+
+  - title: 电容器储能
+    tag: 电磁学
+    difficulty: medium
+    latex: 'W = \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}CU^2'
+    description: '电容器储能：$$W = \frac{1}{2}\frac{Q^2}{C} = \frac{1}{2}CU^2$$'
+
+  - title: 欧姆定律
+    tag: 电磁学
+    difficulty: easy
+    latex: 'I = \frac{U}{R}'
+    description: '欧姆定律：$$I = \frac{U}{R}$$'
+
+  - title: 焦耳定律
+    tag: 电磁学
+    difficulty: easy
+    latex: 'Q = I^2Rt'
+    description: '焦耳定律：$$Q = I^2Rt$$'
+
+  - title: 法拉第电磁感应定律
+    tag: 电磁学
+    difficulty: medium
+    latex: '\mathcal{E} = -N\frac{d\Phi}{dt}'
+    description: '法拉第电磁感应定律：$$\mathcal{E} = -N\frac{d\Phi}{dt}$$'
+
+  - title: 动生电动势
+    tag: 电磁学
+    difficulty: medium
+    latex: '\mathcal{E} = Blv'
+    description: '动生电动势：$$\mathcal{E} = Blv$$'
+
+  - title: 洛伦兹力
+    tag: 电磁学
+    difficulty: medium
+    latex: '\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})'
+    description: '洛伦兹力：$$\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})$$'
+
+  - title: 毕奥-萨伐尔定律
+    tag: 电磁学
+    difficulty: hard
+    latex: 'd\vec{B} = \frac{\mu_0}{4\pi}\frac{Id\vec{l} \times \vec{r}}{r^3}'
+    description: '毕奥-萨伐尔定律：$$d\vec{B} = \frac{\mu_0}{4\pi}\frac{Id\vec{l} \times \vec{r}}{r^3}$$'
+
+  - title: 安培环路定理
+    tag: 电磁学
+    difficulty: medium
+    latex: '\oint_L \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{内}}'
+    description: '安培环路定理：$$\oint_L \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{内}}$$'
+
+  - title: 磁场高斯定理
+    tag: 电磁学
+    difficulty: medium
+    latex: '\oint_S \vec{B} \cdot d\vec{S} = 0'
+    description: '磁场高斯定理：$$\oint_S \vec{B} \cdot d\vec{S} = 0$$（磁单极子不存在）。'
+
+  - title: 麦克斯韦方程组（微分形式）第1式
+    tag: 电磁学
+    difficulty: hard
+    latex: '\nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0}'
+    description: '麦克斯韦方程组（微分形式）第1式：高斯电定律。'
+
+  - title: 麦克斯韦方程组（微分形式）第2式
+    tag: 电磁学
+    difficulty: hard
+    latex: '\nabla \cdot \vec{B} = 0'
+    description: '麦克斯韦方程组（微分形式）第2式：高斯磁定律。'
+
+  - title: 麦克斯韦方程组（微分形式）第3式
+    tag: 电磁学
+    difficulty: hard
+    latex: '\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}'
+    description: '麦克斯韦方程组（微分形式）第3式：法拉第电磁感应定律。'
+
+  - title: 麦克斯韦方程组（微分形式）第4式
+    tag: 电磁学
+    difficulty: hard
+    latex: '\nabla \times \vec{B} = \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}'
+    description: '麦克斯韦方程组（微分形式）第4式：安培-麦克斯韦定律。'
+
+  - title: 电磁波波速
+    tag: 电磁学
+    difficulty: medium
+    latex: 'c = \frac{1}{\sqrt{\mu_0\varepsilon_0}}'
+    description: '电磁波在真空中的波速：$$c = \frac{1}{\sqrt{\mu_0\varepsilon_0}}$$'
+
+  - title: 坡印廷矢量
+    tag: 电磁学
+    difficulty: hard
+    latex: '\vec{S} = \vec{E} \times \vec{H}'
+    description: '坡印廷矢量（能流密度）：$$\vec{S} = \vec{E} \times \vec{H}$$'
+
+  # ========== 光学 (Optics) ==========
+  - title: 折射定律（斯涅尔定律）
+    tag: 光学
+    difficulty: easy
+    latex: 'n_1\sin\theta_1 = n_2\sin\theta_2'
+    description: '折射定律（斯涅尔定律）：$$n_1\sin\theta_1 = n_2\sin\theta_2$$'
+
+  - title: 折射率定义
+    tag: 光学
+    difficulty: easy
+    latex: 'n = \frac{c}{v}'
+    description: '折射率定义：$$n = \frac{c}{v}$$'
+
+  - title: 全反射临界角
+    tag: 光学
+    difficulty: medium
+    latex: '\theta_c = \arcsin\frac{n_2}{n_1}'
+    description: '全反射临界角：$$\theta_c = \arcsin\frac{n_2}{n_1} \quad (n_1 > n_2)$$'
+
+  - title: 薄透镜公式
+    tag: 光学
+    difficulty: medium
+    latex: '\frac{1}{f} = \frac{1}{u} + \frac{1}{v}'
+    description: '薄透镜公式：$$\frac{1}{f} = \frac{1}{u} + \frac{1}{v}$$'
+
+  - title: 双缝干涉明纹条件
+    tag: 光学
+    difficulty: medium
+    latex: 'd\sin\theta = k\lambda, \quad k = 0, \pm 1, \pm 2, \ldots'
+    description: '双缝干涉明纹条件：$$d\sin\theta = k\lambda$$'
+
+  - title: 单缝衍射暗纹条件
+    tag: 光学
+    difficulty: medium
+    latex: 'a\sin\theta = k\lambda, \quad k = \pm 1, \pm 2, \ldots'
+    description: '单缝衍射暗纹条件：$$a\sin\theta = k\lambda$$'
+
+  - title: 光栅方程
+    tag: 光学
+    difficulty: medium
+    latex: 'd\sin\theta = k\lambda, \quad k = 0, \pm 1, \pm 2, \ldots'
+    description: '光栅方程（主极大）：$$d\sin\theta = k\lambda$$'
+
+  - title: 布儒斯特定律
+    tag: 光学
+    difficulty: medium
+    latex: '\tan\theta_p = \frac{n_2}{n_1}'
+    description: '布儒斯特定律（起偏角）：$$\tan\theta_p = \frac{n_2}{n_1}$$'
+
+  - title: 马吕斯定律
+    tag: 光学
+    difficulty: easy
+    latex: 'I = I_0\cos^2\theta'
+    description: '马吕斯定律：$$I = I_0\cos^2\theta$$'
+
+  # ========== 近代物理 (Modern Physics) ==========
+  - title: 光电效应方程
+    tag: 近代物理
+    difficulty: medium
+    latex: 'h\nu = W + \frac{1}{2}mv_{\max}^2'
+    description: '爱因斯坦光电效应方程：$$h\nu = W + \frac{1}{2}mv_{\max}^2$$'
+
+  - title: 康普顿散射
+    tag: 近代物理
+    difficulty: medium
+    latex: '\lambda'' - \lambda = \frac{h}{m_0 c}(1 - \cos\theta)'
+    description: '康普顿散射公式：$$\lambda'' - \lambda = \frac{h}{m_0 c}(1 - \cos\theta)$$'
+
+  - title: 德布罗意关系
+    tag: 近代物理
+    difficulty: medium
+    latex: '\lambda = \frac{h}{p} = \frac{h}{mv}'
+    description: '德布罗意关系：$$\lambda = \frac{h}{p} = \frac{h}{mv}$$'
+
+  - title: 玻尔氢原子轨道量子化
+    tag: 近代物理
+    difficulty: medium
+    latex: 'L = n\frac{h}{2\pi} = n\hbar, \quad n = 1, 2, 3, \ldots'
+    description: '玻尔氢原子模型轨道角动量量子化。'
+
+  - title: 玻尔氢原子能级公式
+    tag: 近代物理
+    difficulty: medium
+    latex: 'E_n = -\frac{13.6 \text{ eV}}{n^2}'
+    description: '玻尔氢原子能级公式：$$E_n = -\frac{13.6 \text{ eV}}{n^2}$$'
+
+  - title: 维恩位移定律
+    tag: 近代物理
+    difficulty: medium
+    latex: '\lambda_{\max} T = b'
+    description: '维恩位移定律：$$\lambda_{\max} T = b$$'
+
+  # ========== 量子力学 (Quantum Mechanics) ==========
+  - title: 含时薛定谔方程
+    tag: 量子力学
+    difficulty: hard
+    latex: 'i\hbar\frac{\partial}{\partial t}\Psi(\vec{r}, t) = \hat{H}\Psi(\vec{r}, t)'
+    description: '含时薛定谔方程：$$i\hbar\frac{\partial}{\partial t}\Psi(\vec{r}, t) = \hat{H}\Psi(\vec{r}, t)$$'
+
+  - title: 不含时薛定谔方程
+    tag: 量子力学
+    difficulty: hard
+    latex: '\hat{H}\psi(\vec{r}) = E\psi(\vec{r})'
+    description: '不含时薛定谔方程（定态）：$$\hat{H}\psi(\vec{r}) = E\psi(\vec{r})$$'
+
+  - title: 哈密顿算符（一维）
+    tag: 量子力学
+    difficulty: hard
+    latex: '\hat{H} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)'
+    description: '一维哈密顿算符：$$\hat{H} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)$$'
+
+  - title: 无限深方势阱波函数
+    tag: 量子力学
+    difficulty: hard
+    latex: '\psi_n(x) = \sqrt{\frac{2}{a}}\sin\frac{n\pi x}{a}, \quad n = 1, 2, 3, \ldots'
+    description: '一维无限深方势阱波函数。'
+
+  - title: 无限深方势阱能级
+    tag: 量子力学
+    difficulty: hard
+    latex: 'E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}'
+    description: '一维无限深方势阱能级：$$E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}$$'
+
+  - title: 一维谐振子能级
+    tag: 量子力学
+    difficulty: hard
+    latex: 'E_n = \left(n + \frac{1}{2}\right)\hbar\omega, \quad n = 0, 1, 2, \ldots'
+    description: '一维谐振子能级：$$E_n = \left(n + \frac{1}{2}\right)\hbar\omega$$'
+
+  - title: 势垒穿透透射系数
+    tag: 量子力学
+    difficulty: hard
+    latex: 'T \approx e^{-2\kappa a}, \quad \kappa = \frac{\sqrt{2m(V_0 - E)}}{\hbar}'
+    description: '量子隧穿效应透射系数近似公式。'
+
+  - title: 海森堡不确定性原理
+    tag: 量子力学
+    difficulty: hard
+    latex: '\Delta x \Delta p_x \geq \frac{\hbar}{2}'
+    description: '海森堡不确定性原理：$$\Delta x \Delta p_x \geq \frac{\hbar}{2}$$'
+
+  - title: 角动量本征值
+    tag: 量子力学
+    difficulty: hard
+    latex: '\hat{L}^2 Y_{lm} = l(l+1)\hbar^2 Y_{lm}'
+    description: '角动量平方算符本征值方程。'
+
+  - title: 球谐函数 Y00
+    tag: 量子力学
+    difficulty: hard
+    latex: 'Y_{00} = \frac{1}{\sqrt{4\pi}}'
+    description: '球谐函数 $Y_{00}$（s 轨道）。'
+
+  - title: 泡利不相容原理
+    tag: 量子力学
+    difficulty: medium
+    latex: '\text{同一量子态不能容纳两个全同费米子}'
+    description: '泡利不相容原理：同一量子态不能容纳两个全同费米子。'
+
+  # ========== 相对论 (Relativity) ==========
+  - title: 洛伦兹变换（x方向）
+    tag: 相对论
+    difficulty: hard
+    latex: 'x'' = \frac{x - vt}{\sqrt{1 - v^2/c^2}}, \quad t'' = \frac{t - vx/c^2}{\sqrt{1 - v^2/c^2}}'
+    description: '洛伦兹变换（沿 x 方向）。'
+
+  - title: 长度收缩
+    tag: 相对论
+    difficulty: medium
+    latex: 'L = L_0\sqrt{1 - v^2/c^2}'
+    description: '长度收缩公式：$$L = L_0\sqrt{1 - v^2/c^2}$$'
+
+  - title: 时间膨胀
+    tag: 相对论
+    difficulty: medium
+    latex: '\Delta t = \frac{\Delta t_0}{\sqrt{1 - v^2/c^2}}'
+    description: '时间膨胀公式：$$\Delta t = \frac{\Delta t_0}{\sqrt{1 - v^2/c^2}}$$'
+
+  - title: 相对论动量
+    tag: 相对论
+    difficulty: medium
+    latex: '\vec{p} = \frac{m_0\vec{v}}{\sqrt{1 - v^2/c^2}}'
+    description: '相对论动量：$$\vec{p} = \frac{m_0\vec{v}}{\sqrt{1 - v^2/c^2}}$$'
+
+  - title: 质能方程
+    tag: 相对论
+    difficulty: easy
+    latex: 'E = mc^2'
+    description: '爱因斯坦质能方程：$$E = mc^2$$'
+
+  - title: 静能公式
+    tag: 相对论
+    difficulty: easy
+    latex: 'E_0 = m_0c^2'
+    description: '静能：$$E_0 = m_0c^2$$'
+
+  - title: 能量-动量关系
+    tag: 相对论
+    difficulty: medium
+    latex: 'E^2 = p^2c^2 + m_0^2c^4'
+    description: '相对论能量-动量关系：$$E^2 = p^2c^2 + m_0^2c^4$$'
+
+  # ========== 粒子物理 (Particle Physics) ==========
+  - title: 四种基本相互作用强度比较
+    tag: 粒子物理
+    difficulty: medium
+    latex: 'F_{\text{强}} : F_{\text{电磁}} : F_{\text{弱}} : F_{\text{引}} \approx 1 : 10^{-2} : 10^{-6} : 10^{-39}'
+    description: '四种基本相互作用的强度比较。'
+
+  - title: 质子夸克组成
+    tag: 粒子物理
+    difficulty: medium
+    latex: 'p = uud, \quad Q = +\frac{2}{3} + \frac{2}{3} + \left(-\frac{1}{3}\right) = +1'
+    description: '质子由三个夸克组成：$p = uud$。'
+
+  - title: 中子夸克组成
+    tag: 粒子物理
+    difficulty: medium
+    latex: 'n = udd, \quad Q = +\frac{2}{3} + \left(-\frac{1}{3}\right) + \left(-\frac{1}{3}\right) = 0'
+    description: '中子由三个夸克组成：$n = udd$。'
+
+  - title: π+ 介子夸克组成
+    tag: 粒子物理
+    difficulty: medium
+    latex: '\pi^+ = u\bar{d}'
+    description: '$\pi^+$ 介子由夸克-反夸克组成：$\pi^+ = u\bar{d}$。'
+
+  - title: 宇称不守恒
+    tag: 粒子物理
+    difficulty: hard
+    latex: '\text{弱相互作用中宇称 } P \text{ 不守恒}'
+    description: '宇称不守恒（杨振宁、李政道，1956；吴健雄实验验证，1957）：弱相互作用中宇称不守恒。'
+
+  - title: CP破坏
+    tag: 粒子物理
+    difficulty: hard
+    latex: '\text{弱相互作用中电荷共轭（C）和宇称（P）的联合变换不守恒}'
+    description: 'CP 破坏：弱相互作用中电荷共轭（C）和宇称（P）的联合变换不守恒。'
+
+  # ========== 宇宙学 (Cosmology) ==========
+  - title: 弗里德曼方程（第一式）
+    tag: 宇宙学
+    difficulty: hard
+    latex: '\left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3}\rho - \frac{kc^2}{a^2} + \frac{\Lambda c^2}{3}'
+    description: '弗里德曼方程（第一式）：$$\left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3}\rho - \frac{kc^2}{a^2} + \frac{\Lambda c^2}{3}$$'
+
+  - title: 弗里德曼方程（第二式）
+    tag: 宇宙学
+    difficulty: hard
+    latex: '\frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\left(\rho + \frac{3p}{c^2}\right) + \frac{\Lambda c^2}{3}'
+    description: '弗里德曼方程（第二式）：$$\frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\left(\rho + \frac{3p}{c^2}\right) + \frac{\Lambda c^2}{3}$$'
+
+  - title: 流体方程（能量守恒）
+    tag: 宇宙学
+    difficulty: hard
+    latex: '\dot{\rho} + 3\frac{\dot{a}}{a}\left(\rho + \frac{p}{c^2}\right) = 0'
+    description: '宇宙学流体方程（能量守恒）。'
+
+  - title: 状态方程
+    tag: 宇宙学
+    difficulty: medium
+    latex: 'p = w\rho c^2'
+    description: '状态方程：$p = w\rho c^2$。物质主导 $w=0$，辐射主导 $w=1/3$，宇宙常数 $w=-1$。'
+
+  - title: 哈勃定律
+    tag: 宇宙学
+    difficulty: easy
+    latex: 'v = H_0 d'
+    description: '哈勃定律：$$v = H_0 d$$'
+
+  - title: 宇宙密度参数
+    tag: 宇宙学
+    difficulty: medium
+    latex: '\Omega = \frac{\rho}{\rho_c}, \quad \rho_c = \frac{3H^2}{8\pi G}'
+    description: '宇宙密度参数：$$\Omega = \frac{\rho}{\rho_c}$$'
+
+  # ========== 爱因斯坦引力场方程 ==========
+  - title: 爱因斯坦引力场方程
+    tag: 广义相对论
+    difficulty: hard
+    latex: 'R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}'
+    description: '爱因斯坦引力场方程：$$R_{\mu\nu} - \frac{1}{2}Rg_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$$'
+
+  - title: 里奇曲率张量
+    tag: 广义相对论
+    difficulty: hard
+    latex: 'R_{\mu\nu} = R^\lambda_{\mu\lambda\nu}'
+    description: '里奇曲率张量：$$R_{\mu\nu} = R^\lambda_{\mu\lambda\nu}$$'
+
+  - title: 克里斯托费尔符号
+    tag: 广义相对论
+    difficulty: hard
+    latex: '\Gamma^\lambda_{\mu\nu} = \frac{1}{2}g^{\lambda\rho}\left(\partial_\mu g_{\nu\rho} + \partial_\nu g_{\mu\rho} - \partial_\rho g_{\mu\nu}\right)'
+    description: '克里斯托费尔符号（列维-奇维塔联络）。'
+
+  - title: 闵可夫斯基度规
+    tag: 广义相对论
+    difficulty: medium
+    latex: '\eta_{\mu\nu} = \text{diag}(-1, 1, 1, 1)'
+    description: '闵可夫斯基度规（平直时空）：$$\eta_{\mu\nu} = \text{diag}(-1, 1, 1, 1)$$'
+
+  - title: 测地线方程
+    tag: 广义相对论
+    difficulty: hard
+    latex: '\frac{d^2x^\mu}{d\tau^2} + \Gamma^\mu_{\alpha\beta}\frac{dx^\alpha}{d\tau}\frac{dx^\beta}{d\tau} = 0'
+    description: '测地线方程（自由粒子运动方程）。'
+
+  - title: 史瓦西度规
+    tag: 广义相对论
+    difficulty: hard
+    latex: 'ds^2 = -\left(1 - \frac{2GM}{c^2 r}\right)c^2dt^2 + \left(1 - \frac{2GM}{c^2 r}\right)^{-1}dr^2 + r^2d\Omega^2'
+    description: '史瓦西度规（球对称静态引力场）。'
+
+  - title: 史瓦西半径（事件视界）
+    tag: 广义相对论
+    difficulty: medium
+    latex: 'r_s = \frac{2GM}{c^2}'
+    description: '史瓦西半径（事件视界）：$$r_s = \frac{2GM}{c^2}$$'
+
+  - title: 引力红移
+    tag: 广义相对论
+    difficulty: medium
+    latex: '\frac{\Delta\lambda}{\lambda} = \frac{GM}{c^2}\left(\frac{1}{r_1} - \frac{1}{r_2}\right)'
+    description: '引力红移公式。'
+
+  # ========== 标准模型拉格朗日量 ==========
+  - title: QED拉格朗日密度
+    tag: 标准模型
+    difficulty: hard
+    latex: '\mathcal{L}_{\text{QED}} = \bar{\psi}(i\gamma^\mu D_\mu - m)\psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}'
+    description: '量子电动力学（QED）拉格朗日密度。'
+
+  - title: QCD拉格朗日密度
+    tag: 标准模型
+    difficulty: hard
+    latex: '\mathcal{L}_{\text{QCD}} = \sum_{f}\bar{\psi}_f(i\gamma^\mu D_\mu - m_f)\psi_f - \frac{1}{4}G^a_{\mu\nu}G^{a\mu\nu}'
+    description: '量子色动力学（QCD）拉格朗日密度。'
+
+  - title: 协变导数（QED）
+    tag: 标准模型
+    difficulty: hard
+    latex: 'D_\mu = \partial_\mu + ieA_\mu'
+    description: 'QED 协变导数：$$D_\mu = \partial_\mu + ieA_\mu$$'
+
+  - title: 电磁场强张量
+    tag: 标准模型
+    difficulty: hard
+    latex: 'F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu'
+    description: '电磁场强张量：$$F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$$'
+
+  - title: 希格斯拉格朗日量
+    tag: 标准模型
+    difficulty: hard
+    latex: '\mathcal{L}_H = (D_\mu\phi)^\dagger(D^\mu\phi) - \mu^2\phi^\dagger\phi - \lambda(\phi^\dagger\phi)^2'
+    description: '希格斯拉格朗日量（对称性破缺前）。'
+
+  - title: 汤川耦合（夸克-希格斯）
+    tag: 标准模型
+    difficulty: hard
+    latex: '\mathcal{L}_{\text{Yukawa}} = -y_{ij}^u \bar{Q}_{Li}u_{Rj}\tilde{\phi} - y_{ij}^d \bar{Q}_{Li}d_{Rj}\phi + \text{h.c.}'
+    description: '汤川耦合项（费米子通过希格斯机制获得质量）。'
+
+  - title: CKM矩阵
+    tag: 标准模型
+    difficulty: hard
+    latex: 'V_{\text{CKM}} = \begin{pmatrix} V_{ud} & V_{us} & V_{ub} \\ V_{cd} & V_{cs} & V_{cb} \\ V_{td} & V_{ts} & V_{tb} \end{pmatrix}'
+    description: 'CKM 矩阵（夸克混合矩阵）。'
+
+  - title: 标准模型总拉格朗日量（概要）
+    tag: 标准模型
+    difficulty: hard
+    latex: '\mathcal{L}_{\text{SM}} = \mathcal{L}_{\text{gauge}} + \mathcal{L}_{\text{fermion}} + \mathcal{L}_H + \mathcal{L}_{\text{Yukawa}}'
+    description: '标准模型总拉格朗日量（概要形式）。'
+
+  - title: 标准模型总拉格朗日量（完整形式）
+    tag: 标准模型
+    difficulty: hard
+    latex: '\begin{aligned} \mathcal{L}_{\text{SM}} &= -\frac{1}{4}G^a_{\mu\nu}G^{a\mu\nu} -\frac{1}{4}W^a_{\mu\nu}W^{a\mu\nu} -\frac{1}{4}B_{\mu\nu}B^{\mu\nu} \\ &\quad + i\bar{Q}_L\gamma^\mu D_\mu Q_L + i\bar{u}_R\gamma^\mu D_\mu u_R + i\bar{d}_R\gamma^\mu D_\mu d_R \\ &\quad + i\bar{L}_L\gamma^\mu D_\mu L_L + i\bar{e}_R\gamma^\mu D_\mu e_R \\ &\quad + (D_\mu\phi)^\dagger(D^\mu\phi) + \mu^2\phi^\dagger\phi - \lambda(\phi^\dagger\phi)^2 \\ &\quad - (y_u)_{ij}\bar{Q}_{Li}u_{Rj}\tilde{\phi} - (y_d)_{ij}\bar{Q}_{Li}d_{Rj}\phi - (y_e)_{ij}\bar{L}_{Li}e_{Rj}\phi + \text{h.c.} \end{aligned}'
+    description: '标准模型总拉格朗日量（完整显式）。规范群 $SU(3)_C \times SU(2)_L \times U(1)_Y$。'
+
+  - title: QCD 场强张量
+    tag: 标准模型
+    difficulty: hard
+    latex: 'G^a_{\mu\nu} = \partial_\mu G^a_\nu - \partial_\nu G^a_\mu + g_s f^{abc}G^b_\mu G^c_\nu'
+    description: 'QCD 胶子场强张量（$SU(3)$ 非阿贝尔规范场）。'
+
+  - title: 电弱场强张量
+    tag: 标准模型
+    difficulty: hard
+    latex: 'W^a_{\mu\nu} = \partial_\mu W^a_\nu - \partial_\nu W^a_\mu + g\varepsilon^{abc}W^b_\mu W^c_\nu, \quad B_{\mu\nu} = \partial_\mu B_\nu - \partial_\nu B_\mu'
+    description: '电弱理论中的 $SU(2)_L$ 和 $U(1)_Y$ 场强张量。'
+
+  - title: 夸克 doublet 协变导数
+    tag: 标准模型
+    difficulty: hard
+    latex: 'D_\mu Q_L = \left(\partial_\mu + ig_s T^a G^a_\mu + ig\tau^a W^a_\mu + ig''\frac{1}{6}B_\mu\right)Q_L'
+    description: '夸克 $SU(2)_L$ 二重态的协变导数（$Y=1/6$）。'
+
+  - title: 轻子 doublet 协变导数
+    tag: 标准模型
+    difficulty: hard
+    latex: 'D_\mu L_L = \left(\partial_\mu + ig\tau^a W^a_\mu + ig''\left(-\frac{1}{2}\right)B_\mu\right)L_L'
+    description: '轻子 $SU(2)_L$ 二重态的协变导数（$Y=-1/2$）。'
+
+  - title: 右手夸克协变导数
+    tag: 标准模型
+    difficulty: hard
+    latex: 'D_\mu u_R = \left(\partial_\mu + ig_s T^a G^a_\mu + ig''\frac{2}{3}B_\mu\right)u_R, \quad D_\mu d_R = \left(\partial_\mu + ig_s T^a G^a_\mu + ig''\left(-\frac{1}{3}\right)B_\mu\right)d_R'
+    description: '右手夸克的协变导数（$u_R: Y=2/3, d_R: Y=-1/3$）。'
+
+  - title: 右手轻子协变导数
+    tag: 标准模型
+    difficulty: hard
+    latex: 'D_\mu e_R = \left(\partial_\mu + ig''(-1)B_\mu\right)e_R'
+    description: '右手轻子的协变导数（$Y=-1$）。'
+
+  - title: 希格斯协变导数
+    tag: 标准模型
+    difficulty: hard
+    latex: 'D_\mu\phi = \left(\partial_\mu + ig\tau^a W^a_\mu + ig''\frac{1}{2}B_\mu\right)\phi'
+    description: '希格斯二重态的协变导数（$Y=1/2$）。'
+
+  - title: 希格斯势（对称性破缺前）
+    tag: 标准模型
+    difficulty: hard
+    latex: 'V(\phi) = -\mu^2\phi^\dagger\phi + \lambda(\phi^\dagger\phi)^2, \quad \mu^2>0, \lambda>0'
+    description: '希格斯势能（$V(\phi)$ 在 $\langle\phi\rangle\neq 0$ 处取最小值）。'
+
+  - title: 希格斯真空期望值
+    tag: 标准模型
+    difficulty: hard
+    latex: '\langle\phi\rangle = \frac{1}{\sqrt{2}}\begin{pmatrix} 0 \\ v \end{pmatrix}, \quad v = \sqrt{\frac{\mu^2}{\lambda}} \approx 246 \text{ GeV}'
+    description: '希格斯场的真空期望值（对称性破缺后）。'
+
+  - title: 规范玻色子质量（希格斯机制后）
+    tag: 标准模型
+    difficulty: hard
+    latex: 'M_W = \frac{1}{2}gv, \quad M_Z = \frac{M_W}{\cos\theta_W}, \quad m_\gamma = 0'
+    description: '希格斯机制后 $W^\pm, Z^0$ 获得质量，光子无质量。$\tan\theta_W = g''/g$。'
+
+  - title: 费米子质量（希格斯机制后）
+    tag: 标准模型
+    difficulty: hard
+    latex: 'm_u = \frac{(y_u)_{ii}v}{\sqrt{2}}, \quad m_d = \frac{(y_d)_{ii}v}{\sqrt{2}}, \quad m_e = \frac{(y_e)_{ii}v}{\sqrt{2}}'
+    description: '费米子通过汤川耦合获得质量（$v \approx 246 \text{ GeV}$）。'
+
+  - title: 希格斯粒子质量
+    tag: 标准模型
+    difficulty: hard
+    latex: 'm_H = \sqrt{2\lambda}v \approx 125 \text{ GeV}'
+    description: '希格斯粒子质量（2012 年 LHC 发现）。'
+
+  - title: CKM 矩阵（夸克混合）
+    tag: 标准模型
+    difficulty: hard
+    latex: 'V_{\text{CKM}} = \begin{pmatrix} V_{ud} & V_{us} & V_{ub} \\ V_{cd} & V_{cs} & V_{cb} \\ V_{td} & V_{ts} & V_{tb} \end{pmatrix}, \quad |V_{\text{CKM}}^\dagger V_{\text{CKM}}| = 1'
+    description: 'CKM 矩阵（夸克弱作用本征态与质量本征态之间的混合矩阵）。'
+
+  - title: PMNS 矩阵（中微子混合）
+    tag: 标准模型
+    difficulty: hard
+    latex: 'U_{\text{PMNS}} = \begin{pmatrix} U_{e1} & U_{e2} & U_{e3} \\ U_{\mu1} & U_{\mu2} & U_{\mu3} \\ U_{\tau1} & U_{\tau2} & U_{\tau3} \end{pmatrix}'
+    description: 'PMNS 矩阵（中微子弱作用本征态与质量本征态之间的混合矩阵）。中微子振荡由此产生。'
+
+  - title: 戈德斯通定理
+    tag: 标准模型
+    difficulty: hard
+    latex: '\text{连续对称性自发破缺时，会出现 } N \text{ 个无质量标量粒子（戈德斯通玻色子）}'
+    description: '戈德斯通定理：连续对称性自发破缺时出现的无质量标量粒子。在标准模型中，3 个戈德斯通玻色子被 $W^\pm, Z^0$ 吃掉。'

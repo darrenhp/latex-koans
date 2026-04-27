@@ -1,18 +1,72 @@
 koans:
-  - id: 11
-    chapter: 经典公式
-    title: 欧拉公式
+  - title: 欧拉公式
     tag: 经典
     difficulty: medium
     latex: 'e^{i\pi} + 1 = 0'
     description: '世界上最美丽的公式——欧拉恒等式。'
-    hint: '<code>e^{i\pi} + 1 = 0</code>'
 
-  - id: 12
-    chapter: 经典公式
-    title: 高斯积分
+  - title: 高斯积分
     tag: 经典
     difficulty: hard
     latex: '\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}'
     description: '经典的高斯积分公式。'
-    hint: '<code>\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}</code>'
+
+  - title: 韦达定理
+    tag: 代数
+    difficulty: medium
+    latex: 'x^2 + px + q = 0:\quad x_1 + x_2 = -p,\; x_1 x_2 = q'
+    description: '韦达定理：多项式根与系数之间的关系。对于二次方程 $x^2 + px + q = 0$，两根之和 $x_1 + x_2 = -p$，两根之积 $x_1 x_2 = q$。'
+
+  - title: 柯西-施瓦茨不等式
+    tag: 不等式
+    difficulty: medium
+    latex: '\left(\sum_{i=1}^{n} a_i b_i\right)^2 \leq \left(\sum_{i=1}^{n} a_i^2\right)\left(\sum_{i=1}^{n} b_i^2\right)'
+    description: '柯西-施瓦茨不等式：对于任意实数序列 $\{a_i\}$ 和 $\{b_i\}$，有 $\left(\sum a_i b_i\right)^2 \leq \left(\sum a_i^2\right)\left(\sum b_i^2\right)$。等号成立当且仅当 $\frac{a_1}{b_1} = \frac{a_2}{b_2} = \cdots = \frac{a_n}{b_n}$。'
+
+  - title: 算术-几何平均值不等式
+    tag: 不等式
+    difficulty: medium
+    latex: '\frac{a_1 + a_2 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 a_2 \cdots a_n}'
+    description: '算术-几何平均值不等式（AM-GM）：对于任意非负实数 $a_1, a_2, \ldots, a_n$，有 $\frac{a_1 + a_2 + \cdots + a_n}{n} \geq \sqrt[n]{a_1 a_2 \cdots a_n}$。等号成立当且仅当 $a_1 = a_2 = \cdots = a_n$。'
+
+  - title: 二项式定理
+    tag: 代数
+    difficulty: medium
+    latex: '(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k'
+    description: '二项式定理：$(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k$。'
+
+  - title: 欧拉公式（复数形式）
+    tag: 经典
+    difficulty: medium
+    latex: 'e^{i\theta} = \cos\theta + i\sin\theta'
+    description: '欧拉公式（复数形式）：$e^{i\theta} = \cos\theta + i\sin\theta$。当 $\theta = \pi$ 时，得到欧拉恒等式 $e^{i\pi} + 1 = 0$。'
+
+  - title: 勾股定理
+    tag: 几何
+    difficulty: easy
+    latex: 'a^2 + b^2 = c^2'
+    description: '勾股定理：直角三角形两直角边 $a$、$b$ 的平方和等于斜边 $c$ 的平方，即 $a^2 + b^2 = c^2$。'
+
+  - title: 正弦定理
+    tag: 几何
+    difficulty: medium
+    latex: '\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R'
+    description: '正弦定理：在 $\triangle ABC$ 中，$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} = 2R$，其中 $R$ 为外接圆半径。'
+
+  - title: 余弦定理
+    tag: 几何
+    difficulty: medium
+    latex: 'c^2 = a^2 + b^2 - 2ab\cos C'
+    description: '余弦定理：在 $\triangle ABC$ 中，$c^2 = a^2 + b^2 - 2ab\cos C$。'
+
+  - title: 泰勒展开
+    tag: 微积分
+    difficulty: hard
+    latex: 'f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n'
+    description: '泰勒展开：若函数 $f(x)$ 在 $x=a$ 处无穷阶可导，则 $f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$。'
+
+  - title: 斯特林公式
+    tag: 渐近
+    difficulty: hard
+    latex: 'n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n'
+    description: '斯特林公式：$n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n$，给出了阶乘的渐近表达式。'

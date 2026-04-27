@@ -1,0 +1,102 @@
+koans:
+- title: 字符串与子串
+  tag: 基础
+  difficulty: easy
+  latex: s = s_0 s_1 \cdots s_{n-1} \in \Sigma^n, n = |s|
+  description: 字符串：$s = s_0 s_1 \cdots s_{n-1} \in \Sigma^n$，$n = |s|$。子串：$s[l:r]
+    = s_l s_{l+1} \cdots s_{r-1}$。
+- title: 前缀与后缀
+  tag: 基础
+  difficulty: easy
+  latex: \text{prefix}_i(s) = s[0:i], \text{suffix}_i(s) = s[i:n]
+  description: 前缀：$s[0:i] = \text{prefix}_i(s)$，$1 \leq i \leq n$。后缀：$s[i:n] = \text{suffix}_i(s)$，$0
+    \leq i < n$。
+- title: 字符串匹配定义
+  tag: 基础
+  difficulty: medium
+  latex: \text{Match}(t, p) = \{ i \mid t[i:i+|p|] = p \}
+  description: 字符串匹配：给定文本 $t$ 和模式 $p$，找到所有 $t[i:i+|p|] = p$ 的位置 $i$。
+- title: 前缀函数定义
+  tag: KMP
+  difficulty: hard
+  latex: \pi[i] = \max\{ j \mid 0 \leq j \leq i \land s[0:j] = s[i-j+1:i+1] \}
+  description: '前缀函数：$\pi: \{0,1,\ldots,n-1\} \to \{-1,0,1,\ldots,n-1\}$。等价于：$\pi[i]
+    = \text{最长真前缀同时也是后缀的长度}$。'
+- title: KMP 匹配
+  tag: KMP
+  difficulty: hard
+  latex: '\text{KMP: use }\pi_p\text{ to avoid backtracking}'
+  description: KMP 匹配：模式 $p$ 在文本 $t$ 中，用 $\pi_p$ 避免回溯。时间复杂度：$O(n + m)$。
+- title: Z 函数定义
+  tag: Z算法
+  difficulty: hard
+  latex: z[i] = \max\{ k \mid s[0:k] = s[i:i+k] \}
+  description: 'Z 函数：$z: \{0,1,\ldots,n-1\} \to \mathbb{N}$。$z[i] = \max\{ k \mid
+    s[0:k] = s[i:i+k] \}$。'
+- title: Z 盒与递推
+  tag: Z算法
+  difficulty: hard
+  latex: z[i] = \begin{cases} \min(r-i+1, z[i-l]), & i \leq r \\ 0, & \end{cases}
+  description: Z 盒：$[l, r]$ 满足 $z[l] = r - l + 1$ 且 $r$ 最大化。递推公式：$$z[i] = \begin{cases}
+    \min(r-i+1, z[i-l]), & i \leq r \\ 0, & \text{否则} \end{cases}$$然后暴力扩展。
+- title: AC 自动机定义
+  tag: AC自动机
+  difficulty: hard
+  latex: \text{fail}(v) =
+  description: AC 自动机：Trie + 失效链接。失效链接：$\text{fail}(v) = \text{Trie}$ 中 $v$ 的最长真后缀对应的状态。转移函数：$$\delta(v,
+    c) = \begin{cases} \text{Trie}(v, c), & \text{存在} \\ \delta(\text{fail}(v), c),
+    & \text{否则} \end{cases}$$
+- title: 后缀数组定义
+  tag: 后缀数组
+  difficulty: hard
+  latex: \text{SA}[0:n-1] \text{ is permutation, } \text{suffix}_{\text{SA}[0]}(s)
+    < \cdots < \text{suffix}_{\text{SA}[n-1]}(s)
+  description: 后缀数组：$\text{SA}[0:n-1]$ 是 $\{0,1,\ldots,n-1\}$ 的排列，满足 $$\text{suffix}_{\text{SA}[0]}(s)
+    < \text{suffix}_{\text{SA}[1]}(s) < \cdots < \text{suffix}_{\text{SA}[n-1]}(s)$$排名数组：$\text{Rank}[i]
+    = j \iff \text{SA}[j] = i$。
+- title: LCP 数组
+  tag: 后缀数组
+  difficulty: hard
+  latex: \text{LCP}[i] = \text{lcp}(\text{suffix}_{\text{SA}[i-1]}(s), \text{suffix}_{\text{SA}[i]}(s))
+  description: LCP 数组：$\text{LCP}[i] = \text{lcp}(\text{suffix}_{\text{SA}[i-1]}(s),
+    \text{suffix}_{\text{SA}[i]}(s))$ 其中 $\text{lcp}(u,v) = \max\{ k \mid u[0:k] =
+    v[0:k] \}$。LCP 查询（RMQ）：$$\text{lcp}(i,j) = \min_{k=\text{Rank}[i]+1}^{\text{Rank}[j]}
+    \text{LCP}[k]$$
+- title: 后缀自动机定义
+  tag: SAM
+  difficulty: hard
+  latex: \text{SAM is minimal DFA that accepts all suffixes of } s
+  description: 后缀自动机 (SAM)：接受 $s$ 所有后缀的最小 DFA。状态数：$|\text{SAM}| \leq 2n - 1$。转移数：$\leq
+    3n - 4$。
+- title: 后缀链接与 endpos
+  tag: SAM
+  difficulty: hard
+  latex: \text{link}(v) = \max_{\text{suffix } w \text{ of } w} \{ w \in \text{SAM}
+    \}
+  description: '后缀链接：$\text{link}: Q \to Q$。endpos 等价类：$$\text{endpos}(w) = \{ i \mid
+    s[0:i] \text{ 以 } w \text{ 结尾} \}$$不同子串数：$$\sum_{v \in Q} (\text{len}(v) - \text{len}(\text{link}(v)))$$'
+- title: 回文树定义
+  tag: 回文树
+  difficulty: hard
+  latex: '\text{PAM has } \leq n + 2 \text{ states, two roots: } 0 \text{ (even) and
+    } -1 \text{ (odd)}'
+  description: 回文树（回文自动机）：接受 $s$ 所有不同回文子串的自动机。状态数：$|\text{PAM}| \leq n + 2$。两个根：偶数根：$0$，$\text{len}(0)
+    = 0$；奇数根：$-1$，$\text{len}(-1) = -1$。
+- title: 最小表示法
+  tag: 最小表示法
+  difficulty: hard
+  latex: \text{min representation} = \min\{ s[k:] + s[:k] \mid 0 \leq k < n \}
+  description: 最小表示法：字符串 $s$ 的最小表示是循环同构 $\min\{ s[k:] + s[:k] \mid 0 \leq k < n \}$。算法：双指针，$O(n)$。
+- title: Lyndon 分解
+  tag: Lyndon分解
+  difficulty: hard
+  latex: s = w_1 w_2 \cdots w_k, w_i \text{ is Lyndon word, } w_1 \geq w_2 \geq \cdots
+    \geq w_k
+  description: Lyndon 分解：任何字符串 $s$ 可唯一分解为 $$s = w_1 w_2 \cdots w_k$$ 其中 $w_i$ 是 Lyndon
+    词且 $w_1 \geq w_2 \geq \cdots \geq w_k$（字典序）。Lyndon 词：字符串 $w$ 满足 $w$ 是其所有真后缀中严格最小的。
+- title: Runs 理论
+  tag: Runs
+  difficulty: hard
+  latex: \text{Run} = (l, r, p) \text{ where } s[l:l+p] = s[l+p:l+2p] = \cdots
+  description: Runs 理论：Run 是三元组 $(l, r, p)$ 表示区间 $[l, r]$ 内所有长度为 $p$ 的子串都相同（周期为 $p$）。Runs
+    数量上界：$O(n)$，具体 $\leq 3n$。

@@ -1,0 +1,148 @@
+koans:
+- title: 整除性定义
+  tag: 基础
+  difficulty: easy
+  latex: 'a \mid b \iff \exists k \in \mathbb{Z}: b = ak'
+  description: '整除性：$a \mid b \iff \exists k \in \mathbb{Z}: b = ak$。'
+- title: 带余除法
+  tag: 基础
+  difficulty: easy
+  latex: a = bq + r, 0 \leq r < |b|
+  description: 带余除法：$a = bq + r$，$0 \leq r < |b|$。
+- title: 最大公约数
+  tag: 基础
+  difficulty: medium
+  latex: \gcd(a,b) = \max\{ d \in \mathbb{N}^+ \mid d \mid a \land d \mid b \}
+  description: 最大公约数：$\gcd(a,b) = \max\{ d \in \mathbb{N}^+ \mid d \mid a \land d
+    \mid b \}$。
+- title: 最小公倍数
+  tag: 基础
+  difficulty: medium
+  latex: \text{lcm}(a,b) = \min\{ m \in \mathbb{N}^+ \mid a \mid m \land b \mid m
+    \}
+  description: 最小公倍数：$\text{lcm}(a,b) = \min\{ m \in \mathbb{N}^+ \mid a \mid m \land
+    b \mid m \}$。关系：$\gcd(a,b) \cdot \text{lcm}(a,b) = |ab|$。
+- title: 欧几里得算法
+  tag: 算法
+  difficulty: medium
+  latex: \gcd(a,b) = \begin{cases} a, & b = 0 \\ \gcd(b, a \bmod b), & b \neq 0 \end{cases}
+  description: 欧几里得算法：$$\gcd(a,b) = \begin{cases} a, & b = 0 \\ \gcd(b, a \bmod b),
+    & b \neq 0 \end{cases}$$
+- title: 扩展欧几里得
+  tag: 算法
+  difficulty: hard
+  latex: '\exists x,y \in \mathbb{Z}: ax + by = \gcd(a,b)'
+  description: '扩展欧几里得：$\exists x,y \in \mathbb{Z}: ax + by = \gcd(a,b)$。'
+- title: 素数定义
+  tag: 基础
+  difficulty: easy
+  latex: p > 1 \text{ is prime} \iff p 1 p
+  description: 素数：$p > 1$ 是素数 $\iff$ $p$ 的正因数只有 $1$ 和 $p$。
+- title: 算术基本定理
+  tag: 定理
+  difficulty: medium
+  latex: n = \prod_{i=1}^k p_i^{e_i}
+  description: '算术基本定理：$\forall n > 1, \exists! p_1 < p_2 < \cdots < p_k, \exists!
+    e_1,\ldots,e_k \in \mathbb{N}^+$: $$n = \prod_{i=1}^k p_i^{e_i}$$'
+- title: 素数定理
+  tag: 定理
+  difficulty: hard
+  latex: \pi(x) \sim \frac{x}{\ln x}
+  description: 素数计数函数：$\pi(x) = |\{ p \leq x \mid p \text{ 是素数} \}|$。素数定理：$\pi(x)
+    \sim \frac{x}{\ln x}$。
+- title: 同余定义
+  tag: 基础
+  difficulty: easy
+  latex: a \equiv b \pmod{n} \iff n \mid (a-b)
+  description: 同余：$a \equiv b \pmod{n} \iff n \mid (a-b)$。
+- title: 线性同余方程
+  tag: 方程
+  difficulty: medium
+  latex: ax \equiv b \pmod{n} \iff \gcd(a,n) \mid b
+  description: 线性同余方程：$ax \equiv b \pmod{n}$ 有解 $\iff \gcd(a,n) \mid b$。若有解，则有 $\gcd(a,n)$
+    个模 $n$ 不同余的解。
+- title: 欧拉函数定义
+  tag: 函数
+  difficulty: medium
+  latex: \varphi(n) = |\{ k \in \mathbb{N} \mid 1 \leq k \leq n \land \gcd(k,n) =
+    1 \}|
+  description: 欧拉函数：$\varphi(n) = |\{ k \in \mathbb{N} \mid 1 \leq k \leq n \land
+    \gcd(k,n) = 1 \}|$。
+- title: 欧拉函数计算公式
+  tag: 函数
+  difficulty: hard
+  latex: \varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)
+  description: 欧拉函数计算公式：$n = \prod_{i=1}^k p_i^{e_i} \implies \varphi(n) = n \prod_{i=1}^k
+    \left(1 - \frac{1}{p_i}\right)$。性质：$\sum_{d \mid n} \varphi(d) = n$。
+- title: 费马小定理
+  tag: 定理
+  difficulty: medium
+  latex: a^{p-1} \equiv 1 \pmod{p} \quad (p \text{ is prime}, p \nmid a)
+  description: 费马小定理：$p$ 是素数，$a \in \mathbb{Z}$ 且 $p \nmid a \implies a^{p-1} \equiv
+    1 \pmod{p}$。推论：$a^p \equiv a \pmod{p}$。
+- title: 欧拉定理
+  tag: 定理
+  difficulty: medium
+  latex: a^{\varphi(n)} \equiv 1 \pmod{n} \quad (\gcd(a,n) = 1)
+  description: 欧拉定理：$\gcd(a,n) = 1 \implies a^{\varphi(n)} \equiv 1 \pmod{n}$。推广：若
+    $\gcd(a,n) = 1$，则 $a^k \equiv a^{k \bmod \varphi(n)} \pmod{n}$。
+- title: 中国剩余定理
+  tag: 定理
+  difficulty: hard
+  latex: \begin{cases} x \equiv a_1 \pmod{n_1} \\ x \equiv a_2 \pmod{n_2} \\ \cdots
+    \\ x \equiv a_k \pmod{n_k} \end{cases}
+  description: 中国剩余定理：若 $\gcd(n_i, n_j) = 1$（$i \neq j$），则方程组有唯一解模 $N = n_1 n_2 \cdots
+    n_k$。
+- title: 阶的定义
+  tag: 基础
+  difficulty: medium
+  latex: \text{ord}_n(a) = \min\{ k \in \mathbb{N}^+ \mid a^k \equiv 1 \pmod{n} \}
+  description: 阶：$\text{ord}_n(a) = \min\{ k \in \mathbb{N}^+ \mid a^k \equiv 1 \pmod{n}
+    \}$（要求 $\gcd(a,n) = 1$）。性质：$\text{ord}_n(a) \mid \varphi(n)$。
+- title: 原根定义
+  tag: 基础
+  difficulty: hard
+  latex: \text{ord}_n(g) = \varphi(n) \iff g \text{ is primitive root mod } n
+  description: 原根：$g$ 是模 $n$ 的原根 $\iff \text{ord}_n(g) = \varphi(n)$。存在条件：模 $n$ 有原根
+    $\iff n = 2, 4, p^k, 2p^k$（$p$ 奇素数）。
+- title: 勒让德符号
+  tag: 符号
+  difficulty: hard
+  latex: \left(\frac{a}{p}\right) = \begin{cases} 0, & p \mid a \\ 1, & a p \\ -1,
+    & a p \end{cases}
+  description: 勒让德符号：$$\left(\frac{a}{p}\right) = \begin{cases} 0, & p \mid a \\ 1,
+    & a \text{ 是模 } p \text{ 的二次剩余} \\ -1, & a \text{ 是模 } p \text{ 的二次非剩余} \end{cases}$$
+- title: 二次互反律
+  tag: 定理
+  difficulty: hard
+  latex: \left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2} \cdot
+    \frac{q-1}{2}}
+  description: 二次互反律：$$\left(\frac{p}{q}\right)\left(\frac{q}{p}\right) = (-1)^{\frac{p-1}{2}
+    \cdot \frac{q-1}{2}}$$。
+- title: 连分数表示
+  tag: 表示
+  difficulty: hard
+  latex: x = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \cdots}}} = [a_0;
+    a_1, a_2, a_3, \ldots]
+  description: 简单连分数：$$x = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3 + \cdots}}}
+    = [a_0; a_1, a_2, a_3, \ldots]$$
+- title: 默比乌斯函数
+  tag: 函数
+  difficulty: hard
+  latex: '\mu(n) = \begin{cases} 1, & n = 1 \\ 0, & \exists p: p^2 \mid n \\ (-1)^k,
+    & n = p_1 p_2 \cdots p_k \end{cases}'
+  description: '默比乌斯函数：$$\mu(n) = \begin{cases} 1, & n = 1 \\ 0, & \exists p: p^2
+    \mid n \\ (-1)^k, & n = p_1 p_2 \cdots p_k \text{（不同素数）} \end{cases}$$'
+- title: 默比乌斯反演
+  tag: 定理
+  difficulty: hard
+  latex: g(n) = \sum_{d \mid n} f(d) \implies f(n) = \sum_{d \mid n} \mu(d) g(\frac{n}{d})
+  description: 默比乌斯反演：$g(n) = \sum_{d \mid n} f(d) \implies f(n) = \sum_{d \mid n}
+    \mu(d) g(\frac{n}{d})$。
+- title: 黎曼ζ函数
+  tag: 函数
+  difficulty: hard
+  latex: \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p } \frac{1}{1 - p^{-s}}
+  description: 黎曼ζ函数：$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{
+    素数}} \frac{1}{1 - p^{-s}} \quad (\text{Re}(s) > 1)$$黎曼假设：$\zeta(s) = 0$ 且 $0 <
+    \text{Re}(s) < 1 \implies \text{Re}(s) = \frac{1}{2}$。

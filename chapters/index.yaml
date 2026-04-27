@@ -16,3 +16,35 @@ chapters:
   - name: 经典公式
     file: chapters/04-经典公式.yaml
     description: 欧拉公式、高斯积分等经典公式
+
+  - name: 图论
+    file: chapters/05-图论.yaml
+    description: 图论基本概念、定理和公式
+
+  - name: 数论
+    file: chapters/06-数论.yaml
+    description: 数论基础概念、定理和公式
+
+  - name: 串论
+    file: chapters/07-串论.yaml
+    description: 字符串匹配算法（KMP、AC自动机、后缀数组等）
+
+  - name: 概率论
+    file: chapters/08-概率论.yaml
+    description: 概率论核心概念、分布和定理
+
+  - name: 离散数学
+    file: chapters/09-离散数学.yaml
+    description: 集合论、逻辑、代数结构等离散数学概念
+
+  - name: 数学分析
+    file: chapters/10-数学分析.yaml
+    description: 极限、微分、积分、级数等数学分析核心概念
+
+  - name: 组合数学
+    file: chapters/11-组合数学.yaml
+    description: 排列组合、生成函数、容斥原理等组合数学概念
+
+  - name: 物理学
+    file: chapters/12-物理学.yaml
+    description: 力学、热学、电磁学、光学、近代物理、量子力学、相对论、粒子物理等物理学核心概念与公式

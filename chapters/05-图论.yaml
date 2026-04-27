@@ -1,0 +1,201 @@
+koans:
+- title: 无向图定义
+  tag: 基础
+  difficulty: easy
+  latex: G = (V, E)
+  description: 无向图：$G = (V, E)$，其中 $V$ 是顶点集，$E \subseteq \{ \{u,v\} \mid u,v \in V,
+    u \neq v \}$ 是边集。
+- title: 有向图定义
+  tag: 基础
+  difficulty: easy
+  latex: G = (V, E), E \subseteq V \times V
+  description: 有向图：$G = (V, E)$，其中 $E \subseteq V \times V$。
+- title: 加权图定义
+  tag: 基础
+  difficulty: easy
+  latex: '(V, E, w), w: E \to \mathbb{R}'
+  description: '加权图：$(V, E, w)$，$w: E \to \mathbb{R}$。'
+- title: 顶点度数
+  tag: 基础
+  difficulty: medium
+  latex: d(v) = |\{ e \in E \mid v \in e \}|
+  description: 无向图中，顶点 $v$ 的度：$d(v) = |\{ e \in E \mid v \in e \}|$。
+- title: 握手定理
+  tag: 定理
+  difficulty: medium
+  latex: \sum_{v \in V} d(v) = 2|E|
+  description: 握手定理：$\sum_{v \in V} d(v) = 2|E|$
+- title: 出度与入度
+  tag: 基础
+  difficulty: medium
+  latex: d^+(v) = |\{ (v,u) \in E \}|, d^-(v) = |\{ (u,v) \in E \}|
+  description: 有向图中，出度：$d^+(v) = |\{ (v,u) \in E \}|$，入度：$d^-(v) = |\{ (u,v) \in E
+    \}|$。
+- title: 完全图
+  tag: 特殊图
+  difficulty: easy
+  latex: K_n = (V,E), |V|=n, E = \{ \{u,v\} \mid u \neq v \}
+  description: 完全图 $K_n = (V,E)$，$|V|=n$，$E = \{ \{u,v\} \mid u \neq v \}$，边数为 $\binom{n}{2}$。
+- title: 二分图
+  tag: 特殊图
+  difficulty: medium
+  latex: 'G = (U \cup V, E), U \cap V = \emptyset, \forall \{u,v\} \in E: u \in U,
+    v \in V'
+  description: '二分图：$G = (U \cup V, E)$，$U \cap V = \emptyset$，$\forall \{u,v\} \in
+    E: u \in U, v \in V$。'
+- title: 完全二分图
+  tag: 特殊图
+  difficulty: medium
+  latex: K_{m,n}, |U|=m, |V|=n, E = U \times V
+  description: 完全二分图：$K_{m,n}$，$|U|=m, |V|=n$，$E = U \times V$。
+- title: 子图定义
+  tag: 基础
+  difficulty: medium
+  latex: H = (V_H, E_H) \text{ is subgraph of } G = (V_G, E_G) \iff V_H \subseteq
+    V_G \land E_H \subseteq E_G
+  description: $H = (V_H, E_H)$ 是 $G = (V_G, E_G)$ 的子图 $\iff V_H \subseteq V_G \land
+    E_H \subseteq E_G \cap (V_H \times V_H)$。
+- title: 生成子图与诱导子图
+  tag: 基础
+  difficulty: medium
+  latex: V_H = V_G , E_H = \{ \{u,v\} \in E_G \mid u,v \in V_H \}
+  description: 生成子图：$V_H = V_G$。诱导子图：$E_H = \{ \{u,v\} \in E_G \mid u,v \in V_H \}$。
+- title: 路径与连通
+  tag: 连通性
+  difficulty: medium
+  latex: v_0, v_1, \ldots, v_k \text{ where } \{v_{i-1}, v_i\} \in E
+  description: 路径：顶点序列 $v_0, v_1, \ldots, v_k$，其中 $\{v_{i-1}, v_i\} \in E$。连通：$\forall
+    u,v \in V$，存在 $u$ 到 $v$ 的路径。
+- title: 连通分量与强连通
+  tag: 连通性
+  difficulty: medium
+  latex: '\text{Connected component: maximal connected subgraph of } G'
+  description: 连通分量：$G$ 的极大连通子图。有向图的强连通：$\forall u,v \in V$，存在 $u \to v$ 和 $v \to
+    u$ 的路径。
+- title: 割点与割边
+  tag: 连通性
+  difficulty: hard
+  latex: '\text{Cut vertex: vertex whose removal increases \# connected components}'
+  description: 割点：删除后增加连通分量数的顶点。割边（桥）：删除后增加连通分量数的边。
+- title: 树的定义
+  tag: 树
+  difficulty: medium
+  latex: G \text{ is tree} \iff |E| = |V| - 1
+  description: 树：$G$ 连通且 $|E| = |V| - 1$。性质：任意两顶点间有唯一简单路径；无圈且连通；最小边数的连通图；最大边数的无圈图。
+- title: 森林与生成树
+  tag: 树
+  difficulty: medium
+  latex: '\text{Forest: }k\text{ components, }|E| = |V| - k'
+  description: 森林：$k$ 个连通分量，$|E| = |V| - k$。生成树：$G$ 的连通生成子图且是树。
+- title: Cayley 公式
+  tag: 树
+  difficulty: hard
+  latex: \tau(K_n) = n^{n-2}
+  description: 完全图的生成树数：$K_n$ 有 $n^{n-2}$ 个生成树（Cayley 公式）。
+- title: 欧拉回路与欧拉路径
+  tag: 欧拉图
+  difficulty: medium
+  latex: '\text{Euler circuit: uses each edge exactly once}'
+  description: 欧拉回路：经过每条边恰好一次的回路。欧拉路径：经过每条边恰好一次的路径。
+- title: 无向图欧拉回路条件
+  tag: 欧拉图
+  difficulty: medium
+  latex: '\text{Undirected Euler circuit} \iff \forall v: d(v) \text{ even} \land
+    \text{connected}'
+  description: 无向图有欧拉回路 $\iff$ 所有顶点度数为偶数且连通。无向图有欧拉路径 $\iff$ 恰好 $0$ 或 $2$ 个奇度顶点且连通。
+- title: 有向图欧拉回路条件
+  tag: 欧拉图
+  difficulty: hard
+  latex: '\text{Directed Euler circuit} \iff \forall v: d^+(v) = d^-(v) \land \text{weakly
+    connected}'
+  description: '有向图有欧拉回路 $\iff$ $\forall v: d^+(v) = d^-(v)$ 且弱连通。'
+- title: 哈密顿回路与路径
+  tag: 哈密顿图
+  difficulty: medium
+  latex: '\text{Hamiltonian circuit: visits each vertex exactly once}'
+  description: 哈密顿回路：经过每个顶点恰好一次的回路。哈密顿路径：经过每个顶点恰好一次的路径。
+- title: Dirac 定理与 Ore 定理
+  tag: 哈密顿图
+  difficulty: hard
+  latex: '\text{Dirac: }|V| \geq 3, \forall v: d(v) \geq n/2 \implies G \text{ Hamiltonian}'
+  description: 'Dirac 定理：$|V| = n \geq 3$，$\forall v: d(v) \geq n/2 \implies G$ 是哈密顿图。Ore
+    定理：$\forall u,v$ 不相邻：$d(u) + d(v) \geq n \implies G$ 是哈密顿图。'
+- title: 平面图与 Euler 公式
+  tag: 平面图
+  difficulty: medium
+  latex: '\text{Planar graph: no edge crossings}'
+  description: 平面图：可画在平面上使边不交叉。Euler 公式：$G$ 连通平面图，$|V| - |E| + |F| = 2$（$F$ 为面数）。
+- title: Euler 公式推论与 Kuratowski 定理
+  tag: 平面图
+  difficulty: hard
+  latex: '|V| \geq 3, \text{ connected planar} \implies |E| \leq 3|V| - 6'
+  description: 推论：$|V| \geq 3$，$G$ 连通平面简单图 $\implies |E| \leq 3|V| - 6$。Kuratowski
+    定理：$G$ 是平面图 $\iff$ $G$ 不包含 $K_5$ 或 $K_{3,3}$ 的细分。
+- title: 色数与四色定理
+  tag: 着色
+  difficulty: medium
+  latex: \chi(G) = \min\{ k \mid G \text{ is } k\text{-colorable}\}
+  description: 色数 $\chi(G)$：正常顶点着色所需的最少颜色数。四色定理：任何平面图 $\chi(G) \leq 4$。
+- title: Brooks 定理与 Vizing 定理
+  tag: 着色
+  difficulty: hard
+  latex: '\text{Brooks: } \chi(G) \leq \Delta(G) \text{ (}G\text{ not complete, not
+    odd cycle)}'
+  description: Brooks 定理：连通图 $G$ 不是完全图也不是奇圈，则 $\chi(G) \leq \Delta(G)$。Vizing 定理：$\Delta(G)
+    \leq \chi'(G) \leq \Delta(G) + 1$。
+- title: 匹配定义
+  tag: 匹配
+  difficulty: medium
+  latex: 'M \subseteq E, \forall e_1, e_2 \in M: e_1 \cap e_2 = \emptyset'
+  description: '匹配：$M \subseteq E$，$\forall e_1, e_2 \in M: e_1 \cap e_2 = \emptyset$。完美匹配：$M$
+    覆盖所有顶点。最大匹配：基数最大的匹配。'
+- title: Hall 定理
+  tag: 匹配
+  difficulty: hard
+  latex: '\text{Hall: } \forall S \subseteq U: |N(S)| \geq |S| \iff \text{perfect
+    matching}'
+  description: 'Hall 定理（二分图完美匹配）：$\forall S \subseteq U: |N(S)| \geq |S|$。Berger 公式：最大匹配大小
+    $= \frac{1}{2} \min_{S \subseteq V} (|V| + |S| - |N(S)|)$。'
+- title: 独立集与团
+  tag: 独立集与团
+  difficulty: medium
+  latex: \alpha(G) = \max\{ |S| \mid S \text{ is independent set}\}
+  description: '独立集：$S \subseteq V$，$\forall u,v \in S: \{u,v\} \notin E$。团：$S \subseteq
+    V$，$\forall u,v \in S, u \neq v: \{u,v\} \in E$。独立数 $\alpha(G)$，团数 $\omega(G)$。'
+- title: 邻接矩阵与拉普拉斯矩阵
+  tag: 矩阵表示
+  difficulty: hard
+  latex: A_{ij} = \begin{cases} 1, & \{v_i, v_j\} \in E \\ 0, & \text{otherwise} \end{cases}
+  description: 邻接矩阵 $A$：$A_{ij} = \begin{cases} 1, & \{v_i, v_j\} \in E \\ 0, & \text{否则}
+    \end{cases}$。拉普拉斯矩阵 $L = D - A$，其中 $D$ 为度矩阵。
+- title: Kirchhoff 矩阵树定理
+  tag: 矩阵表示
+  difficulty: hard
+  latex: \tau(G) = \frac{1}{n} \lambda_2 \lambda_3 \cdots \lambda_n
+  description: Kirchhoff 矩阵树定理：$\tau(G) = \frac{1}{n} \lambda_2 \lambda_3 \cdots \lambda_n$，其中
+    $\lambda_i$ 是 $L$ 的特征值。
+- title: 最大流最小割定理
+  tag: 网络流
+  difficulty: hard
+  latex: \max \{ \text{val}(f) \} = \min \{ c(S, \overline{S}) \}
+  description: 最大流最小割定理：$\max \{ \text{val}(f) \} = \min \{ c(S, \overline{S}) \}$。
+- title: 围长与直径
+  tag: 图的不变量
+  difficulty: medium
+  latex: g(G) = \min\{ \text{length of cycle in } G \}
+  description: 围长 $g(G)$：最短圈的长度。直径 $\text{diam}(G) = \max_{u,v \in V} d(u,v)$。半径 $\text{rad}(G)
+    = \min_{v \in V} \max_{u \in V} d(v,u)$。
+- title: Menger 定理
+  tag: 重要定理
+  difficulty: hard
+  latex: '\text{Menger: max internally disjoint } s\text{-}t \text{ paths} = \text{min
+    vertices separating } s,t'
+  description: Menger 定理：点形式：$s,t$ 间内部不相交路径的最大数 = 分离 $s,t$ 的最少顶点数。边形式：$s,t$ 间边不相交路径的最大数
+    = 分离 $s,t$ 的最少边数。
+- title: Tutte 定理与 Ramsey 定理
+  tag: 重要定理
+  difficulty: hard
+  latex: '\text{Tutte: }G\text{ has perfect matching} \iff \forall S \subseteq V:
+    o(G-S) \leq |S|'
+  description: 'Tutte 定理：图有完美匹配 $\iff \forall S \subseteq V: o(G-S) \leq |S|$（$o(G)$
+    为奇连通分量数）。Ramsey 定理：$R(s,t)$ 存在且 $R(s,t) \leq \binom{s+t-2}{s-1}$。'

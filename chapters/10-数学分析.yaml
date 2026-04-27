@@ -1,0 +1,162 @@
+koans:
+- title: 数列极限定义
+  tag: 极限
+  difficulty: medium
+  latex: '\forall \varepsilon>0, \exists N \in \mathbb{N}^+, \forall n>N: |a_n - A|
+    < \varepsilon \implies \lim_{n \to \infty} a_n = A'
+  description: '数列极限定义：$$\forall \varepsilon>0, \exists N \in \mathbb{N}^+, \forall
+    n>N: |a_n - A| < \varepsilon \implies \lim_{n \to \infty} a_n = A$$'
+- title: 函数极限定义
+  tag: 极限
+  difficulty: medium
+  latex: '\forall \varepsilon>0, \exists \delta>0, \forall x: 0<|x-x_0|<\delta: |f(x)-A|<\varepsilon
+    \implies \lim_{x \to x_0} f(x) = A'
+  description: '函数极限定义：$$\forall \varepsilon>0, \exists \delta>0, \forall x: 0<|x-x_0|<\delta:
+    |f(x)-A|<\varepsilon \implies \lim_{x \to x_0} f(x) = A$$'
+- title: 无穷小量
+  tag: 极限
+  difficulty: easy
+  latex: \lim_{x \to x_0} \alpha(x) = 0
+  description: 无穷小量：$$\lim_{x \to x_0} \alpha(x) = 0$$
+- title: 连续定义
+  tag: 连续
+  difficulty: medium
+  latex: \lim_{x \to x_0} f(x) = f(x_0)
+  description: 连续定义：$$\lim_{x \to x_0} f(x) = f(x_0)$$
+- title: 一致连续
+  tag: 连续
+  difficulty: hard
+  latex: '\forall \varepsilon>0, \exists \delta>0, \forall x_1,x_2 \in I: |x_1-x_2|<\delta
+    \implies |f(x_1)-f(x_2)|<\varepsilon'
+  description: '一致连续：$$\forall \varepsilon>0, \exists \delta>0, \forall x_1,x_2 \in
+    I: |x_1-x_2|<\delta \implies |f(x_1)-f(x_2)|<\varepsilon$$'
+- title: 导数定义
+  tag: 微分
+  difficulty: medium
+  latex: f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x)-f(x_0)}{\Delta x} =
+    \frac{dy}{dx}
+  description: 导数定义：$$f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0+\Delta x)-f(x_0)}{\Delta
+    x} = \frac{dy}{dx}$$
+- title: 微分
+  tag: 微分
+  difficulty: easy
+  latex: dy = f'(x)dx
+  description: 微分：$$dy = f'(x)dx$$
+- title: 拉格朗日中值定理
+  tag: 中值定理
+  difficulty: medium
+  latex: f(b)-f(a) = f'(\xi)(b-a), \xi \in (a,b)
+  description: 拉格朗日中值定理：$$f(b)-f(a) = f'(\xi)(b-a),\ \xi \in (a,b)$$
+- title: 柯西中值定理
+  tag: 中值定理
+  difficulty: hard
+  latex: \frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)},\ \xi \in (a,b)
+  description: 柯西中值定理：$$\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)},\ \xi
+    \in (a,b)$$
+- title: 泰勒公式
+  tag: 级数
+  difficulty: hard
+  latex: f(x) = \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + o((x-x_0)^n)
+  description: 泰勒公式：$$f(x) = \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^k + o((x-x_0)^n)$$
+- title: 黎曼积分定义
+  tag: 积分
+  difficulty: hard
+  latex: \int_a^b f(x)dx = \lim_{\lambda \to 0} \sum_{i=1}^n f(\xi_i)\Delta x_i
+  description: 黎曼积分定义：$$\int_a^b f(x)dx = \lim_{\lambda \to 0} \sum_{i=1}^n f(\xi_i)\Delta
+    x_i$$
+- title: 牛顿-莱布尼茨公式
+  tag: 积分
+  difficulty: medium
+  latex: \int_a^b f(x)dx = F(b) - F(a),\ F'(x)=f(x)
+  description: 牛顿-莱布尼茨公式：$$\int_a^b f(x)dx = F(b) - F(a),\ F'(x)=f(x)$$
+- title: 反常积分
+  tag: 积分
+  difficulty: medium
+  latex: \int_a^{+\infty} f(x)dx = \lim_{A \to +\infty} \int_a^A f(x)dx
+  description: 反常积分：$$\int_a^{+\infty} f(x)dx = \lim_{A \to +\infty} \int_a^A f(x)dx$$
+- title: 数项级数收敛
+  tag: 级数
+  difficulty: medium
+  latex: \sum_{n=1}^{\infty} a_n = \lim_{n \to \infty} S_n,\ S_n = \sum_{k=1}^n a_k
+  description: 数项级数收敛：$$\sum_{n=1}^{\infty} a_n = \lim_{n \to \infty} S_n,\ S_n =
+    \sum_{k=1}^n a_k$$
+- title: 幂级数
+  tag: 级数
+  difficulty: hard
+  latex: \sum_{n=0}^{\infty} a_n(x-x_0)^n
+  description: 幂级数：$$\sum_{n=0}^{\infty} a_n(x-x_0)^n$$
+- title: 傅里叶级数
+  tag: 级数
+  difficulty: hard
+  latex: f(x) \sim \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n\cos nx + b_n\sin
+    nx\right)
+  description: 傅里叶级数：$$f(x) \sim \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n\cos
+    nx + b_n\sin nx\right)$$$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nxdx,\
+    b_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nxdx$$
+- title: 偏导数
+  tag: 多元微积分
+  difficulty: medium
+  latex: \frac{\partial f}{\partial x_i} = \lim_{\Delta x_i \to 0} \frac{f(x_1,...,x_i+\Delta
+    x_i,...,x_n)-f(x)}{\Delta x_i}
+  description: 偏导数：$$\frac{\partial f}{\partial x_i} = \lim_{\Delta x_i \to 0} \frac{f(x_1,...,x_i+\Delta
+    x_i,...,x_n)-f(x)}{\Delta x_i}$$
+- title: 全微分
+  tag: 多元微积分
+  difficulty: medium
+  latex: df = \sum_{i=1}^n \frac{\partial f}{\partial x_i}dx_i
+  description: 全微分：$$df = \sum_{i=1}^n \frac{\partial f}{\partial x_i}dx_i$$
+- title: 格林公式
+  tag: 多元微积分
+  difficulty: hard
+  latex: \oint_L Pdx+Qdy = \iint_D \left(\frac{\partial Q}{\partial x}-\frac{\partial
+    P}{\partial y}\right)dxdy
+  description: 格林公式：$$\oint_L Pdx+Qdy = \iint_D \left(\frac{\partial Q}{\partial x}-\frac{\partial
+    P}{\partial y}\right)dxdy$$
+- title: 高斯公式
+  tag: 多元微积分
+  difficulty: hard
+  latex: \oiint_{\Sigma} Pdydz+Qdzdx+Rdxdy = \iiint_{\Omega} \left(\frac{\partial
+    P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)dV
+  description: 高斯公式：$$\oiint_{\Sigma} Pdydz+Qdzdx+Rdxdy = \iiint_{\Omega} \left(\frac{\partial
+    P}{\partial x}+\frac{\partial Q}{\partial y}+\frac{\partial R}{\partial z}\right)dV$$
+- title: 斯托克斯公式
+  tag: 多元微积分
+  difficulty: hard
+  latex: \oint_{\Gamma} Pdx+Qdy+Rdz = \iint_{\Sigma} \left(\frac{\partial R}{\partial
+    y}-\frac{\partial Q}{\partial z}\right)dydz + \left(\frac{\partial P}{\partial
+    z}-\frac{\partial R}{\partial x}\right)dzdx + \left(\frac{\partial Q}{\partial
+    x}-\frac{\partial P}{\partial y}\right)dxdy
+  description: 斯托克斯公式：$$\oint_{\Gamma} Pdx+Qdy+Rdz = \iint_{\Sigma} \left(\frac{\partial
+    R}{\partial y}-\frac{\partial Q}{\partial z}\right)dydz + \left(\frac{\partial
+    P}{\partial z}-\frac{\partial R}{\partial x}\right)dzdx + \left(\frac{\partial
+    Q}{\partial x}-\frac{\partial P}{\partial y}\right)dxdy$$
+- title: 梯度
+  tag: 场论
+  difficulty: medium
+  latex: \nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial
+    y}, \frac{\partial f}{\partial z}\right)
+  description: 梯度：$$\nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial
+    f}{\partial y}, \frac{\partial f}{\partial z}\right)$$
+- title: 散度
+  tag: 场论
+  difficulty: medium
+  latex: \nabla \cdot \vec{F} = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial
+    y} + \frac{\partial F_z}{\partial z}
+  description: 散度：$$\nabla \cdot \vec{F} = \frac{\partial F_x}{\partial x} + \frac{\partial
+    F_y}{\partial y} + \frac{\partial F_z}{\partial z}$$
+- title: 旋度
+  tag: 场论
+  difficulty: hard
+  latex: \nabla \times \vec{F} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ \frac{\partial}{\partial
+    x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ F_x & F_y &
+    F_z \end{vmatrix}
+  description: 旋度：$$\nabla \times \vec{F} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k}
+    \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial
+    z} \\ F_x & F_y & F_z \end{vmatrix}$$
+- title: 拉普拉斯算子
+  tag: 场论
+  difficulty: medium
+  latex: \Delta f = \nabla^2 f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2
+    f}{\partial y^2} + \frac{\partial^2 f}{\partial z^2}
+  description: 拉普拉斯算子：$$\Delta f = \nabla^2 f = \frac{\partial^2 f}{\partial x^2}
+    + \frac{\partial^2 f}{\partial y^2} + \frac{\partial^2 f}{\partial z^2}$$
