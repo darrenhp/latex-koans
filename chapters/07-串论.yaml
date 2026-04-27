@@ -42,10 +42,8 @@ koans:
 - title: AC 自动机定义
   tag: AC自动机
   difficulty: hard
-  latex: \text{fail}(v) =
-  description: AC 自动机：Trie + 失效链接。失效链接：$\text{fail}(v) = \text{Trie}$ 中 $v$ 的最长真后缀对应的状态。转移函数：$$\delta(v,
-    c) = \begin{cases} \text{Trie}(v, c), & \text{存在} \\ \delta(\text{fail}(v), c),
-    & \text{否则} \end{cases}$$
+  latex: '\begin{aligned} \text{AC} &= (Q, \Sigma, \delta, \text{fail}, s_0) \\ \text{fail}(v) &= \operatorname*{argmax}_{u \in Q : u \neq v, \sigma(u) \prec \sigma(v)} |\sigma(u)| \\ \delta(v, c) &= \begin{cases} w, & (v,c,w) \in E \\ \delta(\text{fail}(v), c), & (v,c,w) \notin E \ (\forall w) \land v \neq s_0 \\ s_0, & (v,c,w) \notin E \ (\forall w) \land v = s_0 \end{cases} \end{aligned}'
+  description: 'AC 自动机：形式化为五元组 $(Q, \Sigma, \delta, \text{fail}, s_0)$，其中 $\sigma(v)$ 表示状态 $v$ 对应的字符串，$E \subseteq Q \times \Sigma \times Q$ 为 Trie 边集。$\text{fail}(v)$ 为 $v$ 的最长真后缀对应的状态。$\delta(v, c)$ 递归定义：存在 Trie 边则转移，否则沿 fail 链回溯，根节点 $s_0$ 为递归基。时间复杂度：$O(\sum |p_i| + |t|)$。'
 - title: 后缀数组定义
   tag: 后缀数组
   difficulty: hard
@@ -65,23 +63,18 @@ koans:
 - title: 后缀自动机定义
   tag: SAM
   difficulty: hard
-  latex: \text{SAM is minimal DFA that accepts all suffixes of } s
-  description: 后缀自动机 (SAM)：接受 $s$ 所有后缀的最小 DFA。状态数：$|\text{SAM}| \leq 2n - 1$。转移数：$\leq
-    3n - 4$。
+  latex: '\begin{aligned} \text{SAM} &= (Q, \Sigma, \delta, \text{len}, \text{link}, s_0) \\ \text{where } &\forall v \in Q, \delta(v, \cdot) \text{ accepts all suffixes of } s \end{aligned}'
+  description: '后缀自动机 (SAM)：接受 $s$ 所有后缀的最小 DFA，形式化为六元组 $(Q, \Sigma, \delta, \text{len}, \text{link}, s_0)$，其中 $Q$ 为状态集，$\delta$ 为转移函数，$\text{len}(v)$ 为状态 $v$ 表示的最长子串长度，$\text{link}(v)$ 为后缀链接，$s_0$ 为初始状态。状态数：$|Q| \leq 2n - 1$。转移数：$\leq 3n - 4$。'
 - title: 后缀链接与 endpos
   tag: SAM
   difficulty: hard
-  latex: \text{link}(v) = \max_{\text{suffix } w \text{ of } w} \{ w \in \text{SAM}
-    \}
-  description: '后缀链接：$\text{link}: Q \to Q$。endpos 等价类：$$\text{endpos}(w) = \{ i \mid
-    s[0:i] \text{ 以 } w \text{ 结尾} \}$$不同子串数：$$\sum_{v \in Q} (\text{len}(v) - \text{len}(\text{link}(v)))$$'
+  latex: '\begin{aligned} \text{link}(v) &= \text{state for } \max \{ w : w \prec v, w \neq v \} \\ \text{endpos}(w) &= \{ i : s[0:i] \text{ ends with } w \} \\ \#\text{substr} &= \sum_{v \in Q} (\text{len}(v) - \text{len}(\text{link}(v))) \end{aligned}'
+  description: '后缀链接：$\text{link}: Q \to Q$，指向 $v$ 的最长真后缀状态。endpos 等价类：$\text{endpos}(w) = \{ i : s[0:i] \text{ 以 } w \text{ 结尾} \}$。同一等价类中的状态在 SAM 中形成一条 link 链。不同子串数：$\sum_{v \in Q} (\text{len}(v) - \text{len}(\text{link}(v)))$。'
 - title: 回文树定义
   tag: 回文树
   difficulty: hard
-  latex: '\text{PAM has } \leq n + 2 \text{ states, two roots: } 0 \text{ (even) and
-    } -1 \text{ (odd)}'
-  description: 回文树（回文自动机）：接受 $s$ 所有不同回文子串的自动机。状态数：$|\text{PAM}| \leq n + 2$。两个根：偶数根：$0$，$\text{len}(0)
-    = 0$；奇数根：$-1$，$\text{len}(-1) = -1$。
+  latex: '\begin{aligned} \text{PAM} &= (Q, \text{next}, \text{link}, \text{len}, s_0, s_{-1}) \\ \text{next}(v, c) &= \text{state for } c \cdot \sigma(v) \cdot c \\ \text{link}(v) &= \arg\max_{u \in Q, u \neq v, \sigma(u) \text{ is suffix of } \sigma(v)} \text{len}(u) \end{aligned}'
+  description: '回文树（PAM）：接受 $s$ 所有不同回文子串的自动机，形式化为六元组 $(Q, \text{next}, \text{link}, \text{len}, s_0, s_{-1})$。$\text{next}(v, c)$ 为转移函数，$\text{link}(v)$ 为后缀链接（指向 $v$ 的最长真回文后缀对应的状态）。$\text{len}(v)$ 为状态 $v$ 表示的回文串长度。状态数：$|Q| \leq n + 2$。两个根：偶数根 $s_0$（$\text{len}=0$）和奇数根 $s_{-1}$（$\text{len}=-1$）。'
 - title: 最小表示法
   tag: 最小表示法
   difficulty: hard
