@@ -81,8 +81,8 @@ koans:
   - title: 开普勒第三定律
     tag: 力学
     difficulty: medium
-    latex: '\frac{T^2}{a^3} = \text{常量}'
-    description: '开普勒第三定律：$$\frac{T^2}{a^3} = \text{常量}$$'
+    latex: '\frac{T^2}{a^3} = \text{constant}'
+    description: 'Kepler''s third law: $$\frac{T^2}{a^3} = \text{constant}$$'
 
   # ========== 热学 (Thermodynamics) ==========
   - title: 热力学第一定律
@@ -106,14 +106,14 @@ koans:
   - title: 熵增原理
     tag: 热学
     difficulty: medium
-    latex: '\Delta S \geq 0 \quad (\text{孤立系统})'
-    description: '熵增原理：$$\Delta S \geq 0$$（孤立系统）。'
+    latex: '\Delta S \geq 0 \quad (\text{isolated system})'
+    description: 'Entropy increase principle: $$\Delta S \geq 0$$ (isolated system).'
 
   - title: 卡诺循环效率
     tag: 热学
     difficulty: medium
-    latex: '\eta_{\text{卡诺}} = 1 - \frac{T_2}{T_1}'
-    description: '卡诺循环效率：$$\eta_{\text{卡诺}} = 1 - \frac{T_2}{T_1}$$'
+    latex: '\eta_{\text{Carnot}} = 1 - \frac{T_2}{T_1}'
+    description: 'Carnot cycle efficiency: $$\eta_{\text{Carnot}} = 1 - \frac{T_2}{T_1}$$'
 
   - title: 麦克斯韦-玻尔兹曼分布
     tag: 热学
@@ -149,8 +149,8 @@ koans:
   - title: 电场高斯定理
     tag: 电磁学
     difficulty: medium
-    latex: '\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{内}}}{\varepsilon_0}'
-    description: '电场高斯定理：$$\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{内}}}{\varepsilon_0}$$'
+    latex: '\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{enclosed}}}{\varepsilon_0}'
+    description: 'Gauss''s law for electric field: $$\oint_S \vec{E} \cdot d\vec{S} = \frac{Q_{\text{enclosed}}}{\varepsilon_0}$$'
 
   - title: 电势定义
     tag: 电磁学
@@ -215,8 +215,8 @@ koans:
   - title: 安培环路定理
     tag: 电磁学
     difficulty: medium
-    latex: '\oint_L \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{内}}'
-    description: '安培环路定理：$$\oint_L \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{内}}$$'
+    latex: '\oint_L \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{enclosed}}'
+    description: 'Ampère''s circuital law: $$\oint_L \vec{B} \cdot d\vec{l} = \mu_0 I_{\text{enclosed}}$$'
 
   - title: 磁场高斯定理
     tag: 电磁学
@@ -466,8 +466,8 @@ koans:
   - title: 四种基本相互作用强度比较
     tag: 粒子物理
     difficulty: medium
-    latex: 'F_{\text{强}} : F_{\text{电磁}} : F_{\text{弱}} : F_{\text{引}} \approx 1 : 10^{-2} : 10^{-6} : 10^{-39}'
-    description: '四种基本相互作用的强度比较。'
+    latex: 'F_{\text{strong}} : F_{\text{EM}} : F_{\text{weak}} : F_{\text{grav}} \approx 1 : 10^{-2} : 10^{-6} : 10^{-39}'
+    description: 'Relative strengths of the four fundamental interactions.'
 
   - title: 质子夸克组成
     tag: 粒子物理
@@ -727,5 +727,5 @@ koans:
   - title: 戈德斯通定理
     tag: 标准模型
     difficulty: hard
-    latex: '\text{连续对称性自发破缺时，会出现 } N \text{ 个无质量标量粒子（戈德斯通玻色子）}'
-    description: '戈德斯通定理：连续对称性自发破缺时出现的无质量标量粒子。在标准模型中，3 个戈德斯通玻色子被 $W^\pm, Z^0$ 吃掉。'
+    latex: '\text{Goldstone theorem: } N \text{ massless scalar particles (Goldstone bosons) appear when continuous symmetry is spontaneously broken}'
+    description: 'Goldstone theorem: Massless scalar particles appear when continuous symmetry is spontaneously broken. In Standard Model, 3 Goldstone bosons are eaten by $W^\pm, Z^0$.'
