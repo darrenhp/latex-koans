@@ -34,19 +34,23 @@ koans:
 - title: 素数定义
   tag: 基础
   difficulty: easy
-  latex: 'p > 1 \text{ is prime} \iff p \mid 1, p \mid p'
-  description: '素数：$p > 1$ 是素数 $\iff$ $p$ 的正因数只有 $1$ 和 $p$。'
+  latex: 'p \in \mathbb{P} \iff p > 1 \land \forall d \mid p, d \in \{1, p\}'
+  description: '素数：$p \in \mathbb{P} \iff p > 1$ 且 $p$ 的正因数只有 $1$ 和 $p$。'
 - title: 算术基本定理
   tag: 定理
   difficulty: medium
-  latex: 'n = \prod_{i=1}^k p_i^{e_i}'
+  latex: |
+    \forall n > 1, \exists! p_1 < p_2 < \cdots < p_k, \exists! e_1,\ldots,e_k \in \mathbb{N}^+:
+    n = \prod_{i=1}^k p_i^{e_i}
   description: '算术基本定理：$\forall n > 1, \exists! p_1 < p_2 < \cdots < p_k, \exists!
-    e_1,\ldots,e_k \in \mathbb{N}^+$: $$n = \prod_{i=1}^k p_i^{e_i}$$'
+    e_1,\ldots,e_k \in \mathbb{N}^+: $$n = \prod_{i=1}^k p_i^{e_i}$$'
 - title: 素数定理
   tag: 定理
   difficulty: hard
-  latex: '\pi(x) \sim \frac{x}{\ln x}'
-  description: '素数计数函数：$\pi(x) = |\{ p \leq x \mid p \text{ 是素数} \}|$。素数定理：$\pi(x) \sim \frac{x}{\ln x}$。'
+  latex: |
+    \pi(x) = |\{ p \in \mathbb{P} \mid p \leq x \}|
+    \pi(x) \sim \frac{x}{\ln x}
+  description: '素数计数函数：$\pi(x) = |\{ p \in \mathbb{P} \mid p \leq x \}|$。素数定理：$\pi(x) \sim \frac{x}{\ln x}$。'
 - title: 同余定义
   tag: 基础
   difficulty: easy
@@ -66,16 +70,16 @@ koans:
   tag: 函数
   difficulty: hard
   latex: |
-    \varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)
+    n = \prod_{i=1}^k p_i^{e_i} \implies \varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)
     \sum_{d \mid n} \varphi(d) = n \text{ (property)}
   description: '欧拉函数计算公式：$n = \prod_{i=1}^k p_i^{e_i} \implies \varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)$。性质：$\sum_{d \mid n} \varphi(d) = n$。'
 - title: 费马小定理
   tag: 定理
   difficulty: medium
   latex: |
-    a^{p-1} \equiv 1 \pmod{p} \quad (p \text{ is prime}, p \nmid a)
+    p \in \mathbb{P}, p \nmid a \implies a^{p-1} \equiv 1 \pmod{p}
     a^p \equiv a \pmod{p} \text{ (corollary)}
-  description: '费马小定理：$p$ 是素数，$a \in \mathbb{Z}$ 且 $p \nmid a \implies a^{p-1} \equiv 1 \pmod{p}$。推论：$a^p \equiv a \pmod{p}$。'
+  description: '费马小定理：$p \in \mathbb{P}$, $a \in \mathbb{Z}$ 且 $p \nmid a \implies a^{p-1} \equiv 1 \pmod{p}$。推论：$a^p \equiv a \pmod{p}$。'
 - title: 欧拉定理
   tag: 定理
   difficulty: medium
@@ -129,4 +133,4 @@ koans:
   tag: 函数
   difficulty: hard
   latex: '\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p } \frac{1}{1 - p^{-s}}'
-  description: '黎曼ζ函数：$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ 素数}} \frac{1}{1 - p^{-s}} \quad (\text{Re}(s) > 1)$$黎曼假设：$\zeta(s) = 0$ 且 $0 < \text{Re}(s) < 1 \implies \text{Re}(s) = \frac{1}{2}$。'
+  description: '黎曼ζ函数：$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \in \mathbb{P}} \frac{1}{1 - p^{-s}} \quad (\text{Re}(s) > 1)$$黎曼假设：$\zeta(s) = 0$ 且 $0 < \text{Re}(s) < 1 \implies \text{Re}(s) = \frac{1}{2}$。'
