@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LaTeX 公案 · 练习站</title>
+  <title>LaTeX 公案 · 练习站 </title>
 
   <!-- MathJax 3 -->
   <script>
@@ -479,7 +479,12 @@
 <body>
 
 <header>
-  <div class="logo">LaTeX <span>练习</span></div>
+  <div>
+    <div class="logo">LaTeX <span>练习</span></div>
+    <div style="font-size:0.65rem; color:var(--muted); margin-top:2px; letter-spacing:0.02em;">
+      由 腾讯 CodeBuddy 生成
+    </div>
+  </div>
   <div class="progress-bar-wrap">
     <span id="progress-text">0 / 0</span>
     <div class="progress-track">
@@ -1277,5 +1282,9 @@ function updateProgress() {
   document.getElementById('progress-fill').style.width = `${(solved / total) * 100}%`;
 }
 </script>
+<footer style="text-align:center; padding:1rem; color:var(--muted); font-size:0.75rem; border-top:1px solid var(--border); margin-top:2rem;">
+  本页面和习题由 <strong style="color:var(--accent);">腾讯 CodeBuddy</strong> 人工智能编程助手自动生成
+</footer>
+
 </body>
 </html>
