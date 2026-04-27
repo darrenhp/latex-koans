@@ -704,18 +704,40 @@ let KOANS = [
 ];
 
 async function loadKoansFromYaml() {
-  const response = await fetch('./koans.yaml', { cache: 'no-store' });
-  if (!response.ok) {
-    throw new Error(`题库配置加载失败（HTTP ${response.status}）`);
+  // 1. 加载章节索引
+  const indexResponse = await fetch('./chapters/index.yaml', { cache: 'no-store' });
+  if (!indexResponse.ok) {
+    throw new Error(`章节索引加载失败（HTTP ${indexResponse.status}）`);
   }
 
-  const yamlText = await response.text();
-  const parsed = window.jsyaml?.load(yamlText);
-  if (!parsed || !Array.isArray(parsed.koans)) {
-    throw new Error('题库配置格式错误：缺少 koans 数组');
+  const indexYaml = await indexResponse.text();
+  const indexParsed = window.jsyaml?.load(indexYaml);
+  if (!indexParsed || !Array.isArray(indexParsed.chapters)) {
+    throw new Error('章节索引格式错误：缺少 chapters 数组');
   }
 
-  KOANS = parsed.koans.map((item, idx) => ({
+  // 2. 并行加载所有章节文件
+  const chapterFiles = indexParsed.chapters.map(ch => ch.file);
+  const fetchPromises = chapterFiles.map(file =>
+    fetch(`./${file}`, { cache: 'no-store' })
+      .then(res => {
+        if (!res.ok) throw new Error(`章节文件 ${file} 加载失败（HTTP ${res.status}）`);
+        return res.text();
+      })
+      .then(text => {
+        const parsed = window.jsyaml?.load(text);
+        if (!parsed || !Array.isArray(parsed.koans)) {
+          throw new Error(`章节文件 ${file} 格式错误：缺少 koans 数组`);
+        }
+        return parsed.koans;
+      })
+  );
+
+  const allKoansArrays = await Promise.all(fetchPromises);
+  const allKoans = allKoansArrays.flat();
+
+  // 3. 标准化每道题目
+  KOANS = allKoans.map((item, idx) => ({
     id: item.id ?? idx + 1,
     title: item.title ?? `题目 ${idx + 1}`,
     chapter: item.chapter ?? '未分类',
@@ -727,7 +749,7 @@ async function loadKoansFromYaml() {
   }));
 
   if (!KOANS.length) {
-    throw new Error('题库为空，请在 koans.yaml 中至少配置一道题');
+    throw new Error('题库为空，请在章节文件中至少配置一道题');
   }
 }
 

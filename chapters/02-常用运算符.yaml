@@ -1,0 +1,36 @@
+koans:
+  - id: 5
+    chapter: 常用运算符
+    title: 求和符号
+    tag: 符号
+    difficulty: medium
+    latex: '\sum_{i=1}^{n} i'
+    description: '用 <strong>\sum_{下限}^{上限}</strong> 表示求和。'
+    hint: '<code>\sum_{i=1}^{n} i</code>'
+
+  - id: 6
+    chapter: 常用运算符
+    title: 定积分
+    tag: 符号
+    difficulty: medium
+    latex: '\int_{a}^{b} f(x)\,dx'
+    description: '<strong>\int_{下限}^{上限}</strong> 表示积分，<code>\,</code> 是小间距。'
+    hint: '<code>\int_{a}^{b} f(x)\,dx</code>'
+
+  - id: 7
+    chapter: 常用运算符
+    title: 极限
+    tag: 符号
+    difficulty: medium
+    latex: '\lim_{x \to \infty} f(x)'
+    description: '<strong>\lim_{x \to \infty}</strong> 表示极限趋向无穷。'
+    hint: '<code>\lim_{x \to \infty} f(x)</code>'
+
+  - id: 13
+    chapter: 常用运算符
+    title: 连乘积
+    tag: 符号
+    difficulty: medium
+    latex: '\prod_{k=1}^{n} k = n!'
+    description: '<strong>\prod</strong> 表示连乘积。'
+    hint: '<code>\prod_{k=1}^{n} k = n!</code>'

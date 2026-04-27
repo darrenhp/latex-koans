@@ -1,0 +1,36 @@
+koans:
+  - id: 1
+    chapter: 基础语法
+    title: 分数
+    tag: 基础
+    difficulty: easy
+    latex: '\frac{a}{b}'
+    description: '用 <strong>\frac{分子}{分母}</strong> 表示分数。'
+    hint: '语法：<code>\frac{a}{b}</code>'
+
+  - id: 2
+    chapter: 基础语法
+    title: 平方根
+    tag: 基础
+    difficulty: easy
+    latex: '\sqrt{x}'
+    description: '用 <strong>\sqrt{}</strong> 表示平方根。'
+    hint: '<code>\sqrt{x}</code>'
+
+  - id: 3
+    chapter: 基础语法
+    title: n 次方根
+    tag: 基础
+    difficulty: easy
+    latex: '\sqrt[n]{x}'
+    description: '用 <strong>\sqrt[n]{}</strong> 表示 n 次方根。'
+    hint: '<code>\sqrt[n]{x}</code>'
+
+  - id: 4
+    chapter: 基础语法
+    title: 上下标
+    tag: 基础
+    difficulty: easy
+    latex: 'x^{2} + y_{i}'
+    description: '<strong>^{}</strong> 为上标，<strong>_{}</strong> 为下标。'
+    hint: '<code>x^{2} + y_{i}</code>'

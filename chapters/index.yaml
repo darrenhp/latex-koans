@@ -1,0 +1,18 @@
+# 章节索引文件
+# 每个章节引用对应的 yml 文件
+chapters:
+  - name: 基础语法
+    file: chapters/01-基础语法.yaml
+    description: LaTeX 基础语法入门
+
+  - name: 常用运算符
+    file: chapters/02-常用运算符.yaml
+    description: 求和、积分、极限等常用运算符
+
+  - name: 进阶表达
+    file: chapters/03-进阶表达.yaml
+    description: 矩阵、向量、方程组等进阶内容
+
+  - name: 经典公式
+    file: chapters/04-经典公式.yaml
+    description: 欧拉公式、高斯积分等经典公式

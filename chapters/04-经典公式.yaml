@@ -1,0 +1,18 @@
+koans:
+  - id: 11
+    chapter: 经典公式
+    title: 欧拉公式
+    tag: 经典
+    difficulty: medium
+    latex: 'e^{i\pi} + 1 = 0'
+    description: '世界上最美丽的公式——欧拉恒等式。'
+    hint: '<code>e^{i\pi} + 1 = 0</code>'
+
+  - id: 12
+    chapter: 经典公式
+    title: 高斯积分
+    tag: 经典
+    difficulty: hard
+    latex: '\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}'
+    description: '经典的高斯积分公式。'
+    hint: '<code>\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}</code>'
