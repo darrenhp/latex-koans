@@ -8,7 +8,9 @@ koans:
 - title: 有向图定义
   tag: 基础
   difficulty: easy
-  latex: G = (V, E), E \subseteq V \times V
+  latex: |
+    G = (V, E)
+    E \subseteq V \times V
   description: 有向图：$G = (V, E)$，其中 $E \subseteq V \times V$。
 - title: 加权图定义
   tag: 基础
@@ -28,7 +30,9 @@ koans:
 - title: 出度与入度
   tag: 基础
   difficulty: medium
-  latex: d^+(v) = |\{ (v,u) \in E \}|, d^-(v) = |\{ (u,v) \in E \}|
+  latex: |
+    d^+(v) = |\{ (v,u) \in E \}|
+    d^-(v) = |\{ (u,v) \in E \}|
   description: 有向图中，出度：$d^+(v) = |\{ (v,u) \in E \}|$，入度：$d^-(v) = |\{ (u,v) \in E
     \}|$。
 - title: 完全图
@@ -39,8 +43,10 @@ koans:
 - title: 二分图
   tag: 特殊图
   difficulty: medium
-  latex: 'G = (U \cup V, E), U \cap V = \emptyset, \forall \{u,v\} \in E: u \in U,
-    v \in V'
+  latex: |
+    G = (U \cup V, E)
+    U \cap V = \emptyset
+    \forall \{u,v\} \in E: u \in U, v \in V
   description: '二分图：$G = (U \cup V, E)$，$U \cap V = \emptyset$，$\forall \{u,v\} \in
     E: u \in U, v \in V$。'
 - title: 完全二分图
@@ -51,8 +57,9 @@ koans:
 - title: 子图定义
   tag: 基础
   difficulty: medium
-  latex: H = (V_H, E_H) \text{ is subgraph of } G = (V_G, E_G) \iff V_H \subseteq
-    V_G \land E_H \subseteq E_G
+  latex: |
+    H = (V_H, E_H) \text{ is subgraph of } G = (V_G, E_G)
+    V_H \subseteq V_G \land E_H \subseteq E_G
   description: $H = (V_H, E_H)$ 是 $G = (V_G, E_G)$ 的子图 $\iff V_H \subseteq V_G \land
     E_H \subseteq E_G \cap (V_H \times V_H)$。
 - title: 生成子图与诱导子图

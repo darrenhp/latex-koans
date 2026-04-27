@@ -28,9 +28,10 @@ koans:
 - title: 二项式系数
   tag: 排列组合
   difficulty: medium
-  latex: \binom{n}{r} = C(n,r) = \frac{n!}{r!(n-r)!},
-    \binom{n}{r} = \binom{n}{n-r} \text{ (symmetry)},
-    \binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1} \text{ (pascal)},
+  latex: |
+    \binom{n}{r} = C(n,r) = \frac{n!}{r!(n-r)!}
+    \binom{n}{r} = \binom{n}{n-r} \text{ (symmetry)}
+    \binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1} \text{ (pascal)}
     \sum_{k=0}^{n} \binom{n}{k} = 2^n \text{ (sum)}
   description: 二项式系数：$$\binom{n}{r} = C(n,r) = \frac{n!}{r!(n-r)!}$$基本性质：$$\binom{n}{r}
     = \binom{n}{n-r}$$$$\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}$$$$\sum_{k=0}^{n}
@@ -78,9 +79,10 @@ koans:
 - title: 斐波那契数列
   tag: 递推关系
   difficulty: medium
-  latex: F_n = F_{n-1} + F_{n-2}, F_0 = 0, F_1 = 1,
-    F_n = \frac{1}{\sqrt{5}}\left(\phi^n - \psi^n\right),
-    \phi = \frac{1+\sqrt{5}}{2},
+  latex: |
+    F_n = F_{n-1} + F_{n-2}, \quad F_0 = 0, F_1 = 1
+    F_n = \frac{1}{\sqrt{5}}\left(\phi^n - \psi^n\right)
+    \phi = \frac{1+\sqrt{5}}{2}
     \psi = \frac{1-\sqrt{5}}{2}
   description: 斐波那契数列：$$F_n = F_{n-1} + F_{n-2}, \quad F_0 = 0, F_1 = 1$$通项公式：$$F_n
     = \frac{1}{\sqrt{5}}\left(\phi^n - \psi^n\right), \quad \phi = \frac{1+\sqrt{5}}{2},
@@ -88,14 +90,16 @@ koans:
 - title: 卡特兰数
   tag: 递推关系
   difficulty: hard
-  latex: C_n = \frac{1}{n+1}\binom{2n}{n} = \frac{(2n)!}{n!(n+1)!},
+  latex: |
+    C_n = \frac{1}{n+1}\binom{2n}{n} = \frac{(2n)!}{n!(n+1)!}
     C_n = \sum_{i=0}^{n-1} C_i C_{n-1-i} \text{ (recurrence)}
   description: 卡特兰数 $C_n$：$$C_n = \frac{1}{n+1}\binom{2n}{n} = \frac{(2n)!}{n!(n+1)!}$$递推关系：$$C_n
     = \sum_{i=0}^{n-1} C_i C_{n-1-i}$$
 - title: 错排数
   tag: 递推关系
   difficulty: hard
-  latex: D_n = n! \sum_{i=0}^{n} \frac{(-1)^i}{i!},
+  latex: |
+    D_n = n! \sum_{i=0}^{n} \frac{(-1)^i}{i!}
     D_n = (n-1)(D_{n-1} + D_{n-2}) \text{ (recurrence)}
   description: 错排数 $D_n$：$n$ 个元素的排列中，所有元素都不在原来位置上的方案数。通项公式（容斥原理）：$$D_n = n! \sum_{i=0}^{n}
     \frac{(-1)^i}{i!}$$递推关系：$$D_n = (n-1)(D_{n-1} + D_{n-2})$$
@@ -131,8 +135,9 @@ koans:
 - title: 二项式反演
   tag: 反演
   difficulty: hard
-  latex: g(n) = \sum_{k=0}^{n} \binom{n}{k} f(k) \implies f(n) = \sum_{k=0}^{n} (-1)^{n-k}
-    \binom{n}{k} g(k)
+  latex: |
+    g(n) = \sum_{k=0}^{n} \binom{n}{k} f(k)
+    f(n) = \sum_{k=0}^{n} (-1)^{n-k} \binom{n}{k} g(k)
   description: 二项式反演：若 $$g(n) = \sum_{k=0}^{n} \binom{n}{k} f(k)$$ 则 $$f(n) = \sum_{k=0}^{n}
     (-1)^{n-k} \binom{n}{k} g(k)$$
 - title: 范德蒙恒等式

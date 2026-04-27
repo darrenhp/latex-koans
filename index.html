@@ -836,7 +836,11 @@ async function loadKoan(koan) {
 
   // render target
   const compareTarget = document.getElementById('compare-target');
-  compareTarget.innerHTML = `\\[${koan.latex}\\]`;
+  // 支持多行 latex：如果包含换行符，用 gather 环境包裹
+  const latex = koan.latex.includes('\n')
+    ? `\\begin{gather}${koan.latex.replace(/\n/g, '\\\\')}\\end{gather}`
+    : koan.latex;
+  compareTarget.innerHTML = `\\[${latex}\\]`;
   await typesetElements([compareTarget]);
 
   // render description

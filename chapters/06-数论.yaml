@@ -17,8 +17,9 @@ koans:
 - title: 最小公倍数
   tag: 基础
   difficulty: medium
-  latex: '\text{lcm}(a,b) = \min\{ m \in \mathbb{N}^+ \mid a \mid m \land b \mid m \},
-    \gcd(a,b) \cdot \text{lcm}(a,b) = |ab|'
+  latex: |
+    \text{lcm}(a,b) = \min\{ m \in \mathbb{N}^+ \mid a \mid m \land b \mid m \}
+    \gcd(a,b) \cdot \text{lcm}(a,b) = |ab|
   description: '最小公倍数：$\text{lcm}(a,b) = \min\{ m \in \mathbb{N}^+ \mid a \mid m \land b \mid m \}$。关系：$\gcd(a,b) \cdot \text{lcm}(a,b) = |ab|$。'
 - title: 欧几里得算法
   tag: 算法
@@ -64,20 +65,23 @@ koans:
 - title: 欧拉函数计算公式
   tag: 函数
   difficulty: hard
-  latex: '\varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right),
-    \sum_{d \mid n} \varphi(d) = n \text{ (property)}'
+  latex: |
+    \varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)
+    \sum_{d \mid n} \varphi(d) = n \text{ (property)}
   description: '欧拉函数计算公式：$n = \prod_{i=1}^k p_i^{e_i} \implies \varphi(n) = n \prod_{i=1}^k \left(1 - \frac{1}{p_i}\right)$。性质：$\sum_{d \mid n} \varphi(d) = n$。'
 - title: 费马小定理
   tag: 定理
   difficulty: medium
-  latex: 'a^{p-1} \equiv 1 \pmod{p} \quad (p \text{ is prime}, p \nmid a),
-    a^p \equiv a \pmod{p} \text{ (corollary)}'
+  latex: |
+    a^{p-1} \equiv 1 \pmod{p} \quad (p \text{ is prime}, p \nmid a)
+    a^p \equiv a \pmod{p} \text{ (corollary)}
   description: '费马小定理：$p$ 是素数，$a \in \mathbb{Z}$ 且 $p \nmid a \implies a^{p-1} \equiv 1 \pmod{p}$。推论：$a^p \equiv a \pmod{p}$。'
 - title: 欧拉定理
   tag: 定理
   difficulty: medium
-  latex: 'a^{\varphi(n)} \equiv 1 \pmod{n} \quad (\gcd(a,n) = 1),
-    a^k \equiv a^{k \bmod \varphi(n)} \pmod{n} \text{ (generalization)}'
+  latex: |
+    a^{\varphi(n)} \equiv 1 \pmod{n} \quad (\gcd(a,n) = 1)
+    a^k \equiv a^{k \bmod \varphi(n)} \pmod{n} \text{ (generalization)}
   description: '欧拉定理：$\gcd(a,n) = 1 \implies a^{\varphi(n)} \equiv 1 \pmod{n}$。推广：若 $\gcd(a,n) = 1$，则 $a^k \equiv a^{k \bmod \varphi(n)} \pmod{n}$。'
 - title: 中国剩余定理
   tag: 定理

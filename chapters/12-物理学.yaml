@@ -39,13 +39,17 @@ koans:
   - title: 功的定义
     tag: 力学
     difficulty: easy
-    latex: 'W = F s \cos\theta, W = \int \vec{F} \cdot d\vec{r} \text{ (integral form)}'
+    latex: |
+      W = F s \cos\theta
+      W = \int \vec{F} \cdot d\vec{r} \text{ (integral form)}
     description: '功：$W = F s \cos\theta$，或 $W = \int \vec{F} \cdot d\vec{r}$。'
 
   - title: 功率公式
     tag: 力学
     difficulty: easy
-    latex: 'P = \frac{W}{t} = Fv\cos\theta'
+    latex: |
+      P = \frac{W}{t}
+      P = Fv\cos\theta
     description: '功率：$$P = \frac{W}{t} = Fv\cos\theta$$'
 
   - title: 动量定理
@@ -423,7 +427,9 @@ koans:
   - title: 洛伦兹变换（x方向）
     tag: 相对论
     difficulty: hard
-    latex: 'x'' = \frac{x - vt}{\sqrt{1 - v^2/c^2}}, \quad t'' = \frac{t - vx/c^2}{\sqrt{1 - v^2/c^2}}'
+    latex: |
+      x'' = \frac{x - vt}{\sqrt{1 - v^2/c^2}}
+      t'' = \frac{t - vx/c^2}{\sqrt{1 - v^2/c^2}}
     description: '洛伦兹变换（沿 x 方向）。'
 
   - title: 长度收缩

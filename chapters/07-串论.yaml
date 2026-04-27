@@ -2,13 +2,17 @@ koans:
 - title: 字符串与子串
   tag: 基础
   difficulty: easy
-  latex: s = s_0 s_1 \cdots s_{n-1} \in \Sigma^n, n = |s|
+  latex: |
+    s = s_0 s_1 \cdots s_{n-1} \in \Sigma^n
+    n = |s|
   description: 字符串：$s = s_0 s_1 \cdots s_{n-1} \in \Sigma^n$，$n = |s|$。子串：$s[l:r]
     = s_l s_{l+1} \cdots s_{r-1}$。
 - title: 前缀与后缀
   tag: 基础
   difficulty: easy
-  latex: \text{prefix}_i(s) = s[0:i], \text{suffix}_i(s) = s[i:n]
+  latex: |
+    \text{prefix}_i(s) = s[0:i]
+    \text{suffix}_i(s) = s[i:n]
   description: 前缀：$s[0:i] = \text{prefix}_i(s)$，$1 \leq i \leq n$。后缀：$s[i:n] = \text{suffix}_i(s)$，$0
     \leq i < n$。
 - title: 字符串匹配定义

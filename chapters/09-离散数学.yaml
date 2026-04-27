@@ -14,10 +14,11 @@ koans:
 - title: 集合运算
   tag: 集合论
   difficulty: medium
-  latex: A \cup B = \{x \mid x \in A \lor x \in B\},
-    A \cap B = \{x \mid x \in A \land x \in B\},
-    A \setminus B = \{x \mid x \in A \land x \notin B\},
-    \overline{A} = U \setminus A,
+  latex: |
+    A \cup B = \{x \mid x \in A \lor x \in B\}
+    A \cap B = \{x \mid x \in A \land x \in B\}
+    A \setminus B = \{x \mid x \in A \land x \notin B\}
+    \overline{A} = U \setminus A
     A \triangle B = (A \setminus B) \cup (B \setminus A)
   description: 基本运算：并集：$A \cup B = \{x \mid x \in A \lor x \in B\}$。交集：$A \cap B =
     \{x \mid x \in A \land x \in B\}$。差集：$A \setminus B = \{x \mid x \in A \land x
@@ -38,9 +39,10 @@ koans:
 - title: 关系性质
   tag: 关系
   difficulty: medium
-  latex: \forall a \in A, (a, a) \in R \text{ (reflexive)},
-    (a,b) \in R \Rightarrow (b,a) \in R \text{ (symmetry)},
-    (a,b) \in R \land (b,c) \in R \Rightarrow (a,c) \in R \text{ (transitivity)},
+  latex: |
+    \forall a \in A, (a, a) \in R \text{ (reflexive)}
+    (a,b) \in R \Rightarrow (b,a) \in R \text{ (symmetry)}
+    (a,b) \in R \land (b,c) \in R \Rightarrow (a,c) \in R \text{ (transitivity)}
     (a,b) \in R \land (b,a) \in R \Rightarrow a = b \text{ (anti-symmetry)}
   description: 关系性质：自反性：$\forall a \in A, (a, a) \in R$。对称性：$(a, b) \in R \Rightarrow
     (b, a) \in R$。传递性：$(a, b) \in R \land (b, c) \in R \Rightarrow (a, c) \in R$。反对称性：$(a,
@@ -53,22 +55,29 @@ koans:
 - title: 函数类型
   tag: 函数
   difficulty: medium
-  latex: f(a_1) = f(a_2) \Rightarrow a_1 = a_2, \forall b \in B, \exists a \in A,
-    f(a) = b
+  latex: |
+    f(a_1) = f(a_2) \Rightarrow a_1 = a_2
+    \forall b \in B, \exists a \in A, f(a) = b
   description: 函数类型：单射（一对一）：$\forall a_1, a_2 \in A, f(a_1) = f(a_2) \Rightarrow a_1
     = a_2$。满射（到上）：$\forall b \in B, \exists a \in A, f(a) = b$。双射：单射 + 满射。
 - title: 康托尔定理
   tag: 基数
   difficulty: hard
-  latex: '|\mathcal{P}(A)| = 2^{|A|} > |A|,
-    |A| = |\mathbb{N}| = \aleph_0 \text{ (countable)},
-    |\mathbb{R}| = 2^{\aleph_0} = \mathfrak{c} \text{ (uncountable)}'
+  latex: |
+    |\mathcal{P}(A)| = 2^{|A|} > |A|
+    |A| = |\mathbb{N}| = \aleph_0 \text{ (countable)}
+    |\mathbb{R}| = 2^{\aleph_0} = \mathfrak{c} \text{ (uncountable)}
   description: 康托尔定理：$$|\mathcal{P}(A)| = 2^{|A|} > |A|$$可数集：$|A| = |\mathbb{N}| =
     \aleph_0$。不可数集：$| \mathbb{R} | = 2^{\aleph_0} = \mathfrak{c}$。
 - title: 命题联结词
   tag: 命题逻辑
   difficulty: easy
-  latex: \neg P, P \land Q, P \lor Q, P \to Q, P \leftrightarrow Q
+  latex: |
+    \neg P
+    P \land Q
+    P \lor Q
+    P \to Q
+    P \leftrightarrow Q
   description: 命题联结词：否定：$\neg P$。合取：$P \land Q$。析取：$P \lor Q$。蕴含：$P \Rightarrow Q$
     或 $P \to Q$。双蕴含：$P \Leftrightarrow Q$ 或 $P \leftrightarrow Q$。
 - title: 逆否定理
@@ -93,8 +102,10 @@ koans:
 - title: 布尔代数公理
   tag: 布尔代数
   difficulty: hard
-  latex: a \land b = b \land a, (a \land b) \land c = a \land (b \land c), a \land
-    (a \lor b) = a
+  latex: |
+    a \land b = b \land a
+    (a \land b) \land c = a \land (b \land c)
+    a \land (a \lor b) = a
   description: 布尔代数 $(B, \land, \lor, \neg, 0, 1)$ 公理：交换律、结合律、分配律、吸收律、互补律、恒等律。
 - title: 德摩根定律（布尔代数）
   tag: 布尔代数
