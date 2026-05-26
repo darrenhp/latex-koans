@@ -1,0 +1,128 @@
+koans:
+  - title: 简单类定义
+    tag: 类图
+    difficulty: easy
+    mermaid: |
+      classDiagram
+          class Animal {
+              +String name
+              +int age
+              +makeSound() void
+          }
+    description: '使用 <strong>classDiagram</strong> 创建类图。类内 <code>+</code> 表示公有（public），<code>-</code> 表示私有（private），<code>#</code> 表示受保护（protected）。'
+    hint: 'classDiagram\n    class Animal {\n        +String name\n        +int age\n        +makeSound() void\n    }'
+
+  - title: 继承关系
+    tag: 类图
+    difficulty: easy
+    mermaid: |
+      classDiagram
+          Animal <|-- Dog
+          Animal <|-- Cat
+          class Animal {
+              +makeSound()
+          }
+          class Dog {
+              +bark()
+          }
+          class Cat {
+              +meow()
+          }
+    description: '<code>A <|-- B</code> 表示 B <strong>继承</strong>自 A（B extends A）。三角箭头指向父类。'
+    hint: 'classDiagram\n    Animal <|-- Dog\n    Animal <|-- Cat\n    class Animal {\n        +makeSound()\n    }\n    class Dog {\n        +bark()\n    }\n    class Cat {\n        +meow()\n    }'
+
+  - title: 接口实现
+    tag: 类图
+    difficulty: medium
+    mermaid: |
+      classDiagram
+          class IVehicle {
+              <<interface>>
+              +start()
+              +stop()
+          }
+          IVehicle <|.. Car
+          class Car {
+              +start()
+              +stop()
+              +openTrunk()
+          }
+    description: '<code>A <|.. B</code>（虚线三角箭头）表示 B <strong>实现</strong>接口 A。用 <code><<interface>></code> 标注接口。'
+    hint: 'classDiagram\n    class IVehicle {\n        <<interface>>\n        +start()\n        +stop()\n    }\n    IVehicle <|.. Car\n    class Car {\n        +start()\n        +stop()\n        +openTrunk()\n    }'
+
+  - title: 关联与聚合
+    tag: 类图
+    difficulty: medium
+    mermaid: |
+      classDiagram
+          Library "1" --> "*" Book : has
+          class Library {
+              +addBook()
+          }
+          class Book {
+              +String title
+          }
+    description: '<code>A "1" --> "*" B : 标签</code> 表示<strong>关联关系</strong>，1 和 * 是基数（一个图书馆有多本书）。关联线上带标签描述关系语义。'
+    hint: 'classDiagram\n    Library "1" --> "*" Book : has\n    class Library {\n        +addBook()\n    }\n    class Book {\n        +String title\n    }\n'
+
+  - title: 组合关系
+    tag: 类图
+    difficulty: medium
+    mermaid: |
+      classDiagram
+          House *-- Room
+          class House {
+              +address
+              +addRoom()
+          }
+          class Room {
+              +name
+              +size
+          }
+    description: '<code>A *-- B</code> 表示 A <strong>组合</strong> B（Composition，实心菱形）。B 的生命周期由 A 管理，房子销毁时房间也消失。'
+    hint: 'classDiagram\n    House *-- Room\n    class House {\n        +address\n        +addRoom()\n    }\n    class Room {\n        +name\n        +size\n    }'
+
+  - title: 依赖关系
+    tag: 类图
+    difficulty: medium
+    mermaid: |
+      classDiagram
+          Order ..> PaymentService : depends on
+          class Order {
+              +checkout()
+          }
+          class PaymentService {
+              +process()
+          }
+    description: '<code>A ..> B</code> 表示 A <strong>依赖</strong>B（Dependency，虚线箭头）。Order 在 checkout 方法中使用 PaymentService。'
+    hint: 'classDiagram\n    Order ..> PaymentService : depends on\n    class Order {\n        +checkout()\n    }\n    class PaymentService {\n        +process()\n    }'
+
+  - title: 完整关系图
+    tag: 类图
+    difficulty: hard
+    mermaid: |
+      classDiagram
+          class User {
+              +String name
+              +String email
+              +login()
+          }
+          class Order {
+              +Date date
+              +String status
+              +calculateTotal()
+          }
+          class Product {
+              +String name
+              +float price
+          }
+          class Cart {
+              +addItem()
+              +checkout()
+          }
+          User "1" --> "*" Order : places
+          Order "*" --> "*" Product : contains
+          User "1" --> "1" Cart : owns
+          Cart "1" o-- "*" Product : holds
+    description: '综合练习：一个电商系统中的类关系。<code>o--</code> 表示聚合（Aggregation，空心菱形）。注意区分不同的关系类型和基数标注。'
+    hint: 'classDiagram\n    class User { +String name +String email +login() }\n    class Order { +Date date +String status +calculateTotal() }\n    class Product { +String name +float price }\n    class Cart { +addItem() +checkout() }\n    User "1" --> "*" Order : places\n    Order "*" --> "*" Product : contains\n    User "1" --> "1" Cart : owns\n    Cart "1" o-- "*" Product : holds'

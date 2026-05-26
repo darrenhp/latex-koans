@@ -1,0 +1,131 @@
+koans:
+  - title: 简单实体
+    tag: ER图
+    difficulty: easy
+    mermaid: |
+      erDiagram
+          CUSTOMER {
+              int id PK
+              string name
+              string email
+          }
+    description: '使用 <strong>erDiagram</strong> 创建实体关系图。<code>PK</code> 主键，<code>FK</code> 外键。字段格式：<code>类型 字段名 约束</code>。'
+    hint: 'erDiagram\n    CUSTOMER {\n        int id PK\n        string name\n        string email\n    }'
+
+  - title: 一对多关系
+    tag: ER图
+    difficulty: easy
+    mermaid: |
+      erDiagram
+          CUSTOMER ||--o{ ORDER : places
+          CUSTOMER {
+              int id PK
+              string name
+          }
+          ORDER {
+              int id PK
+              date orderDate
+              int customerId FK
+          }
+    description: '<code>||--o{</code> 表示<strong>一对多</strong>关系（一个客户可以有多个订单）。|| 表示一（exactly one），o{ 表示零或多个。'
+    hint: 'erDiagram\n    CUSTOMER ||--o{ ORDER : places\n    CUSTOMER {\n        int id PK\n        string name\n    }\n    ORDER {\n        int id PK\n        date orderDate\n        int customerId FK\n    }'
+
+  - title: 多对多关系
+    tag: ER图
+    difficulty: medium
+    mermaid: |
+      erDiagram
+          STUDENT }o--o{ COURSE : enrolls
+          STUDENT {
+              int id PK
+              string name
+          }
+          COURSE {
+              int id PK
+              string title
+              int credits
+          }
+    description: '<code>}o--o{</code> 表示<strong>多对多</strong>关系。学生可以选多门课，每门课有多个学生。实际数据库中通常需要一个中间表（enrollment）。'
+    hint: 'erDiagram\n    STUDENT }o--o{ COURSE : enrolls\n    STUDENT {\n        int id PK\n        string name\n    }\n    COURSE {\n        int id PK\n        string title\n        int credits\n    }'
+
+  - title: 一对一关系
+    tag: ER图
+    difficulty: medium
+    mermaid: |
+      erDiagram
+          USER ||--|| PROFILE : has
+          USER {
+              int id PK
+              string username
+          }
+          PROFILE {
+              int id PK
+              int userId FK
+              string bio
+              string avatar
+          }
+    description: '<code>||--||</code> 表示<strong>一对一</strong>关系。每个用户有且仅有一个资料。注意 PROFILE 中的 userId 是外键（FK）。'
+    hint: 'erDiagram\n    USER ||--|| PROFILE : has\n    USER {\n        int id PK\n        string username\n    }\n    PROFILE {\n        int id PK\n        int userId FK\n        string bio\n        string avatar\n    }\n'
+
+  - title: 关系基数详解
+    tag: ER图
+    difficulty: medium
+    mermaid: |
+      erDiagram
+          EMPLOYEE ||--o{ TASK : assigned_to
+          TASK }o--|| PROJECT : belongs_to
+          EMPLOYEE {
+              int id PK
+              string name
+          }
+          TASK {
+              int id PK
+              string description
+          }
+          PROJECT {
+              int id PK
+              string name
+          }
+    description: '<strong>基数符号</strong>：<code>||</code> 恰好一，<code>|o</code> 零或一，<code>}o</code> 零或多，<code>}|</code> 一或多。关系标签描述业务语义。'
+    hint: 'erDiagram\n    EMPLOYEE ||--o{ TASK : assigned_to\n    TASK }o--|| PROJECT : belongs_to\n    EMPLOYEE { int id PK string name }\n    TASK { int id PK string description }\n    PROJECT { int id PK string name }'
+
+  - title: 电商数据模型
+    tag: ER图
+    difficulty: hard
+    mermaid: |
+      erDiagram
+          USER ||--o{ ORDER : places
+          ORDER ||--|{ ORDER_ITEM : contains
+          PRODUCT ||--o{ ORDER_ITEM : includes
+          USER ||--o{ REVIEW : writes
+          PRODUCT ||--o{ REVIEW : has
+          USER {
+              int id PK
+              string name
+              string email
+          }
+          ORDER {
+              int id PK
+              int userId FK
+              date createdAt
+          }
+          ORDER_ITEM {
+              int id PK
+              int orderId FK
+              int productId FK
+              int quantity
+          }
+          PRODUCT {
+              int id PK
+              string name
+              float price
+          }
+          REVIEW {
+              int id PK
+              int userId FK
+              int productId FK
+              int rating
+              string comment
+          }
+    description: '综合练习：完整的电商数据模型。包含 5 个实体、多种关系类型。ORDER_ITEM 是多对多关系的中间表。注意外键 FK 的标注位置与关系一致性。'
+    hint: 'erDiagram\n    USER ||--o{ ORDER : places\n    ORDER ||--|{ ORDER_ITEM : contains\n    PRODUCT ||--o{ ORDER_ITEM : includes\n    USER ||--o{ REVIEW : writes\n    PRODUCT ||--o{ REVIEW : has'

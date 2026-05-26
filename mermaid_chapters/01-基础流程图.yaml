@@ -1,0 +1,94 @@
+koans:
+  - title: 简单线性流程
+    tag: 流程图
+    difficulty: easy
+    mermaid: |
+      graph LR
+          A[开始] --> B[处理]
+          B --> C[结束]
+    description: '使用 <strong>graph LR</strong>（Left to Right）创建从左到右的流程图。节点用方括号 <code>[文本]</code> 表示，箭头用 <code>--></code> 连接。'
+    hint: 'graph LR\n    A[开始] --> B[处理]\n    B --> C[结束]'
+
+  - title: 自上而下流程
+    tag: 流程图
+    difficulty: easy
+    mermaid: |
+      graph TD
+          A[启动] --> B[加载数据]
+          B --> C[显示结果]
+    description: '使用 <strong>graph TD</strong>（Top Down）创建从上到下的流程图。方向关键字：TD / LR / RL / BT。'
+    hint: 'graph TD\n    A[启动] --> B[加载数据]\n    B --> C[显示结果]'
+
+  - title: 菱形判断节点
+    tag: 流程图
+    difficulty: medium
+    mermaid: |
+      graph TD
+          A[开始] --> B{是否通过?}
+          B -->|是| C[成功]
+          B -->|否| D[重试]
+    description: '用花括号 <code>{文本}</code> 创建<strong>菱形判断节点</strong>。边标签用 <code>|文本|</code> 写在箭头中间。'
+    hint: 'graph TD\n    A[开始] --> B{是否通过?}\n    B -->|是| C[成功]\n    B -->|否| D[重试]'
+
+  - title: 圆角与圆形节点
+    tag: 流程图
+    difficulty: medium
+    mermaid: |
+      graph LR
+          A((开始)) --> B[处理]
+          B --> C((结束))
+    description: '用双圆括号 <code>((文本))</code> 创建<strong>圆形节点</strong>，常用于开始和结束。还支持 <code>(圆角矩形)</code>、<code>[[子程序]]</code>、<code>[(数据库)]</code> 等形状。'
+    hint: 'graph LR\n    A((开始)) --> B[处理]\n    B --> C((结束))'
+
+  - title: 多分支流程
+    tag: 流程图
+    difficulty: medium
+    mermaid: |
+      graph TD
+          A[登录] --> B{验证}
+          B -->|管理员| C[管理面板]
+          B -->|用户| D[主页]
+          B -->|游客| E[注册页]
+    description: '菱形判断节点可以有<strong>多个分支</strong>，每个分支用 <code>|标签|</code> 区分。注意每行缩进需一致（通常用 4 个空格）。'
+    hint: 'graph TD\n    A[登录] --> B{验证}\n    B -->|管理员| C\n    B -->|用户| D\n    B -->|游客| E'
+
+  - title: 子图分组
+    tag: 流程图
+    difficulty: hard
+    mermaid: |
+      graph TB
+          subgraph 前端
+              A[用户界面] --> B[发送请求]
+          end
+          subgraph 后端
+              C[接收请求] --> D[处理数据]
+          end
+          B --> C
+          D --> E[响应结果]
+    description: '用 <strong>subgraph 标题</strong> ... end 将相关节点<strong>分组</strong>到同一个框中。子图之间用箭头连接。使用 TB(Top to Bottom) 等同于 TD。'
+    hint: 'graph TB\n    subgraph 前端\n        A[用户界面] --> B[发送请求]\n    end\n    subgraph 后端\n        C[接收请求] --> D[处理数据]\n    end\n    B --> C\n    D --> E[响应结果]'
+
+  - title: 带样式的节点
+    tag: 流程图
+    difficulty: hard
+    mermaid: |
+      graph LR
+          A[普通节点]
+          B[高优先级]
+          C[低优先级]
+          A --> B
+          B --> C
+          style B fill:#f9f,stroke:#333,stroke-width:2px
+          style C fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    description: '用 <strong>style 节点ID 样式属性</strong> 为节点设置自定义样式。支持 fill（填充色）、stroke（边框色）、stroke-width（线宽）、color（文字色）、stroke-dasharray（虚线）等。'
+    hint: 'graph LR\n    A[普通节点]\n    B[高优先级]\n    C[低优先级]\n    A --> B\n    B --> C\n    style B fill:#f9f,stroke:#333,stroke-width:2px\n    style C fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5'
+
+  - title: 带链接的节点
+    tag: 流程图
+    difficulty: medium
+    mermaid: |
+      graph LR
+          A[首页] --> B[注册]
+          click B "https://example.com" "点击注册"
+    description: '用 <strong>click 节点ID URL 提示文本</strong> 为节点添加<strong>点击跳转</strong>功能。用户点击节点时会打开指定的链接。'
+    hint: 'graph LR\n    A[首页] --> B[注册]\n    click B "https://example.com" "点击注册"'

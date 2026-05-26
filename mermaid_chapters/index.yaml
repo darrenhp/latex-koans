@@ -1,0 +1,25 @@
+# Mermaid 章节索引文件
+chapters:
+  - name: 基础流程图
+    file: mermaid_chapters/01-基础流程图.yaml
+    description: Mermaid 流程图入门基础
+
+  - name: 序列图
+    file: mermaid_chapters/02-序列图.yaml
+    description: 参与者交互与时序
+
+  - name: 类图
+    file: mermaid_chapters/03-类图.yaml
+    description: 面向对象类关系设计
+
+  - name: 状态图
+    file: mermaid_chapters/04-状态图.yaml
+    description: 状态机与状态转移
+
+  - name: 甘特图
+    file: mermaid_chapters/05-甘特图.yaml
+    description: 项目计划与时间线
+
+  - name: ER 图
+    file: mermaid_chapters/06-ER图.yaml
+    description: 实体关系数据建模

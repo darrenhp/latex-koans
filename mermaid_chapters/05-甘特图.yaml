@@ -1,0 +1,77 @@
+koans:
+  - title: 简单项目计划
+    tag: 甘特图
+    difficulty: easy
+    mermaid: |
+      gantt
+          title 项目计划
+          dateFormat  YYYY-MM-DD
+          section 设计
+              需求分析    :a1, 2024-01-01, 7d
+              原型设计    :a2, after a1, 5d
+          section 开发
+              编码        :b1, after a2, 14d
+              测试        :b2, after b1, 5d
+    description: '使用 <strong>gantt</strong> 创建甘特图。<code>title</code> 设置标题，<code>dateFormat</code> 定义日期格式，<code>section</code> 分组任务。<code>:ID, 开始日期, 时长</code> 定义任务。'
+    hint: 'gantt\n    title 项目计划\n    dateFormat  YYYY-MM-DD\n    section 设计\n        需求分析    :a1, 2024-01-01, 7d\n        原型设计    :a2, after a1, 5d'
+
+  - title: 带里程碑的项目
+    tag: 甘特图
+    difficulty: medium
+    mermaid: |
+      gantt
+          title 产品发布甘特图
+          dateFormat  YYYY-MM-DD
+          section 里程碑
+              Kickoff      :milestone, m1, 2024-01-01, 0d
+              Beta Release :milestone, m2, 2024-02-15, 0d
+              V1.0 Launch  :milestone, m3, 2024-03-01, 0d
+          section 开发
+              功能开发      :dev, 2024-01-01, 30d
+              集成测试      :test, after dev, 15d
+    description: '用 <strong>:milestone, ID, 日期, 0d</strong> 创建<strong>里程碑</strong>（菱形标记）。持续时间为 0d 表示这是一个时间点而非时间段。'
+    hint: 'gantt\n    title 产品发布甘特图\n    dateFormat  YYYY-MM-DD\n    section 里程碑\n        Kickoff      :milestone, m1, 2024-01-01, 0d\n        Beta Release :milestone, m2, 2024-02-15, 0d\n        V1.0 Launch  :milestone, m3, 2024-03-01, 0d'
+
+  - title: 任务状态与依赖
+    tag: 甘特图
+    difficulty: medium
+    mermaid: |
+      gantt
+          title 开发排期
+          dateFormat  YYYY-MM-DD
+          section 前端
+              UI设计      :done,    f1, 2024-01-01, 10d
+              页面开发     :active,  f2, after f1, 12d
+              联调         :         f3, after f2, 5d
+          section 后端
+              API设计     :done,    b1, 2024-01-01, 7d
+              API开发     :crit,    b2, after b1, 14d
+              性能优化     :         b3, after b2, 5d
+    description: '<code>:done</code> 已完成，<code>:active</code> 进行中，<code>:crit</code> 关键任务（红色高亮）。不写状态默认未开始。用 <code>after ID</code> 表示依赖。'
+    hint: 'gantt\n    title 开发排期\n    dateFormat  YYYY-MM-DD\n    section 前端\n        UI设计      :done, f1, 2024-01-01, 10d\n        页面开发     :active, f2, after f1, 12d\n        联调         : f3, after f2, 5d'
+
+  - title: 多团队协作计划
+    tag: 甘特图
+    difficulty: hard
+    mermaid: |
+      gantt
+          title SaaS 平台开发计划
+          dateFormat  YYYY-MM-DD
+          section 产品调研
+              用户访谈        :done,    r1, 2024-01-01, 14d
+              竞品分析        :done,    r2, 2024-01-08, 10d
+              需求文档        :active,  r3, after r2, 7d
+          section 设计团队
+              信息架构        :         d1, after r3, 5d
+              高保真原型      :         d2, after d1, 10d
+          section 开发团队
+              后端骨架        :crit,    e1, after r3, 10d
+              前端框架搭建     :         e2, after d1, 8d
+              核心功能开发     :         e3, after e1, 20d
+              API对接         :         e4, after e2 e3, 10d
+          section 测试
+              集成测试        :         t1, after e4, 10d
+              UAT验收         :milestone, m1, after t1, 0d
+              上线             :milestone, m2, after t1, 3d
+    description: '<strong>after ID1 ID2</strong> 表示任务依赖多个前置任务。多 section 展示实际项目中不同团队的并行工作。<code>:crit</code> 标注关键路径任务。'
+    hint: 'gantt\n    title SaaS 平台开发计划\n    dateFormat  YYYY-MM-DD\n    section 产品调研\n        用户访谈        :done, r1, 2024-01-01, 14d\n        竞品分析        :done, r2, 2024-01-08, 10d\n        需求文档        :active, r3, after r2, 7d'

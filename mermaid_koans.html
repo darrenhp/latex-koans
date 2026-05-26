@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mermaid 公案 · 练习站</title>
+
+  <!-- Mermaid.js -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3350;
+      --accent: #6c8ef5;
+      --accent2: #a78bfa;
+      --green: #34d399;
+      --red: #f87171;
+      --yellow: #fbbf24;
+      --orange: #fb923c;
+      --teal: #2dd4bf;
+      --text: #e2e8f0;
+      --muted: #8892b0;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--orange), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+    .logo span { font-weight: 300; }
+    .progress-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .reset-progress-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.6rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .reset-progress-btn:hover {
+      color: var(--red);
+      border-color: var(--red);
+      background: rgba(248, 113, 113, 0.08);
+    }
+    .progress-track {
+      width: 140px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--orange), var(--teal));
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── Tab switcher ── */
+    .app-tabs {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: 1.5rem;
+    }
+    .app-tab {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: -0.01em;
+    }
+    .app-tab:hover { color: var(--text); background: var(--surface2); }
+    .app-tab.active {
+      color: var(--orange);
+      background: rgba(251, 146, 60, 0.1);
+    }
+
+    /* ── Layout ── */
+    main {
+      flex: 1;
+      display: flex;
+      gap: 1.5rem;
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      min-height: 0;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      flex: 0 0 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .sidebar h3 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 0 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .koan-btn {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+    }
+    .koan-btn:hover { background: var(--surface2); border-color: var(--accent); }
+    .koan-btn.active {
+      background: var(--surface2);
+      border-color: var(--orange);
+      box-shadow: 0 0 0 1px var(--orange) inset;
+    }
+    .koan-btn .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: var(--border);
+    }
+    .koan-btn.solved .status-dot { background: var(--green); }
+    .koan-btn.failed .status-dot { background: var(--red); }
+    .koan-title-text { font-size: 0.88rem; line-height: 1.3; }
+    .koan-tag {
+      margin-left: auto;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: var(--surface2);
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .chapter-switcher {
+      background: linear-gradient(180deg, rgba(251,146,60,0.08), rgba(45,212,191,0.02));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 0.25rem;
+    }
+    .chapter-switcher-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .chapter-count {
+      font-size: 0.68rem;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 2px 8px;
+      color: var(--text);
+      background: var(--surface);
+    }
+    .chapter-filter {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.62rem 2.2rem 0.62rem 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(1em + 1px), calc(100% - 13px) calc(1em + 1px);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+    }
+    .chapter-filter:focus { border-color: var(--orange); box-shadow: 0 0 0 1px var(--orange) inset; }
+    .koan-list-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.5rem;
+      min-height: 180px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* ── Content ── */
+    .content { flex: 1; display: flex; flex-direction: column; gap: 1.25rem; overflow-y: auto; padding-right: 0.5rem; min-height: 0; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .card-header h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .badge {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+    .badge-easy { background: #064e3b; color: var(--green); }
+    .badge-medium { background: #451a03; color: var(--yellow); }
+    .badge-hard { background: #450a0a; color: var(--red); }
+
+    /* Diagram display */
+    .diagram-display {
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .diagram-display svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Description */
+    .description {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .description strong { color: var(--text); }
+
+    /* Editor */
+    .editor-wrap {
+      position: relative;
+    }
+    .editor-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .editor-label .hint-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      padding: 1px 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-left: auto;
+    }
+    .editor-label .hint-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    textarea#mermaid-input {
+      width: 100%;
+      background: #0a0c13;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #a5f3fc;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      padding: 1rem 1.25rem;
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s;
+      outline: none;
+      tab-size: 2;
+    }
+    textarea#mermaid-input:focus { border-color: var(--orange); }
+    textarea#mermaid-input::placeholder { color: #334155; }
+
+    /* Mermaid language tag */
+    .lang-tag {
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      pointer-events: none;
+    }
+
+    /* Preview + Compare row */
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      transition: grid-template-columns 0.3s;
+    }
+    .compare-row.vertical {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+    .preview-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .preview-box .box-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+    .preview-svg-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      overflow-x: auto;
+    }
+    .preview-svg-wrap svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Code view */
+    .code-view {
+      background: #0a0c13;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #a5f3fc;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    /* Action buttons */
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--orange), var(--teal));
+      color: #111;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+    /* Result banner */
+    .result-banner {
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: none;
+    }
+    .result-banner.show { display: flex; }
+    .result-banner.success {
+      background: #052e1c;
+      border: 1px solid #065f46;
+      color: var(--green);
+    }
+    .result-banner.error {
+      background: #2d0a0a;
+      border: 1px solid #7f1d1d;
+      color: var(--red);
+    }
+    .result-banner.warning {
+      background: #2d1a00;
+      border: 1px solid #78350f;
+      color: var(--yellow);
+    }
+    .result-banner.parse-error {
+      background: #1a0a2d;
+      border: 1px solid #6d28d9;
+      color: var(--accent2);
+    }
+    .result-icon { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+    .result-text strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+
+    /* Hint box */
+    .hint-box {
+      background: #1e1a05;
+      border: 1px solid #78350f;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.82rem;
+      color: var(--yellow);
+      display: none;
+      line-height: 1.6;
+    }
+    .hint-box.show { display: block; }
+    .hint-box code {
+      background: #2d2200;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      display: block;
+      white-space: pre-wrap;
+      margin-top: 0.4rem;
+    }
+
+    /* Score / streak */
+    .stats-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .stat-card {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .stat-card .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+    .stat-card.highlight .stat-value { color: var(--orange); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      main { grid-template-columns: 1fr; padding: 1rem; }
+      .compare-row { grid-template-columns: 1fr; }
+      .sidebar { flex-direction: column; }
+      .koan-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:0.5rem;">
+    <div>
+      <div class="logo">Mermaid <span>练习</span></div>
+      <div style="font-size:0.65rem; color:var(--muted); margin-top:2px; letter-spacing:0.02em;">
+        由 腾讯 CodeBuddy 生成
+      </div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <span id="progress-text">0 / 0</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <button class="reset-progress-btn" onclick="resetProgress()">清除进度</button>
+  </div>
+</header>
+
+<main>
+  <!-- Sidebar: koan list -->
+  <aside class="sidebar" id="koan-list">
+    <h3>图表题库</h3>
+    <!-- populated by JS -->
+  </aside>
+
+  <!-- Main content -->
+  <div class="content">
+
+    <!-- Stats row -->
+    <div class="stats-row">
+      <div class="stat-card highlight">
+        <div class="stat-value" id="stat-solved">0</div>
+        <div class="stat-label">已通过</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-streak">0</div>
+        <div class="stat-label">连续正确</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-attempts">0</div>
+        <div class="stat-label">总尝试</div>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="card" id="description-card">
+      <div class="card-header">
+        <h2>图表说明</h2>
+      </div>
+      <div class="description" id="description-content"></div>
+    </div>
+
+    <!-- Compare preview -->
+    <div class="card">
+      <div class="card-header">
+        <h2>图表对比</h2>
+        <span class="badge" id="difficulty-badge">—</span>
+      </div>
+      <div class="compare-row" id="compare-row">
+        <div class="preview-box">
+          <div class="box-label">目标图表</div>
+          <div class="preview-svg-wrap" id="compare-target">—</div>
+        </div>
+        <div class="preview-box">
+          <div class="box-label">你的输入（实时预览）</div>
+          <div class="preview-svg-wrap" id="compare-yours">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="card">
+      <div class="editor-label">
+        你的 Mermaid 代码
+        <div class="lang-tag" id="lang-tag">mermaid</div>
+        <button class="hint-btn" id="hint-toggle" onclick="toggleHint()">💡 提示 (⌘/)</button>
+      </div>
+      <div class="hint-box" id="hint-box"></div>
+      <div class="editor-wrap" style="margin-top:0.5rem">
+        <textarea id="mermaid-input"
+          placeholder="在此输入 Mermaid 代码，例如：&#10;graph TD&#10;    A[开始] --> B[结束]"
+          rows="6"
+          oninput="onInputChange()"></textarea>
+      </div>
+
+      <div class="result-banner" id="result-banner">
+        <div class="result-icon" id="result-icon"></div>
+        <div class="result-text" id="result-text"></div>
+      </div>
+
+      <div class="actions" style="margin-top:1rem">
+        <button class="btn btn-primary" onclick="checkAnswer()">✓ 提交对比 (⌘↩)</button>
+        <button class="btn btn-ghost" onclick="clearInput()">清空 (⌘K)</button>
+        <button class="btn btn-ghost" onclick="nextKoan()">下一题 (⌘J) →</button>
+        <button class="btn btn-ghost" onclick="showCodeHint()" title="显示目标代码">📋 答案</button>
+      </div>
+    </div>
+
+    <!-- Code hint panel -->
+    <div class="card" id="code-hint-card" style="display:none;">
+      <div class="card-header">
+        <h2>答案代码</h2>
+        <button class="btn btn-ghost" style="padding:0.25rem 0.6rem;font-size:0.7rem;" onclick="document.getElementById('code-hint-card').style.display='none'">✕</button>
+      </div>
+      <div class="code-view" id="code-hint-content"></div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+/* ────────────────────────────────────────────
+   MERMAID INIT
+──────────────────────────────────────────── */
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  securityLevel: 'loose',
+  themeVariables: {
+    primaryColor: '#1a1d27',
+    primaryTextColor: '#e2e8f0',
+    primaryBorderColor: '#6c8ef5',
+    lineColor: '#8892b0',
+    secondaryColor: '#22263a',
+    secondaryTextColor: '#e2e8f0',
+    secondaryBorderColor: '#a78bfa',
+    tertiaryColor: '#2e3350',
+    tertiaryTextColor: '#e2e8f0',
+    tertiaryBorderColor: '#4a5580',
+    noteBkgColor: '#1e293b',
+    noteTextColor: '#e2e8f0',
+    noteBorderColor: '#475569',
+    fontSize: '15px',
+    labelTextColor: '#e2e8f0',
+    loopTextColor: '#e2e8f0',
+    edgeLabelBackground: '#1a1d27',
+    titleColor: '#e2e8f0',
+    errorBkgColor: '#450a0a',
+    errorTextColor: '#f87171',
+    classText: '#e2e8f0',
+    flowchart: {
+      htmlLabels: true,
+      curve: 'basis',
+      padding: 20
+    },
+    sequence: {
+      actorFontSize: 15,
+      noteFontSize: 13,
+      messageFontSize: 13,
+      mirrorActors: false,
+      width: 180,
+      boxMargin: 12
+    },
+    gantt: {
+      titleBkgColor: '#1a1d27',
+      titleColor: '#e2e8f0',
+      sectionBkgColor: '#22263a',
+      sectionBkgColor2: '#2e3350',
+      taskBkgColor: '#1e293b',
+      taskBorderColor: '#475569',
+      taskTextColor: '#e2e8f0',
+      todayLineColor: '#f87171',
+      gridColor: '#2e3350'
+    }
+  }
+});
+
+let renderIdCounter = 0;
+
+/* ────────────────────────────────────────────
+   KOAN DATABASE
+──────────────────────────────────────────── */
+let KOANS = [];
+
+async function loadKoansFromYaml() {
+  const indexResponse = await fetch('./mermaid_chapters/index.yaml', { cache: 'no-store' });
+  if (!indexResponse.ok) {
+    throw new Error(`章节索引加载失败（HTTP ${indexResponse.status}）`);
+  }
+
+  const indexYaml = await indexResponse.text();
+  const indexParsed = window.jsyaml?.load(indexYaml);
+  if (!indexParsed || !Array.isArray(indexParsed.chapters)) {
+    throw new Error('章节索引格式错误：缺少 chapters 数组');
+  }
+
+  const chapterFiles = indexParsed.chapters.map(ch => ({ file: ch.file, name: ch.name }));
+  CHAPTER_ORDER = indexParsed.chapters.map(ch => ch.name);
+
+  const fetchPromises = chapterFiles.map(({ file, name }) =>
+    fetch(`./${file}`, { cache: 'no-store' })
+      .then(res => {
+        if (!res.ok) throw new Error(`章节文件 ${file} 加载失败（HTTP ${res.status}）`);
+        return res.text();
+      })
+      .then(text => {
+        const parsed = window.jsyaml?.load(text);
+        if (!parsed || !Array.isArray(parsed.koans)) {
+          throw new Error(`章节文件 ${file} 格式错误：缺少 koans 数组`);
+        }
+        return parsed.koans.map(koan => ({ ...koan, chapter: name }));
+      })
+  );
+
+  const allKoansArrays = await Promise.all(fetchPromises);
+  const allKoans = allKoansArrays.flat();
+
+  KOANS = allKoans.map((item, idx) => ({
+    id: idx + 1,
+    title: item.title ?? `题目 ${idx + 1}`,
+    chapter: item.chapter ?? '未分类',
+    tag: item.tag ?? '未标记',
+    difficulty: item.difficulty ?? 'easy',
+    mermaid: item.mermaid ?? '',
+    description: item.description ?? '',
+    hint: item.hint ?? ''
+  }));
+
+  if (!KOANS.length) {
+    throw new Error('题库为空，请在章节文件中至少配置一道题');
+  }
+}
+
+function getKoanKey(koan) {
+  return String(koan?.id ?? '');
+}
+
+/* ────────────────────────────────────────────
+   STATE
+──────────────────────────────────────────── */
+let currentKoan = null;
+let solvedSet = new Set();
+let totalAttempts = 0;
+let streak = 0;
+let previewTimer = null;
+let selectedChapter = '';
+let CHAPTER_ORDER = [];
+
+const STORAGE_KEY = 'mermaid_koans_progress_v1';
+
+function saveProgress() {
+  try {
+    const snapshot = {
+      solvedIds: [...solvedSet],
+      totalAttempts,
+      streak,
+      selectedChapter,
+      currentKoanId: currentKoan ? getKoanKey(currentKoan) : null
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+  } catch (error) {
+    console.warn('进度保存失败：', error);
+  }
+}
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+
+    const snapshot = JSON.parse(raw);
+    if (!snapshot || typeof snapshot !== 'object') return null;
+
+    const validIds = new Set(KOANS.map(k => getKoanKey(k)));
+    const restoredSolved = Array.isArray(snapshot.solvedIds)
+      ? snapshot.solvedIds.map(String).filter(id => validIds.has(id))
+      : [];
+
+    solvedSet = new Set(restoredSolved);
+    totalAttempts = Number.isFinite(snapshot.totalAttempts) ? Math.max(0, snapshot.totalAttempts) : 0;
+    streak = Number.isFinite(snapshot.streak) ? Math.max(0, snapshot.streak) : 0;
+
+    if (typeof snapshot.selectedChapter === 'string' && snapshot.selectedChapter.trim()) {
+      selectedChapter = snapshot.selectedChapter;
+    }
+
+    return snapshot.currentKoanId != null ? String(snapshot.currentKoanId) : null;
+  } catch (error) {
+    console.warn('进度恢复失败，已忽略：', error);
+    return null;
+  }
+}
+
+/* ────────────────────────────────────────────
+   INIT
+──────────────────────────────────────────── */
+window.addEventListener('load', async () => {
+  try {
+    await loadKoansFromYaml();
+    const restoredKoanId = loadProgress();
+    buildSidebar();
+    updateStats();
+    bindShortcuts();
+
+    const initialKoan = KOANS.find(k => getKoanKey(k) === restoredKoanId) || KOANS[0];
+    await loadKoan(initialKoan);
+  } catch (error) {
+    console.error(error);
+    const compareTarget = document.getElementById('compare-target');
+    if (compareTarget) {
+      compareTarget.innerHTML = '<span style="color:var(--red)">初始化失败，请查看错误详情</span>';
+    }
+  }
+});
+
+function buildSidebar() {
+  const list = document.getElementById('koan-list');
+  const h3 = list.querySelector('h3');
+  list.innerHTML = '';
+  list.appendChild(h3);
+
+  const chapters = CHAPTER_ORDER.length > 0 ? CHAPTER_ORDER : [...new Set(KOANS.map(k => k.chapter || '未分类'))];
+  if (!chapters.length) return;
+
+  if (!selectedChapter || !chapters.includes(selectedChapter)) {
+    selectedChapter = chapters[0];
+  }
+
+  const switcher = document.createElement('div');
+  switcher.className = 'chapter-switcher';
+  switcher.innerHTML = `
+    <div class="chapter-switcher-top">
+      <span>章节筛选</span>
+      <span class="chapter-count" id="chapter-count"></span>
+    </div>
+  `;
+
+  const select = document.createElement('select');
+  select.className = 'chapter-filter';
+  select.id = 'chapter-filter';
+  select.innerHTML = chapters
+    .map((ch, idx) => {
+      const num = String(idx + 1).padStart(2, '0');
+      return `<option value="${ch}">${num}. ${ch}</option>`;
+    })
+    .join('');
+  select.value = selectedChapter;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'koan-list-wrap';
+  wrap.id = 'koan-list-wrap';
+
+  const updateChapterMeta = () => {
+    const count = KOANS.filter(k => (k.chapter || '未分类') === selectedChapter).length;
+    const countEl = document.getElementById('chapter-count');
+    if (countEl) countEl.textContent = `${count} 题`;
+  };
+
+  select.onchange = () => {
+    selectedChapter = select.value;
+    renderKoanListByChapter();
+    updateChapterMeta();
+    saveProgress();
+  };
+
+  switcher.appendChild(select);
+  list.appendChild(switcher);
+  list.appendChild(wrap);
+
+  renderKoanListByChapter();
+  updateChapterMeta();
+  updateProgress();
+}
+
+function renderKoanListByChapter() {
+  const wrap = document.getElementById('koan-list-wrap');
+  if (!wrap) return;
+
+  const chapterItems = KOANS.filter(k => (k.chapter || '未分类') === selectedChapter);
+  wrap.innerHTML = '';
+
+  chapterItems.forEach(k => {
+    const btn = document.createElement('button');
+    btn.className = 'koan-btn';
+    btn.id = `koan-btn-${getKoanKey(k)}`;
+    btn.onclick = () => loadKoan(k);
+
+    if (currentKoan && getKoanKey(currentKoan) === getKoanKey(k)) {
+      btn.classList.add('active');
+    }
+    if (solvedSet.has(getKoanKey(k))) {
+      btn.classList.add('solved');
+    }
+
+    btn.innerHTML = `
+      <span class="status-dot"></span>
+      <span class="koan-title-text">${k.id}. ${k.title}</span>
+      <span class="koan-tag">${k.tag}</span>
+    `;
+    wrap.appendChild(btn);
+  });
+}
+
+/* ────────────────────────────────────────────
+   MERMAID RENDER HELPERS
+──────────────────────────────────────────── */
+async function renderMermaidToSVG(diagramCode) {
+  const id = `mermaid-${renderIdCounter++}`;
+  try {
+    const { svg } = await mermaid.render(id, diagramCode);
+    return svg;
+  } catch (e) {
+    console.warn('Mermaid 渲染错误:', e.message);
+    throw e;
+  }
+}
+
+async function setTargetSVG(diagramCode) {
+  const targetEl = document.getElementById('compare-target');
+  try {
+    const svg = await renderMermaidToSVG(diagramCode);
+    targetEl.innerHTML = svg;
+  } catch (e) {
+    targetEl.innerHTML = `<span style="color:var(--red)">目标图表渲染失败</span>`;
+    console.error(e);
+  }
+}
+
+/* ────────────────────────────────────────────
+   LOAD KOAN
+──────────────────────────────────────────── */
+async function loadKoan(koan) {
+  currentKoan = koan;
+
+  // sidebar active
+  document.querySelectorAll('.koan-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.getElementById(`koan-btn-${getKoanKey(koan)}`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  // difficulty badge
+  const badge = document.getElementById('difficulty-badge');
+  badge.className = 'badge badge-' + koan.difficulty;
+  badge.textContent = { easy: '简单', medium: '中等', hard: '困难' }[koan.difficulty];
+
+  // hide result, hint, code hint card
+  hideResult();
+  hideHint();
+  document.getElementById('code-hint-card').style.display = 'none';
+  document.getElementById('mermaid-input').value = '';
+  document.getElementById('compare-yours').innerHTML = '—';
+
+  // render target mermaid diagram
+  await setTargetSVG(koan.mermaid);
+
+  // render description
+  const descriptionContent = document.getElementById('description-content');
+  descriptionContent.innerHTML = koan.description || '';
+
+  updateCompareLayout();
+  saveProgress();
+}
+
+/* ────────────────────────────────────────────
+   REAL-TIME PREVIEW
+──────────────────────────────────────────── */
+function onInputChange() {
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(renderPreview, 500);
+}
+
+function updateCompareLayout() {
+  const compareRow = document.getElementById('compare-row');
+  const targetBox = document.getElementById('compare-target');
+  const previewBox = document.getElementById('compare-yours');
+  if (!compareRow || !targetBox || !previewBox) return;
+
+  const targetH = targetBox.scrollHeight;
+  const previewH = previewBox.scrollHeight;
+  const threshold = 300;
+
+  if (previewH > threshold || targetH > threshold) {
+    compareRow.classList.add('vertical');
+  } else {
+    compareRow.classList.remove('vertical');
+  }
+}
+
+async function renderPreview() {
+  const raw = document.getElementById('mermaid-input').value.trim();
+  const yoursEl = document.getElementById('compare-yours');
+  if (!raw) {
+    yoursEl.innerHTML = '—';
+    updateCompareLayout();
+    return;
+  }
+
+  try {
+    const svg = await renderMermaidToSVG(raw);
+    yoursEl.innerHTML = svg;
+  } catch (e) {
+    yoursEl.innerHTML = `<span style="color:var(--red);font-size:0.82rem;">⚠ 语法错误</span>`;
+  }
+  updateCompareLayout();
+}
+
+/* ────────────────────────────────────────────
+   CHECK ANSWER (pixel comparison via canvas)
+──────────────────────────────────────────── */
+async function checkAnswer() {
+  if (!currentKoan) return;
+  const raw = document.getElementById('mermaid-input').value.trim();
+  if (!raw) {
+    showResult('warning', '⚠️', '请先输入 Mermaid 代码', '');
+    return;
+  }
+
+  totalAttempts++;
+  updateStats();
+
+  // render user's input
+  const yoursEl = document.getElementById('compare-yours');
+  try {
+    const svg = await renderMermaidToSVG(raw);
+    yoursEl.innerHTML = svg;
+  } catch (e) {
+    showResult('parse-error', '⚠',
+      'Mermaid 语法错误',
+      '你的代码包含语法错误，请检查后重试。常见问题：缩进不一致、箭头方向错误、缺少分号。'
+    );
+    saveProgress();
+    return;
+  }
+
+  const targetEl = document.getElementById('compare-target');
+
+  // pixel comparison
+  const match = await pixelCompare(targetEl, yoursEl);
+
+  if (match) {
+    streak++;
+    if (!solvedSet.has(getKoanKey(currentKoan))) {
+      solvedSet.add(getKoanKey(currentKoan));
+      const btn = document.getElementById(`koan-btn-${getKoanKey(currentKoan)}`);
+      if (btn) {
+        btn.classList.add('solved');
+        btn.classList.remove('failed');
+      }
+    }
+    updateStats();
+    updateProgress();
+    showResult('success', '✓',
+      '完全匹配！恭喜通过本题',
+      `你输入的图表与目标图形一致。连续正确：${streak} 题`
+    );
+  } else {
+    streak = 0;
+    const btn = document.getElementById(`koan-btn-${getKoanKey(currentKoan)}`);
+    if (btn && !solvedSet.has(getKoanKey(currentKoan))) {
+      btn.classList.add('failed');
+    }
+    updateStats();
+    showResult('error', '✗',
+      '图形不匹配，请检查你的输入',
+      '仔细对比上方的目标图表，注意节点名、箭头方向、缩进格式。'
+    );
+  }
+
+  saveProgress();
+}
+
+/* ────────────────────────────────────────────
+   PIXEL COMPARISON
+──────────────────────────────────────────── */
+async function pixelCompare(elA, elB) {
+  const svgA = elA.querySelector('svg');
+  const svgB = elB.querySelector('svg');
+
+  if (!svgA || !svgB) {
+    return normalizedTextMatch(elA.textContent || '', elB.textContent || '');
+  }
+
+  try {
+    const [imgA, imgB] = await Promise.all([svgToImage(svgA), svgToImage(svgB)]);
+    return imagesMatch(imgA, imgB);
+  } catch(e) {
+    return normalizedTextMatch(elA.textContent || '', elB.textContent || '');
+  }
+}
+
+function svgToImage(svgEl) {
+  return new Promise((resolve, reject) => {
+    const clone = svgEl.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+    // Use natural viewBox or default
+    const viewBox = svgEl.getAttribute('viewBox');
+    let nativeW = 600, nativeH = 400;
+    if (viewBox) {
+      const parts = viewBox.split(/\s+/);
+      if (parts.length >= 4) {
+        nativeW = Math.max(1, parseFloat(parts[2]));
+        nativeH = Math.max(1, parseFloat(parts[3]));
+      }
+    }
+
+    // render at a consistent reference size
+    const scale = Math.min(700 / nativeW, 500 / nativeH, 1);
+    const W = Math.max(200, Math.round(nativeW * scale));
+    const H = Math.max(100, Math.round(nativeH * scale));
+
+    clone.setAttribute('width', W);
+    clone.setAttribute('height', H);
+    const blob = new Blob([clone.outerHTML], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image(W, H);
+    img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+function imagesMatch(imgA, imgB) {
+  const W = imgA.naturalWidth || imgA.width;
+  const H = imgA.naturalHeight || imgA.height;
+  const refW = Math.min(W, 700);
+  const refH = Math.min(H, 500);
+
+  const canvasA = document.createElement('canvas');
+  const canvasB = document.createElement('canvas');
+  canvasA.width = canvasB.width = refW;
+  canvasA.height = canvasB.height = refH;
+  const ctxA = canvasA.getContext('2d');
+  const ctxB = canvasB.getContext('2d');
+  ctxA.fillStyle = '#ffffff';
+  ctxA.fillRect(0, 0, refW, refH);
+  ctxB.fillStyle = '#ffffff';
+  ctxB.fillRect(0, 0, refW, refH);
+  ctxA.drawImage(imgA, 0, 0, refW, refH);
+  ctxB.drawImage(imgB, 0, 0, refW, refH);
+
+  const dataA = ctxA.getImageData(0, 0, refW, refH).data;
+  const dataB = ctxB.getImageData(0, 0, refW, refH).data;
+
+  let diff = 0;
+  for (let i = 0; i < dataA.length; i += 4) {
+    diff += Math.abs(dataA[i] - dataB[i]);
+    diff += Math.abs(dataA[i+1] - dataB[i+1]);
+    diff += Math.abs(dataA[i+2] - dataB[i+2]);
+  }
+  const totalPixels = refW * refH;
+  const avgDiff = diff / (totalPixels * 3);
+  return avgDiff < 15; // higher threshold for diagram complexity
+}
+
+function normalizedTextMatch(textA, textB) {
+  const norm = s => s.replace(/\s+/g, '').toLowerCase();
+  return norm(textA) === norm(textB);
+}
+
+/* ────────────────────────────────────────────
+   UI HELPERS
+──────────────────────────────────────────── */
+function showResult(type, icon, title, body) {
+  const banner = document.getElementById('result-banner');
+  const iconEl = document.getElementById('result-icon');
+  const textEl = document.getElementById('result-text');
+  banner.className = `result-banner show ${type}`;
+  iconEl.textContent = icon;
+  textEl.innerHTML = `<strong>${title}</strong>${body ? body : ''}`;
+}
+function hideResult() {
+  document.getElementById('result-banner').className = 'result-banner';
+}
+
+function toggleHint() {
+  if (!currentKoan) return;
+  const box = document.getElementById('hint-box');
+  if (box.classList.contains('show')) {
+    hideHint();
+  } else {
+    const hintText = currentKoan.hint || currentKoan.mermaid;
+    box.innerHTML = `💡 提示：<code>${hintText.replace(/\\n/g, '\n').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`;
+    box.classList.add('show');
+  }
+}
+function hideHint() {
+  const box = document.getElementById('hint-box');
+  box.classList.remove('show');
+  box.innerHTML = '';
+}
+
+function showCodeHint() {
+  if (!currentKoan) return;
+  const card = document.getElementById('code-hint-card');
+  const content = document.getElementById('code-hint-content');
+  card.style.display = 'block';
+  content.textContent = currentKoan.mermaid;
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function clearInput() {
+  document.getElementById('mermaid-input').value = '';
+  document.getElementById('compare-yours').innerHTML = '—';
+  hideResult();
+  document.getElementById('code-hint-card').style.display = 'none';
+}
+
+function resetProgress() {
+  const ok = window.confirm('确定要清除当前做题进度吗？此操作不可撤销。');
+  if (!ok) return;
+
+  solvedSet = new Set();
+  totalAttempts = 0;
+  streak = 0;
+
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    console.warn('清除本地进度失败：', error);
+  }
+
+  document.querySelectorAll('.koan-btn').forEach(btn => {
+    btn.classList.remove('solved');
+    btn.classList.remove('failed');
+  });
+
+  updateStats();
+  updateProgress();
+  hideResult();
+}
+
+function nextKoan() {
+  const chapters = CHAPTER_ORDER.length > 0 ? CHAPTER_ORDER : [...new Set(KOANS.map(k => k.chapter || '未分类'))];
+  if (!chapters.length) return;
+
+  if (!selectedChapter || !chapters.includes(selectedChapter)) {
+    selectedChapter = chapters[0];
+  }
+
+  const scoped = KOANS.filter(k => (k.chapter || '未分类') === selectedChapter);
+  if (!scoped.length) return;
+
+  if (!currentKoan) {
+    loadKoan(scoped[0]);
+    return;
+  }
+
+  const idx = scoped.findIndex(k => getKoanKey(k) === getKoanKey(currentKoan));
+  const hasNextInChapter = idx >= 0 && idx < scoped.length - 1;
+
+  if (hasNextInChapter) {
+    loadKoan(scoped[idx + 1]);
+    return;
+  }
+
+  // 当前章节最后一题 → 下一章节第一题
+  let chapterIdx = chapters.indexOf(selectedChapter);
+  for (let i = 0; i < chapters.length; i++) {
+    chapterIdx = (chapterIdx + 1) % chapters.length;
+    const nextChapter = chapters[chapterIdx];
+    const nextScoped = KOANS.filter(k => (k.chapter || '未分类') === nextChapter);
+    if (!nextScoped.length) continue;
+
+    selectedChapter = nextChapter;
+
+    const select = document.getElementById('chapter-filter');
+    if (select) {
+      select.value = selectedChapter;
+      if (typeof select.onchange === 'function') {
+        select.onchange();
+      } else {
+        renderKoanListByChapter();
+      }
+    } else {
+      renderKoanListByChapter();
+    }
+
+    loadKoan(nextScoped[0]);
+    return;
+  }
+}
+
+function bindShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    if (!e.metaKey) return;
+
+    const key = e.key.toLowerCase();
+
+    if (key === 'enter') {
+      e.preventDefault();
+      checkAnswer();
+      return;
+    }
+
+    if (key === 'k') {
+      e.preventDefault();
+      clearInput();
+      return;
+    }
+
+    if (key === 'j') {
+      e.preventDefault();
+      nextKoan();
+      return;
+    }
+
+    if (key === '/' || key === '?') {
+      e.preventDefault();
+      toggleHint();
+    }
+  });
+}
+
+/* ────────────────────────────────────────────
+   STATS & PROGRESS
+──────────────────────────────────────────── */
+function updateStats() {
+  document.getElementById('stat-solved').textContent = solvedSet.size;
+  document.getElementById('stat-streak').textContent = streak;
+  document.getElementById('stat-attempts').textContent = totalAttempts;
+}
+
+function updateProgress() {
+  const total = KOANS.length;
+  const solved = solvedSet.size;
+  document.getElementById('progress-text').textContent = `${solved} / ${total}`;
+  document.getElementById('progress-fill').style.width = `${(solved / total) * 100}%`;
+}
+</script>
+
+<footer style="text-align:center; padding:1rem; color:var(--muted); font-size:0.75rem; border-top:1px solid var(--border); margin-top:2rem;">
+  本页面和习题由 <strong style="color:var(--orange);">腾讯 CodeBuddy</strong> 人工智能编程助手自动生成
+</footer>
+
+</body>
+</html>

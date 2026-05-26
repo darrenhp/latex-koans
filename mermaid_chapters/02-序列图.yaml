@@ -1,0 +1,92 @@
+koans:
+  - title: 简单请求-响应
+    tag: 序列图
+    difficulty: easy
+    mermaid: |
+      sequenceDiagram
+          participant C as 客户端
+          participant S as 服务器
+          C->>S: 发送请求
+          S-->>C: 返回响应
+    description: '使用 <strong>sequenceDiagram</strong> 创建序列图。<code>->></code> 实线箭头（同步），<code>-->></code> 虚线箭头（异步响应）。<strong>participant</strong> 定义参与者，<code>as</code> 设置别名。'
+    hint: 'sequenceDiagram\n    participant C as 客户端\n    participant S as 服务器\n    C->>S: 发送请求\n    S-->>C: 返回响应'
+
+  - title: 自动激活条
+    tag: 序列图
+    difficulty: medium
+    mermaid: |
+      sequenceDiagram
+          A->>+B: 调用方法
+          B->>+C: 调用数据层
+          C-->>-B: 返回数据
+          B-->>-A: 返回结果
+    description: '<strong>+</strong> 表示激活参与者（显示生命线激活条），<strong>-</strong> 表示结束激活。这是自动编号方式，也可以显式使用 <code>activate</code>/<code>deactivate</code>。'
+    hint: 'sequenceDiagram\n    A->>+B: 调用方法\n    B->>+C: 调用数据层\n    C-->>-B: 返回数据\n    B-->>-A: 返回结果'
+
+  - title: 注释笔记
+    tag: 序列图
+    difficulty: medium
+    mermaid: |
+      sequenceDiagram
+          participant U as 用户
+          participant API
+          U->>API: POST /login
+          Note right of API: 验证登录凭据
+          API-->>U: JWT Token
+          Note left of U: 存储Token到本地
+    description: '用 <strong>Note right of / left of / over 参与者: 文字</strong> 添加注释。<code>right of</code> 在参与者右侧，<code>left of</code> 在左侧，<code>over</code> 横跨两个参与者。'
+    hint: 'sequenceDiagram\n    participant U as 用户\n    participant API\n    U->>API: POST /login\n    Note right of API: 验证登录凭据\n    API-->>U: JWT Token\n    Note left of U: 存储Token到本地'
+
+  - title: 循环与条件
+    tag: 序列图
+    difficulty: hard
+    mermaid: |
+      sequenceDiagram
+          participant C as 客户端
+          participant S as 服务端
+          C->>S: 请求数据
+          loop 分页加载
+              S-->>C: 返回一页数据
+          end
+          alt 数据有效
+              S-->>C: 继续处理
+          else 数据过期
+              S-->>C: 重新请求
+          end
+    description: '<strong>loop 标签</strong> ... end 表示循环逻辑。<strong>alt 条件 / else 条件</strong> ... end 表示条件分支。使用 <code>opt 标签</code> 可表示可选块。'
+    hint: 'sequenceDiagram\n    participant C as 客户端\n    participant S as 服务端\n    C->>S: 请求数据\n    loop 分页加载\n        S-->>C: 返回一页数据\n    end\n    alt 数据有效\n        S-->>C: 继续处理\n    else 数据过期\n        S-->>C: 重新请求\n    end'
+
+  - title: 并行操作
+    tag: 序列图
+    difficulty: hard
+    mermaid: |
+      sequenceDiagram
+          participant M as 主线程
+          par 任务A
+              M->>+W1: 下载文件
+              W1-->>-M: 完成
+          and 任务B
+              M->>+W2: 处理图片
+              W2-->>-M: 完成
+          end
+          M->>M: 合并结果
+    description: '使用 <strong>par 标签 / and 标签</strong> ... end 表示<strong>并行执行</strong>的多个任务。每个 <code>and</code> 块内的操作同时进行。'
+    hint: 'sequenceDiagram\n    participant M as 主线程\n    par 任务A\n        M->>+W1: 下载文件\n        W1-->>-M: 完成\n    and 任务B\n        M->>+W2: 处理图片\n        W2-->>-M: 完成\n    end\n    M->>M: 合并结果'
+
+  - title: 用户注册流程
+    tag: 序列图
+    difficulty: medium
+    mermaid: |
+      sequenceDiagram
+          actor U as 用户
+          participant F as 前端
+          participant B as 后端
+          participant D as 数据库
+          U->>F: 填写注册表单
+          F->>B: POST /register
+          B->>D: INSERT user
+          D-->>B: OK
+          B-->>F: 注册成功
+          F-->>U: 跳转首页
+    description: '用 <strong>actor</strong> 表示<strong>角色</strong>（区别于系统 participant）。完整的注册流程涉及前端、后端、数据库三层。注意箭头方向需与通信方向一致。'
+    hint: 'sequenceDiagram\n    actor U as 用户\n    participant F as 前端\n    participant B as 后端\n    participant D as 数据库\n    U->>F: 填写注册表单\n    F->>B: POST /register\n    B->>D: INSERT user\n    D-->>B: OK\n    B-->>F: 注册成功\n    F-->>U: 跳转首页'

@@ -1,0 +1,93 @@
+koans:
+  - title: 简单开/关状态
+    tag: 状态图
+    difficulty: easy
+    mermaid: |
+      stateDiagram-v2
+          [*] --> 关闭
+          关闭 --> 开启 : 按下开关
+          开启 --> 关闭 : 按下开关
+    description: '使用 <strong>stateDiagram-v2</strong> 创建状态图。<code>[*]</code> 表示初始状态。<code>状态A --> 状态B : 触发事件</code> 描述状态转移。'
+    hint: 'stateDiagram-v2\n    [*] --> 关闭\n    关闭 --> 开启 : 按下开关\n    开启 --> 关闭 : 按下开关'
+
+  - title: 带终态的状态机
+    tag: 状态图
+    difficulty: easy
+    mermaid: |
+      stateDiagram-v2
+          [*] --> 空闲
+          空闲 --> 运行中 : 开始
+          运行中 --> 已完成 : 结束
+          已完成 --> [*]
+    description: '<code>状态 --> [*]</code> 表示到达<strong>终止状态</strong>。idle → running → done → end 是典型的任务生命周期。'
+    hint: 'stateDiagram-v2\n    [*] --> 空闲\n    空闲 --> 运行中 : 开始\n    运行中 --> 已完成 : 结束\n    已完成 --> [*]'
+
+  - title: 复合状态
+    tag: 状态图
+    difficulty: medium
+    mermaid: |
+      stateDiagram-v2
+          [*] --> 工作中
+          state 工作中 {
+              [*] --> 编码
+              编码 --> 测试 : commit
+              测试 --> 部署 : pass
+              部署 --> 编码 : bug
+          }
+          工作中 --> 休息中 : 下班
+          休息中 --> 工作中 : 上班
+    description: '使用 <strong>state 状态名 { ... }</strong> 创建<strong>复合状态</strong>（子状态机）。复合状态内部可以有自己的初始状态 [*] 和转移。'
+    hint: 'stateDiagram-v2\n    [*] --> 工作中\n    state 工作中 {\n        [*] --> 编码\n        编码 --> 测试 : commit\n        测试 --> 部署 : pass\n        部署 --> 编码 : bug\n    }\n    工作中 --> 休息中 : 下班\n    休息中 --> 工作中 : 上班'
+
+  - title: 选择分支
+    tag: 状态图
+    difficulty: medium
+    mermaid: |
+      stateDiagram-v2
+          [*] --> 输入年龄
+          输入年龄 --> 判断
+          state 判断 <<choice>>
+          判断 --> 成人 : age >= 18
+          判断 --> 未成年 : age < 18
+          成人 --> 允许进入
+          未成年 --> 拒绝进入
+    description: '用 <strong>state 名称 <<choice>></strong> 创建<strong>选择节点</strong>（菱形）。分支条件写在转移标签上。Mermaid 自动将 <<choice>> 渲染为菱形。'
+    hint: 'stateDiagram-v2\n    [*] --> 输入年龄\n    输入年龄 --> 判断\n    state 判断 <<choice>>\n    判断 --> 成人 : age >= 18\n    判断 --> 未成年 : age < 18\n    成人 --> 允许进入\n    未成年 --> 拒绝进入'
+
+  - title: 登录状态机
+    tag: 状态图
+    difficulty: hard
+    mermaid: |
+      stateDiagram-v2
+          [*] --> 未登录
+          未登录 --> 登录中 : 提交凭证
+          登录中 --> 已登录 : 验证通过
+          登录中 --> 登录失败 : 验证失败
+          登录失败 --> 未登录 : 返回
+          已登录 --> 未登录 : 退出
+          state 已登录 {
+              [*] --> 浏览中
+              浏览中 --> 编辑中 : 点击编辑
+              编辑中 --> 浏览中 : 保存/取消
+          }
+    description: '综合练习：用户登录状态机 + 复合状态。登录中状态根据验证结果分叉到不同状态。已登录状态内部包含浏览和编辑子状态。'
+    hint: 'stateDiagram-v2\n    [*] --> 未登录\n    未登录 --> 登录中 : 提交凭证\n    登录中 --> 已登录 : 验证通过\n    登录中 --> 登录失败 : 验证失败\n    登录失败 --> 未登录 : 返回\n    已登录 --> 未登录 : 退出\n    state 已登录 {\n        [*] --> 浏览中\n        浏览中 --> 编辑中 : 点击编辑\n        编辑中 --> 浏览中 : 保存/取消\n    }'
+
+  - title: 并发状态
+    tag: 状态图
+    difficulty: hard
+    mermaid: |
+      stateDiagram-v2
+          [*] --> 在线
+          state 在线 {
+              state 音频 <<fork>>
+              音频 --> 麦克风
+              音频 --> 扬声器
+              --
+              视频 --> 摄像头
+              视频 --> 屏幕
+          }
+          在线 --> 离线 : 断开连接
+          离线 --> 在线 : 重新连接
+    description: '用 <strong>--</strong> 分隔线在复合状态内创建<strong>并发区域</strong>。<code><<fork>></code> 表示分叉点。音频和视频子系统并行运行会。'
+    hint: 'stateDiagram-v2\n    [*] --> 在线\n    state 在线 {\n        state 音频 <<fork>>\n        音频 --> 麦克风\n        音频 --> 扬声器\n        --\n        视频 --> 摄像头\n        视频 --> 屏幕\n    }\n    在线 --> 离线 : 断开连接\n    离线 --> 在线 : 重新连接'
